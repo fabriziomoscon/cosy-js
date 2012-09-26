@@ -11,7 +11,8 @@
 class Reference
   constructor: ->
     @value = null
-    @metadata = {}
+    @metadata =
+      watches: []
 
 
 # Is the value a valid reference
@@ -29,6 +30,14 @@ isRef = (value) ->
 assertRef = (value) ->
   throw (new Error 'Invalid reference') unless (isRef value)
   value
+
+# Notify watchers
+# 
+# @param [Reference] reference
+# @return [Reference]
+notify = (reference) ->
+  callback reference for callback in reference.metadata.watches
+  reference
 
 
 # Exports
@@ -53,6 +62,16 @@ module.exports =
   # @return [Reference]
   setRef: (reference, value) ->
     (assertRef reference).value = value
+    notify reference
+    reference
+
+  # Watch a reference for changes
+  # 
+  # @param [Reference] reference
+  # @param [Function] callbac
+  # @return [Reference]
+  watchRef: (reference, callback) ->
+    (assertRef reference).metadata.watches.push callback
     reference
 
   isRef: isRef
