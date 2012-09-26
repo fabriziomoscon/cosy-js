@@ -33,6 +33,7 @@ assertRef = (value) ->
 
 # Notify watchers
 # 
+# @private
 # @param [Reference] reference
 # @return [Reference]
 notify = (reference) ->
