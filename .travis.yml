@@ -6,8 +6,11 @@ node_js:
  - 0.8
  - 0.6
 
+# Install (quieten npm)
+install: npm install --silent
+
 # Build script
-script: './node_modules/.bin/jake ci'
+script: ./node_modules/.bin/jake ci
 
 # Notifications
 notifications:
