@@ -80,7 +80,7 @@ module.exports =
   isRef: isRef
 
 
-# Extend mutable 
+# Extend mutable
 extend mutable, isRef,
   set: (reference, value) -> (setRef reference, value)
   get: (reference) -> (getRef reference)
