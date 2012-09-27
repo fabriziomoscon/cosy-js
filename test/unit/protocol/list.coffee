@@ -27,4 +27,4 @@ suite 'list:', ->
       assert.deepEqual [2, 3, 4], (rest myArray)
 
     test 'Cons appends an element', ->
-      assert.deepEqual [1, 2, 3, 4, 5], (cons myArray 5)
+      assert.deepEqual [1, 2, 3, 4, 5], (cons myArray, 5)

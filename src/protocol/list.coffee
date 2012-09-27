@@ -22,7 +22,10 @@ module.exports = proto = defProtocol {
 extend proto, isArr,
   first: (list) -> if list.length then list[0] else null
   rest: (list) -> if list.length > 1 then list.splice(1) else null
-  cons: (list, item) -> list.splice(0).push item
+  cons: (list, item) ->
+    newList = list.splice 0
+    newList.push item
+    newList
 
 # Object
 # @todo
