@@ -1,3 +1,5 @@
+'use strict'
+
 
 # Dependencies
 {assert} = require 'chai'
