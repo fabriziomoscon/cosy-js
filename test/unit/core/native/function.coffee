@@ -6,20 +6,36 @@
 
 # Tests
 suite 'native function:', ->
-  fn = require '../../../../src/core/native/function'
+  {isFn, assertFn} = require '../../../../src/core/native/function'
 
-  suite 'function:', ->
-    test 'isFn returns false with invalid function', ->
-      assert.isFalse (fn.isFn {})
 
-    test 'isFn returns true with a valid function', ->
-      assert.isTrue (fn.isFn spy)
+  suite 'isFn:', ->
+    test 'empty object is not a function', ->
+      assert.isFalse (isFn {})
 
-    test 'assertFn throws with invalid function', ->
+    test 'string is not a function', ->
+      assert.isFalse (isFn 'foo')
+
+    test 'function is a function', ->
+      assert.isTrue (isFn spy)
+
+
+  suite 'assertFn:', ->
+    test 'call with empty object throws', ->
       assert.throws ->
-        fn.assertFn {}
+        assertFn {}
       , /Invalid function/
 
-    test 'assertFn does not throw with a valid function', ->
+    test 'call with string throws', ->
+      assert.throws ->
+        assertFn 'foo'
+      , /Invalid function/
+
+    test 'call with invalid function throws with given message', ->
+      assert.throws ->
+        assertFn {}, 'foo'
+      , /foo/
+
+    test 'call with function does not throw', ->
       assert.doesNotThrow ->
-        fn.assertFn spy()
+        assertFn spy()
