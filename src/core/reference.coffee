@@ -10,6 +10,8 @@ mutable = require '../protocol/mutable'
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
+# Reference class
+#
 # @private
 class Reference
   constructor: ->
@@ -17,6 +19,12 @@ class Reference
     @metadata =
       watches: []
 
+
+# Create a new reference
+#
+# @return [Reference]
+ref = ->
+  new Reference
 
 # Is the value a valid reference
 #
@@ -34,53 +42,52 @@ assertRef = (value) ->
   throw (new Error 'Invalid reference') unless (isRef value)
   value
 
+# Get the reference value
+#
+# @param [Reference] reference
+# @return [mixed]
+getRef = (reference) ->
+  (assertRef reference).value
+
+# Set the reference value
+#
+# @param [Reference] reference
+# @return [Reference]
+setRef = (reference, value) ->
+  (assertRef reference).value = value
+  notifyRef reference
+  reference
+
+# Watch a reference for changes
+#
+# @param [Reference] reference
+# @param [Function] callbac
+# @return [Reference]
+watchRef = (reference, callback) ->
+  (assertRef reference).metadata.watches.push callback
+  reference
+
 # Notify watchers
 #
 # @private
 # @param [Reference] reference
 # @return [Reference]
-notify = (reference) ->
+notifyRef = (reference) ->
   callback reference for callback in reference.metadata.watches
   reference
-
-# Exports
-module.exports =
-
-  # Create a new reference
-  #
-  # @return [Reference]
-  ref: ->
-    new Reference
-
-  # Get the reference value
-  #
-  # @param [Reference] reference
-  # @return [mixed]
-  getRef: (reference) ->
-    (assertRef reference).value
-
-  # Set the reference value
-  #
-  # @param [Reference] reference
-  # @return [Reference]
-  setRef: (reference, value) ->
-    (assertRef reference).value = value
-    notify reference
-    reference
-
-  # Watch a reference for changes
-  #
-  # @param [Reference] reference
-  # @param [Function] callbac
-  # @return [Reference]
-  watchRef: (reference, callback) ->
-    (assertRef reference).metadata.watches.push callback
-    reference
-
-  isRef: isRef
 
 
 # Extend mutable
 extend mutable, isRef,
   set: (reference, value) -> (setRef reference, value)
   get: (reference) -> (getRef reference)
+
+
+# Exports
+module.exports = {
+  ref
+  isRef
+  getRef
+  setRef
+  watchRef
+}
