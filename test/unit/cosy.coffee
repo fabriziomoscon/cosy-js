@@ -1,10 +1,12 @@
+'use strict'
+
 
 # Dependencies
 {assert} = require 'chai'
 
 
 # Tests
-suite 'cosy module', ->
+suite 'cosy:', ->
   cosy = require '../../src/cosy'
 
   test 'should be an object', ->

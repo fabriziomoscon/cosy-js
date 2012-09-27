@@ -20,7 +20,7 @@ suite 'environment:', ->
     assert.isTrue (env.isEnv env.env(console, domLib))
 
 
-  suite 'log', ->
+  suite 'log:', ->
     data = ret = val = null
 
     setup ->

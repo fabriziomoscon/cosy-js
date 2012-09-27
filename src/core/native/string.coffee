@@ -7,24 +7,24 @@
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-# Is the value a valid number
+# Is the value a valid string
 #
 # @param [mixed] value
 # @return [Boolean]
-isNumber = (value) ->
-  not (isNaN value) and typeof value is 'number'
+isString = (value) ->
+  typeof value is 'string'
 
 
 # Exports
 module.exports =
 
-    isNum: isNumber
+    isStr: isString
 
-    # Assert the value is a valid number
+    # Assert the value is a valid string
     #
     # @param [mixed] value
     # @param [String] message
-    # @return [Number]
-    assertNum: (value, message = 'Invalid number') ->
-      throw (new Error message) unless (isNumber value)
+    # @return [String]
+    assertStr: (value, message = 'Invalid string') ->
+      throw (new Error message) unless (isString value)
       value

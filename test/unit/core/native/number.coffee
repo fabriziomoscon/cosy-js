@@ -1,7 +1,8 @@
+'use strict'
+
 
 # Dependencies
 {assert} = require 'chai'
-{spy} = require 'sinon'
 
 
 # Tests
@@ -43,6 +44,11 @@ suite 'native number:', ->
       assert.throws ->
         assertNum NaN
       , /Invalid number/
+
+    test 'call with invalid number throws with given message', ->
+      assert.throws ->
+        assertNum {}, 'foo'
+      , /foo/
 
     test 'call with number does not throw', ->
       assert.doesNotThrow ->

@@ -7,24 +7,24 @@
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-# Is the value a valid number
+# Is the value a valid array
 #
 # @param [mixed] value
 # @return [Boolean]
-isNumber = (value) ->
-  not (isNaN value) and typeof value is 'number'
+isArray = Array.isArray or (value) ->
+  (Object::toString.call value) is '[object Array]'
 
 
 # Exports
 module.exports =
 
-    isNum: isNumber
+    isArr: isArray
 
-    # Assert the value is a valid number
+    # Assert the value is a valid array
     #
     # @param [mixed] value
     # @param [String] message
-    # @return [Number]
-    assertNum: (value, message = 'Invalid number') ->
-      throw (new Error message) unless (isNumber value)
+    # @return [Array]
+    assertArr: (value, message = 'Invalid array') ->
+      throw (new Error message) unless (isArray value)
       value
