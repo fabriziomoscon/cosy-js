@@ -9,21 +9,33 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-
+# Returns a lazy sequence applying fn to each element of list
+#
+# @param [function] fn
+# @param [list] list
 map = (fn, list) ->
   if (first list) is null
     null
   else
     (cons (fn (first list)), (lazySeq -> map fn, (rest list)))
 
-reduce = (fn, list, acculimator) ->
+# Reduces a list by applying fn
+#
+# @param [function] fn
+# @param [list] list
+# @param [mixed] accum
+reduce = (fn, list, accum) ->
   item = (first list)
   if item is null
-    acculimator
+    accum
   else
-    acculimator = if acculimator? then (fn item acculimator) else item
-    (reduce fn (rest list) acculimator)
+    accum = if accum? then (fn item accum) else item
+    (reduce fn (rest list) accum)
 
+# Returns a lazy sequence containin element in list for which pred returns true 
+#
+# @param [function] pred
+# @param [list] list
 filter = (pred, list) ->
   item = (first list)
   if item is null

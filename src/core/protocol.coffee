@@ -42,7 +42,7 @@ dispatch = (signature) ->
 # @param [function] fn
 addDispatch = (proto, pred, name, fn) ->
   throw (new Error 'Unknown function ' + name) unless proto[name]?
-  throw (new Error 'Function not extendable' + name) unless proto[name].impl?
+  throw (new Error 'Function not extendable ' + name) unless proto[name].impl?
 
   chain = proto[name].impl
   proto[name].impl = (args...) ->
