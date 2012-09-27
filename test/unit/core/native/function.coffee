@@ -1,7 +1,6 @@
 
 # Dependencies
 {assert} = require 'chai'
-{spy} = require 'sinon'
 
 
 # Tests
@@ -17,7 +16,7 @@ suite 'native function:', ->
       assert.isFalse (isFn 'foo')
 
     test 'function is a function', ->
-      assert.isTrue (isFn spy)
+      assert.isTrue (isFn ->)
 
 
   suite 'assertFn:', ->
@@ -38,4 +37,4 @@ suite 'native function:', ->
 
     test 'call with function does not throw', ->
       assert.doesNotThrow ->
-        assertFn spy()
+        assertFn ->
