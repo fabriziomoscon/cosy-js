@@ -9,6 +9,9 @@
 
 # Dependencies
 {isFn} = require './native/function.coffee'
+{extend} = require './protocol'
+mutable = require '../protocol/mutable'
+{ref, getRef, setRef} = require './reference'
 
 
 # @private
@@ -16,6 +19,7 @@ class Environment
   constructor: (console, domLib) ->
     @console = assertConsole console
     @domLib = assertDomLib domLib
+    @ref = ref()
 
 
 # Is the value a valid environment
@@ -53,7 +57,7 @@ assertDomLib = (value) ->
      (isFn value.append) and
      (isFn value.remove)
     return value
-  throw (new Error 'Invalid DOM Library')
+  throw (new Error 'Invalid DOM library')
 
 
 # Exports
@@ -75,3 +79,11 @@ module.exports =
     (assertEnv environment).console.log data
 
   isEnv: isEnv
+
+
+# Extend mutable
+extend mutable, isEnv,
+  get: (environment) -> (getRef environment.ref)
+  set: (environment, value) ->
+    setRef environment.ref, value
+    environment
