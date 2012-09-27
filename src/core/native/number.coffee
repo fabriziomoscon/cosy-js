@@ -19,6 +19,6 @@ module.exports =
     # @param [mixed] value
     # @param [String] message
     # @return [Number]
-    assertNum: (value, message) ->
-      throw (new Error message || 'Invalid number') unless (isNumber value)
+    assertNum: (value, message = 'Invalid number') ->
+      throw (new Error message) unless (isNumber value)
       value

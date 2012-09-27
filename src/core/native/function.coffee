@@ -19,6 +19,6 @@ module.exports =
     # @param [mixed] value
     # @param [String] message
     # @return [Function]
-    assertFn: (value, message) ->
-      throw (new Error message || 'Invalid function') unless (isFunction value)
+    assertFn: (value, message = 'Invalid function') ->
+      throw (new Error message) unless (isFunction value)
       value

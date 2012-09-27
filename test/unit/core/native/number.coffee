@@ -1,7 +1,6 @@
 
 # Dependencies
 {assert} = require 'chai'
-{spy} = require 'sinon'
 
 
 # Tests

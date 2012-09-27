@@ -19,6 +19,6 @@ module.exports =
     # @param [mixed] value
     # @param [String] message
     # @return [Number]
-    assertArr: (value, message) ->
-      throw (new Error message || 'Invalid array') unless (isArray value)
+    assertArr: (value, message = 'Invalid array') ->
+      throw (new Error message) unless (isArray value)
       value
