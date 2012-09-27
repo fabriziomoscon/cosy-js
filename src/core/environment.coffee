@@ -1,7 +1,7 @@
 'use strict'
 
 # Cosy.js
-# 
+#
 # @copyright BraveNewTalent Ltd 2012
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
@@ -21,14 +21,14 @@ class Environment extends Reference
 
 
 # Is the value a valid environment
-# 
+#
 # @param [mixed] value
 # @return [Boolean]
 isEnv = (value) ->
   value instanceof Environment
 
 # Assert the value is a valid environment
-# 
+#
 # @private
 # @param [mixed] value
 # @return [Environment]
@@ -37,7 +37,7 @@ assertEnv = (value) ->
   value
 
 # Assert the value is a valid console
-# 
+#
 # @private
 # @param [mixed] value
 # @return [Console]
@@ -46,7 +46,7 @@ assertConsole = (value) ->
   value
 
 # Assert the value is a valid console
-# 
+#
 # @private
 # @param [mixed] value
 # @return [DomLib]
@@ -59,10 +59,10 @@ assertDomLib = (value) ->
 
 
 # Exports
-module.exports = 
+module.exports =
 
   # Create a new environment
-  # 
+  #
   # @param [Console] console
   # @param [jQuery] domLib
   # @return [Environment]
@@ -70,7 +70,7 @@ module.exports =
     new Environment console, domLib
 
   # Log data to the console
-  # 
+  #
   # @param [Environment] environment
   # @param [mixed] data
   log: (environment, data) ->

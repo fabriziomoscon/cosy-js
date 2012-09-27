@@ -2,7 +2,7 @@
 
 
 # Is the value a valid function
-# 
+#
 # @param [mixed] value
 # @return [Boolean]
 isFunction = (value) ->
@@ -15,7 +15,7 @@ module.exports =
     isFn: isFunction
 
     # Assert the value is a valid function
-    # 
+    #
     # @param [mixed] value
     # @param [String] message
     # @return [Function]

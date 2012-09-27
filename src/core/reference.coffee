@@ -1,7 +1,7 @@
 'use strict'
 
 # Cosy.js
-# 
+#
 # @copyright BraveNewTalent Ltd 2012
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
@@ -16,14 +16,14 @@ class Reference
 
 
 # Is the value a valid reference
-# 
+#
 # @param [mixed] value
 # @return [Boolean]
 isRef = (value) ->
   value instanceof Reference
 
 # Assert the value is a value reference
-# 
+#
 # @private
 # @param [Reference] value
 # @return [Reference]
@@ -32,7 +32,7 @@ assertRef = (value) ->
   value
 
 # Notify watchers
-# 
+#
 # @private
 # @param [Reference] reference
 # @return [Reference]
@@ -45,20 +45,20 @@ notify = (reference) ->
 module.exports =
 
   # Create a new reference
-  # 
+  #
   # @return [Reference]
   ref: ->
     new Reference
 
   # Get the reference value
   #
-  # @param [Reference] reference 
+  # @param [Reference] reference
   # @return [mixed]
   getRef: (reference) ->
     (assertRef reference).value
 
   # Set the reference value
-  # 
+  #
   # @param [Reference] reference
   # @return [Reference]
   setRef: (reference, value) ->
@@ -67,7 +67,7 @@ module.exports =
     reference
 
   # Watch a reference for changes
-  # 
+  #
   # @param [Reference] reference
   # @param [Function] callbac
   # @return [Reference]
