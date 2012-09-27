@@ -11,6 +11,7 @@ mutable = require '../protocol/mutable'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 # @private
 class Environment
   constructor: (console, domLib) ->

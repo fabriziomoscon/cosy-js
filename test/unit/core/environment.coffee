@@ -1,10 +1,16 @@
 'use strict'
 
-# Dependencies
 {assert} = require 'chai'
 console = require '../../mock/console.coffee'
 domLib = require '../../mock/jQuery.coffee'
 {get, set} = require '../../../src/protocol/mutable'
+
+# Cosy.js
+#
+# @copyright BraveNewTalent Ltd 2012
+# @see http://github.com/BraveNewTalent/cosy-js
+# @see http://opensource.org/licenses/mit-license.php MIT License
+
 
 # Tests
 suite 'environment:', ->

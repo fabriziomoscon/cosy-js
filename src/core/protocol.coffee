@@ -6,6 +6,7 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 class Protocol
   constructor: (spec) ->
     @[name] = def for own name,def of spec
