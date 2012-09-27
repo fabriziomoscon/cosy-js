@@ -22,7 +22,7 @@ task 'build', ['lint', 'test'], ->
       console.log 'Built!'.green
     else
       console.log stderr
-      process.exit()
+      fail error
     complete()
 , async: true
 
@@ -35,7 +35,7 @@ task 'lint', ->
       console.log stdout
     else
       console.log stderr
-      process.exit()
+      fail error
     complete()
 , async: true
 
@@ -52,7 +52,7 @@ task 'test', (filePath) ->
       console.log stdout
     else
       console.log stderr
-      process.exit()
+      fail error
     complete()
 , async: true
 
