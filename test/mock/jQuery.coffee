@@ -6,4 +6,7 @@
 
 
 # Exports
-module.exports = {}
+module.exports =
+  ajax: spy()
+  append: spy()
+  remove: spy()

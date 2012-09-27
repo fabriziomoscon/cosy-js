@@ -9,14 +9,15 @@
 
 # Dependencies
 {Reference} = require './reference.coffee'
+{isFn} = require './native/function.coffee'
 
 
 # @private
 class Environment extends Reference
   constructor: (console, domLib) ->
     super
-    @console = console
-    @domLib = domLib
+    @console = assertConsole console
+    @domLib = assertDomLib domLib
 
 
 # Is the value a valid environment
@@ -29,11 +30,32 @@ isEnv = (value) ->
 # Assert the value is a valid environment
 # 
 # @private
-# @param [Environment] value
+# @param [mixed] value
 # @return [Environment]
 assertEnv = (value) ->
   throw (new Error 'Invalid environment') unless (isEnv value)
   value
+
+# Assert the value is a valid console
+# 
+# @private
+# @param [mixed] value
+# @return [Console]
+assertConsole = (value) ->
+  throw (new Error 'Invalid console') unless (isFn value.log)
+  value
+
+# Assert the value is a valid console
+# 
+# @private
+# @param [mixed] value
+# @return [DomLib]
+assertDomLib = (value) ->
+  if (isFn value.ajax) and
+     (isFn value.append) and
+     (isFn value.remove)
+    return value
+  throw (new Error 'Invalid DOM Library')
 
 
 # Exports
