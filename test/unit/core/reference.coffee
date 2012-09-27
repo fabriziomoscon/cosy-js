@@ -1,6 +1,7 @@
 
 # Dependencies
 {assert} = require 'chai'
+{spy} = require 'sinon'
 
 
 # Tests
@@ -47,9 +48,7 @@ suite 'reference module', ->
       val = ref()
 
     test 'watcher is called when reference changes', ->
-      newvalue = null
-      callback = (reference) ->
-        newvalue = getRef reference
+      callback = spy()
       watchRef val, callback
       setRef val, 'foo'
-      assert.strictEqual 'foo', newvalue
+      assert.isTrue callback.withArgs(val).calledOnce
