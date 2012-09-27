@@ -67,8 +67,8 @@ supports = (proto, args...) ->
   proto.supports args...
 
 module.exports = {
-  defProtocol,
-  extend,
-  dispatch,
+  defProtocol
+  extend
+  dispatch
   supports
 }

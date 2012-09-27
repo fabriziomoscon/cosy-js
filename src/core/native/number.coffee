@@ -11,20 +11,21 @@
 #
 # @param [mixed] value
 # @return [Boolean]
-isNumber = (value) ->
+isNum = (value) ->
   not (isNaN value) and typeof value is 'number'
+
+# Assert the value is a valid number
+#
+# @param [mixed] value
+# @param [String] message
+# @return [Number]
+assertNum = (value, message = 'Invalid number') ->
+  throw (new Error message) unless (isNum value)
+  value
 
 
 # Exports
-module.exports =
-
-    isNum: isNumber
-
-    # Assert the value is a valid number
-    #
-    # @param [mixed] value
-    # @param [String] message
-    # @return [Number]
-    assertNum: (value, message = 'Invalid number') ->
-      throw (new Error message) unless (isNumber value)
-      value
+module.exports = {
+  isNum
+  assertNum
+}

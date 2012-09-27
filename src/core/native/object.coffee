@@ -9,26 +9,27 @@
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-# Is the value a valid object
+# Is the value a valid object?
 #
 # @param [mixed] value
 # @return [Boolean]
-isObject = (value) ->
+isObj = (value) ->
   (value?) and
   (typeof value is 'object') and
   (not isArr value)
 
+# Assert the value is a valid object
+#
+# @param [mixed] value
+# @param [String] message
+# @return [Object]
+assertObj = (value, message = 'Invalid object') ->
+  throw (new Error message) unless (isObj value)
+  value
+
 
 # Exports
-module.exports =
-
-    isObj: isObject
-
-    # Assert the value is a valid object
-    #
-    # @param [mixed] value
-    # @param [String] message
-    # @return [Object]
-    assertObj: (value, message = 'Invalid object') ->
-      throw (new Error message) unless (isObject value)
-      value
+module.exports = {
+  isObj
+  assertObj
+}

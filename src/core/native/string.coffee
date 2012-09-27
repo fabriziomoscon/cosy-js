@@ -7,24 +7,25 @@
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-# Is the value a valid string
+# Is the value a valid string?
 #
 # @param [mixed] value
 # @return [Boolean]
-isString = (value) ->
+isStr = (value) ->
   typeof value is 'string'
+
+# Assert the value is a valid string
+#
+# @param [mixed] value
+# @param [String] message
+# @return [String]
+assertStr = (value, message = 'Invalid string') ->
+  throw (new Error message) unless (isStr value)
+  value
 
 
 # Exports
-module.exports =
-
-    isStr: isString
-
-    # Assert the value is a valid string
-    #
-    # @param [mixed] value
-    # @param [String] message
-    # @return [String]
-    assertStr: (value, message = 'Invalid string') ->
-      throw (new Error message) unless (isString value)
-      value
+module.exports = {
+  isStr
+  assertStr
+}
