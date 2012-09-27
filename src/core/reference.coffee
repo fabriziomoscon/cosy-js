@@ -1,5 +1,8 @@
 'use strict'
 
+{extend} = require './protocol'
+mutable = require '../protocol/mutable'
+
 # Cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
@@ -40,7 +43,6 @@ notify = (reference) ->
   callback reference for callback in reference.metadata.watches
   reference
 
-
 # Exports
 module.exports =
 
@@ -78,3 +80,12 @@ module.exports =
   isRef: isRef
 
   Reference: Reference
+
+
+# Protocols
+
+# mutable
+extend mutable, isRef, {
+  set: (reference, value) -> (setRef variable, value)
+  get: (reference) -> (getRef variable)
+}
