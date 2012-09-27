@@ -76,3 +76,5 @@ module.exports =
     reference
 
   isRef: isRef
+
+  Reference: Reference
