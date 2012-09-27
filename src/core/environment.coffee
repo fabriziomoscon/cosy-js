@@ -1,18 +1,15 @@
 'use strict'
 
-# Cosy.js
-#
-# @copyright BraveNewTalent Ltd 2012
-# @see http://github.com/BraveNewTalent/cosy-js
-# @see http://opensource.org/licenses/mit-license.php MIT License
-
-
-# Dependencies
 {isFn} = require './native/function.coffee'
 {extend} = require './protocol'
 mutable = require '../protocol/mutable'
 {ref, getRef, setRef} = require './reference'
 
+# Cosy.js
+#
+# @copyright BraveNewTalent Ltd 2012
+# @see http://github.com/BraveNewTalent/cosy-js
+# @see http://opensource.org/licenses/mit-license.php MIT License
 
 # @private
 class Environment
@@ -21,6 +18,21 @@ class Environment
     @domLib = assertDomLib domLib
     @ref = ref()
 
+
+# Create a new environment
+#
+# @param [Console] console
+# @param [jQuery] domLib
+# @return [Environment]
+env = (console, domLib) ->
+  new Environment console, domLib
+
+# Log data to the console
+#
+# @param [Environment] environment
+# @param [mixed] data
+log = (environment, data) ->
+  (assertEnv environment).console.log data
 
 # Is the value a valid environment
 #
@@ -62,22 +74,8 @@ assertDomLib = (value) ->
 
 # Exports
 module.exports =
-
-  # Create a new environment
-  #
-  # @param [Console] console
-  # @param [jQuery] domLib
-  # @return [Environment]
-  env: (console, domLib) ->
-    new Environment console, domLib
-
-  # Log data to the console
-  #
-  # @param [Environment] environment
-  # @param [mixed] data
-  log: (environment, data) ->
-    (assertEnv environment).console.log data
-
+  env: env
+  log: log
   isEnv: isEnv
 
 
