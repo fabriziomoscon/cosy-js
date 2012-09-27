@@ -48,6 +48,11 @@ suite 'native array:', ->
         assertArr arguments
       , /Invalid array/
 
+    test 'call with invalid array throws with given message', ->
+      assert.throws ->
+        assertArr {}, 'foo'
+      , /foo/
+
     test 'call with array does not throw', ->
       assert.doesNotThrow ->
         assertArr []

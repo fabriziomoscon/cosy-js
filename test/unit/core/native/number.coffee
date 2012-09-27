@@ -43,6 +43,11 @@ suite 'native number:', ->
         assertNum NaN
       , /Invalid number/
 
+    test 'call with invalid number throws with given message', ->
+      assert.throws ->
+        assertNum {}, 'foo'
+      , /foo/
+
     test 'call with number does not throw', ->
       assert.doesNotThrow ->
         assertNum 1
