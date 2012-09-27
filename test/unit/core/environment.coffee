@@ -3,7 +3,7 @@
 # Dependencies
 {assert} = require 'chai'
 console = require '../../mock/console.coffee'
-query = require '../../mock/jQuery.coffee'
+domLib = require '../../mock/jQuery.coffee'
 
 
 # Tests
@@ -17,7 +17,7 @@ suite 'environment:', ->
     assert.isFalse (env.isEnv {})
 
   test 'env returns an environment', ->
-    assert.isTrue (env.isEnv env.env(console, query))
+    assert.isTrue (env.isEnv env.env(console, domLib))
 
 
   suite 'log', ->
@@ -25,7 +25,7 @@ suite 'environment:', ->
 
     setup ->
       data = 'foo'
-      val = env.env(console, query)
+      val = env.env(console, domLib)
       ret = env.log val, data
 
     test 'log calls console.log method', ->

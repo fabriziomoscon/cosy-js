@@ -13,10 +13,10 @@
 
 # @private
 class Environment extends Reference
-  constructor: (console, query) ->
+  constructor: (console, domLib) ->
     super
     @console = console
-    @query = query
+    @domLib = domLib
 
 
 # Is the value a valid environment
@@ -42,10 +42,10 @@ module.exports =
   # Create a new environment
   # 
   # @param [Console] console
-  # @param [Query] query
+  # @param [jQuery] domLib
   # @return [Environment]
-  env: (console, query) ->
-    new Environment console, query
+  env: (console, domLib) ->
+    new Environment console, domLib
 
   # Log data to the console
   # 
