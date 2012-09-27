@@ -43,7 +43,7 @@ task 'lint', ->
 desc 'This runs all unit tests'
 task 'test', (filePath) ->
   if filePath?
-    filePath = path.join paths.unitTest, path
+    filePath = path.join paths.unitTest, filePath
     console.log "Running unit tests for #{filePath}:".cyan
   else
     console.log 'Running unit tests:'.cyan
@@ -66,11 +66,11 @@ task 'default', ['build']
 # Generate a lint command
 getLintCommand = (options = {}) ->
   options.configFile ?= "#{paths.config}/coffeelint.json"
-  "#{paths.nodebin}/coffeelint -rf #{options.configFile} #{paths.src}/**.coffee #{paths.test}/**"
+  "#{paths.nodebin}/coffeelint -rf #{options.configFile} #{paths.src}/** #{paths.test}/**"
 
 # Generate a test command
 getTestCommand = (options = {}) ->
   options.ui ?= 'tdd'
   options.reporter ?= 'spec'
-  options.path ?= "#{paths.unitTest}/**"
-  "#{paths.nodebin}/mocha --compilers coffee:coffee-script --ui #{options.ui} --reporter #{options.reporter} --colors #{options.path}"
+  options.path ?= paths.unitTest
+  "#{paths.nodebin}/mocha --compilers coffee:coffee-script --ui #{options.ui} --reporter #{options.reporter} --colors --recursive #{options.path}"
