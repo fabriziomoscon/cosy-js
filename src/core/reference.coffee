@@ -79,13 +79,8 @@ module.exports =
 
   isRef: isRef
 
-  Reference: Reference
 
-
-# Protocols
-
-# mutable
-extend mutable, isRef, {
-  set: (reference, value) -> (setRef variable, value)
-  get: (reference) -> (getRef variable)
-}
+# Extend mutable 
+extend mutable, isRef,
+  set: (reference, value) -> (setRef reference, value)
+  get: (reference) -> (getRef reference)
