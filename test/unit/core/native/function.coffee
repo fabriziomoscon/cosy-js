@@ -6,7 +6,7 @@
 
 # Tests
 suite 'native function:', ->
-  fn = require '../../../src/core/native/function'
+  fn = require '../../../../src/core/native/function'
 
   suite 'function:', ->
     test 'isFn returns false with invalid function', ->
