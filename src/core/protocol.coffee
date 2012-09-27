@@ -10,6 +10,7 @@
 class Protocol
   constructor: (spec) ->
     @[name] = def for own name,def of spec
+    @.supports = -> false
 
 defProtocol = (spec) ->
   new Protocol spec
@@ -29,14 +30,21 @@ addDispatch = (proto, pred, name, fn) ->
 
   chain = proto[name].impl
   proto[name].impl = (args...) ->
-    return (fn args...) if (pred args...)
-    chain args...
+    if (pred args...) then (fn args...) else chain args...
+
+  supports = proto.supports
+  proto.supports = (args...) ->
+    if (pred args...) then true else supports args...
 
 extend = (proto, pred, spec) ->
   (addDispatch proto, pred, name, fn) for own name,fn of spec
 
+supports = (proto, args...) ->
+  proto.supports args...
+
 module.exports = {
   defProtocol,
   extend,
-  dispatch
+  dispatch,
+  supports
 }

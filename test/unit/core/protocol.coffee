@@ -12,7 +12,7 @@
 
 # Tests
 suite 'protocol module', ->
-  {defProtocol, extend, dispatch} = require '../../../src/core/protocol'
+  {defProtocol, extend, dispatch, supports} = require '../../../src/core/protocol'
   proto = null
   setup ->
     proto = defProtocol {
@@ -66,6 +66,9 @@ suite 'protocol module', ->
         myFn1: (self, x, y) -> self.a = x + y
         myFn2: (self, x) -> self.a = x
 
+    test 'Protocol supports MyType', ->
+      assert.isTrue (supports proto, myVar)
+
     test 'myFn1', ->
       (proto.myFn1 myVar, 2, 3)
       assert.strictEqual 5, myVar.a
@@ -83,6 +86,9 @@ suite 'protocol module', ->
         extend proto, ((type) -> type instanceof MyOtherType),
           myFn1: (self, x, y) -> self.a = x - y
           myFn2: (self, x) -> self.a = -x
+
+      test 'Protocol supports MyOtherType', ->
+        assert.isTrue (supports proto, myOtherVar)
 
       test 'myFn1 MyType', ->
         (proto.myFn1 myVar, 2, 3)
