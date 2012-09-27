@@ -67,6 +67,7 @@ extend = (proto, pred, spec) ->
 supports = (proto, args...) ->
   proto.supports args...
 
+# Exports
 module.exports = {
   defProtocol
   extend
