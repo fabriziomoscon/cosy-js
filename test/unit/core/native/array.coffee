@@ -62,3 +62,7 @@ suite 'native array:', ->
     test 'call with array does not throw', ->
       assert.doesNotThrow ->
         assertArr []
+
+    test 'successful call returns the passed in array', ->
+      val = []
+      assert.strictEqual (assertArr val), val

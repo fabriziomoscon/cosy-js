@@ -61,3 +61,7 @@ suite 'native number:', ->
     test 'call with decimal number does not throw', ->
       assert.doesNotThrow ->
         assertNum 1.2
+
+    test 'successful call returns the passed in number', ->
+      val = 1
+      assert.strictEqual (assertNum val), val

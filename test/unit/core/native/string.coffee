@@ -46,3 +46,7 @@ suite 'native string:', ->
     test 'call with string does not throw', ->
       assert.doesNotThrow ->
         assertStr 'foo'
+
+    test 'successful call returns the passed in string', ->
+      val = 'foo'
+      assert.strictEqual (assertStr val), val

@@ -61,3 +61,7 @@ suite 'native object:', ->
     test 'call with instance does not throw', ->
       assert.doesNotThrow ->
         assertObj (new Date)
+
+    test 'successful call returns the passed in object', ->
+      val = {}
+      assert.strictEqual (assertObj val), val

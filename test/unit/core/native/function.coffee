@@ -44,3 +44,7 @@ suite 'native function:', ->
     test 'call with function does not throw', ->
       assert.doesNotThrow ->
         assertFn ->
+
+    test 'successful call returns the passed in function', ->
+      val = (->)
+      assert.strictEqual (assertFn val), val
