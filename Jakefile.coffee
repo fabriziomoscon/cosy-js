@@ -10,6 +10,7 @@ paths =
   lib: './lib'
   nodebin: './node_modules/.bin'
   src: './src'
+  test: './test'
   unitTest: './test/unit'
 
 # Build JavaScript
@@ -65,7 +66,7 @@ task 'default', ['build']
 # Generate a lint command
 getLintCommand = (options = {}) ->
   options.configFile ?= "#{paths.config}/coffeelint.json"
-  "#{paths.nodebin}/coffeelint -rf #{options.configFile} #{paths.src}/**.coffee #{paths.unitTest}/**"
+  "#{paths.nodebin}/coffeelint -rf #{options.configFile} #{paths.src}/**.coffee #{paths.test}/**"
 
 # Generate a test command
 getTestCommand = (options = {}) ->
