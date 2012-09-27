@@ -30,16 +30,24 @@ suite 'native number:', ->
   suite 'assertNum:', ->
 
     test 'call with string throws', ->
-      assert.isFalse (isNum 'foo')
+      assert.throws ->
+        assertNum 'foo'
+      , /Invalid number/
 
     test 'call with empty object throws', ->
-      assert.isFalse (isNum {})
+      assert.throws ->
+        assertNum {}
+      , /Invalid number/
 
     test 'call with NaN throws', ->
-      assert.isFalse (isNum NaN)
+      assert.throws ->
+        assertNum NaN
+      , /Invalid number/
 
     test 'call with number does not throw', ->
-      assert.isTrue (isNum 1)
+      assert.doesNotThrow ->
+        assertNum 1
 
     test 'call with decimal number does not throw', ->
-      assert.isTrue (isNum 1.2)
+      assert.doesNotThrow ->
+        assertNum 1.2
