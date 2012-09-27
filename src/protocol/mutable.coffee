@@ -1,4 +1,4 @@
-{defProtocol, dispatch} = require '../core/protocol'
+'use strict'
 
 # Cosy.js
 #
@@ -6,7 +6,12 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-module.exports = defProtocol {
+
+# Dependencies
+{defProtocol, dispatch} = require '../core/protocol'
+
+
+# Define protocol
+module.exports = defProtocol
   set: dispatch (variable, value) ->
   get: dispatch (variable) ->
-}
