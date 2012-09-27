@@ -12,7 +12,7 @@
 
 # Tests
 suite 'list:', ->
-  {first, rest, cons} = require '../../../src/protocol/list'
+  {first, rest, conj, cons} = require '../../../src/protocol/list'
 
   suite 'Array', ->
     myArray = null
@@ -26,5 +26,8 @@ suite 'list:', ->
     test 'Rest gets rest of list', ->
       assert.deepEqual [2, 3, 4], (rest myArray)
 
+    test 'Conj appends an element', ->
+      assert.deepEqual [1, 2, 3, 4, 5], (conj myArray, 5)
+
     test 'Cons appends an element', ->
-      assert.deepEqual [1, 2, 3, 4, 5], (cons myArray, 5)
+      assert.deepEqual [1, 2, 3, 4, 5], (cons 5, myArray)

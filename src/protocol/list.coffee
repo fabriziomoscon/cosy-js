@@ -13,7 +13,8 @@
 module.exports = proto = defProtocol {
   first: dispatch (list) ->
   rest: dispatch (list) ->
-  cons: dispatch (list, item) ->
+  conj: dispatch (list, item) ->
+  cons: (item, list) -> (proto.conj list, item)
 }
 
 # Native types
@@ -22,7 +23,8 @@ module.exports = proto = defProtocol {
 extend proto, isArr,
   first: (list) -> if list.length then list[0] else null
   rest: (list) -> if list.length > 1 then list.splice(1) else null
-  cons: (list, item) ->
+  conj: (list, item) ->
+    return [item] if list is null
     newList = list.splice 0
     newList.push item
     newList

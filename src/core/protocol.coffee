@@ -1,6 +1,6 @@
 'use strict'
 
-# Cosy.js
+# cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
 # @see http://github.com/BraveNewTalent/cosy-js
@@ -12,7 +12,7 @@ class Protocol
     @[name] = def for own name,def of spec
     @.supports = -> false
 
-# Define a protocol 
+# Define a protocol
 #
 # @param [Object] spec
 # @return [Protocol]
@@ -42,6 +42,7 @@ dispatch = (signature) ->
 # @param [function] fn
 addDispatch = (proto, pred, name, fn) ->
   throw (new Error 'Unknown function ' + name) unless proto[name]?
+  throw (new Error 'Function not extendable' + name) unless proto[name].impl?
 
   chain = proto[name].impl
   proto[name].impl = (args...) ->
