@@ -8,14 +8,12 @@
 
 
 # Dependencies
-{Reference} = require './reference.coffee'
 {isFn} = require './native/function.coffee'
 
 
 # @private
-class Environment extends Reference
+class Environment
   constructor: (console, domLib) ->
-    super
     @console = assertConsole console
     @domLib = assertDomLib domLib
 
