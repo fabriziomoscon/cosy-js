@@ -7,24 +7,24 @@
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-# Is the value a valid array
+# Is the value a valid string
 #
 # @param [mixed] value
 # @return [Boolean]
-isArray = Array.isArray or (value) ->
-  (Object::toString.call value) is '[object Array]'
+isString = (value) ->
+  typeof value is 'string'
 
 
 # Exports
 module.exports =
 
-    isArr: isArray
+    isStr: isString
 
-    # Assert the value is a valid array
+    # Assert the value is a valid string
     #
     # @param [mixed] value
     # @param [String] message
-    # @return [Array]
-    assertArr: (value, message = 'Invalid array') ->
-      throw (new Error message) unless (isArray value)
+    # @return [String]
+    assertStr: (value, message = 'Invalid string') ->
+      throw (new Error message) unless (isString value)
       value

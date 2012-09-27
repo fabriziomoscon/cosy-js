@@ -30,7 +30,7 @@ module.exports =
     #
     # @param [mixed] value
     # @param [String] message
-    # @return [Number]
+    # @return [Object]
     assertObj: (value, message = 'Invalid object') ->
       throw (new Error message) unless (isObject value)
       value
