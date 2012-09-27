@@ -5,7 +5,7 @@
 
 
 # Tests
-suite 'reference module', ->
+suite 'reference:', ->
   {ref, isRef, getRef, setRef, watchRef} = require '../../../src/core/reference'
 
   test 'string is not a reference', ->
@@ -18,7 +18,7 @@ suite 'reference module', ->
     assert.isTrue (isRef ref())
 
 
-  suite 'get and set', ->
+  suite 'get and set:', ->
     val = null
 
     setup ->
@@ -41,7 +41,7 @@ suite 'reference module', ->
       , /Invalid reference/
 
 
-  suite 'Watch changes', ->
+  suite 'watch:', ->
     val = null
 
     setup ->
