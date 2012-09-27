@@ -65,7 +65,7 @@ task 'default', ['build']
 # Generate a lint command
 getLintCommand = (options = {}) ->
   options.configFile ?= "#{paths.config}/coffeelint.json"
-  "#{paths.nodebin}/coffeelint -rf #{options.configFile} ."
+  "#{paths.nodebin}/coffeelint -rf #{options.configFile} #{paths.src}/**.coffee #{paths.unitTest}/**"
 
 # Generate a test command
 getTestCommand = (options = {}) ->
