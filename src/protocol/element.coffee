@@ -1,5 +1,6 @@
 {defProtocol, dispatch, extend} = require '../core/protocol'
 {ref, watchRef} = require '../core/reference'
+{hashMap} = require '../core/hashMap'
 {map, into} = require './list'
 mutable = require './mutable'
 {isFn, assertFn} = require '../core/native/function.coffee'
@@ -60,7 +61,7 @@ extend protocol, isJqueryElement,
       map (attr) ->
         ret = {}
         ret[attr.name] = protocol.attr element, attr.name
-        ret
+        hashMap ret
       , element.attributes
 
   # Get an element by selector

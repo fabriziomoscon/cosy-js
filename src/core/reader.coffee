@@ -3,6 +3,7 @@
 {css, data} = require '../protocol/element'
 {key, value} = require '../protocol/map'
 {into, second} = require '../protocol/list'
+{hashMap} = require './hashMap'
 {map} = require './list'
 
 # cosy.js
@@ -11,11 +12,10 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-
 getData = (attr) ->
   data = {}
   data[second /^data-cosy-(.*)/.exec (key attr)] = value attr
-  data
+  hashMap data
 
 cosyData = (attr) ->
   (/^data-cosy-/.exec (key attr))?
@@ -32,7 +32,7 @@ parseData = (node) ->
 # @return [map]
 loadNode = (node) ->
   {
-    data: (into (data node, "cosy"), (parseData node))
+    data: (into (cosy node), (parseData node))
     node: node
   }
 
