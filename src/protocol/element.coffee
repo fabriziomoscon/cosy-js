@@ -24,7 +24,7 @@ isJqueryElement = (value) ->
 
 # Exports
 module.exports = protocol = defProtocol {
-  attr:
+  attr: dispatch (element, key) ->
   attrs: dispatch (element) ->
   cosy: (element) -> (protocol.data element, 'cosy')
   css: dispatch (element, selector) ->
