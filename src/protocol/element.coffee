@@ -1,7 +1,8 @@
 {defProtocol, dispatch, extend} = require '../core/protocol'
 {ref, watchRef} = require '../core/reference'
 {hashMap} = require '../core/hashMap'
-{map, into} = require './list'
+{into} = require './list'
+{map,} = require '../core/list'
 mutable = require './mutable'
 {isFn, assertFn} = require '../core/native/function.coffee'
 {assertStr} = require '../core/native/string.coffee'
@@ -27,9 +28,11 @@ isJqueryElement = (value) ->
 module.exports = protocol = defProtocol {
   attr: dispatch (element, key) ->
   attrs: dispatch (element) ->
+  children: dispatch (element) ->
   cosy: (element) -> (protocol.data element, 'cosy')
   css: dispatch (element, selector) ->
   data: (element, key) -> (protocol.attr element, 'data-' + (assertStr key))
+  text: dispatch (element) ->
   value: dispatch (element) ->
 }
 
@@ -64,6 +67,13 @@ extend protocol, isJqueryElement,
         hashMap ret
       , element.attributes
 
+  # Get the children of an element
+  #
+  # @param [Element] element
+  # @return [Array]
+  children: (element) ->
+    element.children()
+
   # Get an element by selector
   #
   # @param [Element] element
@@ -71,6 +81,14 @@ extend protocol, isJqueryElement,
   # @return [Element]
   css: (element, selector) ->
     element.find (assertStr selector, 'Invalid selector')
+
+  # Get a reference to an element text
+  #
+  # @param [Element] element
+  # @return [Reference]
+  text: (element) ->
+    watchRef (mutable.set ref(), element.text), (reference) ->
+      element.text (mutable.get reference)
 
   # Get a reference to an element value
   #
