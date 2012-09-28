@@ -2,6 +2,7 @@
 {ref, watchRef} = require '../core/reference'
 {set} = require '../protocol/mutable'
 {isFn, assertFn} = require '../core/native/function.coffee'
+{assertStr} = require '../core/native/string.coffee'
 
 # Cosy.js
 #
@@ -16,12 +17,14 @@
 # @return [Boolean]
 isJqueryElement = (value) ->
   (isFn value.data) and
+  (isFn value.find) and
   (isFn value.val)
 
 
 # Exports
 module.exports = protocol = defProtocol {
   cosy: (element) -> (protocol.data element, 'cosy')
+  css: dispatch (element, selector) ->
   data: dispatch (element, key) ->
   value: dispatch (element, value) ->
 }
@@ -29,6 +32,8 @@ module.exports = protocol = defProtocol {
 
 # Extend protocol for jQuery
 extend protocol, isJqueryElement,
+  css: (element, selector) ->
+    element.find (assertStr selector, 'Invalid selector')
   data: (element, key) ->
     watchRef (set ref(), (element.data key)), (reference) ->
       element.data key, (get reference)
