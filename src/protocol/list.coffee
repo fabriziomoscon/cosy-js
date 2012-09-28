@@ -12,9 +12,15 @@
 
 module.exports = proto = defProtocol {
   first: dispatch (list) ->
+  second: (list) -> first (rest list)
   rest: dispatch (list) ->
   conj: dispatch (list, item) ->
   cons: (item, list) -> (proto.conj list, item)
+  into: (to, from) ->
+    if from is null
+      into (proto.conj to, (first from)), (rest from)
+    else
+      to
 }
 
 # Native types
@@ -34,5 +40,3 @@ extend proto, isArr,
     newList.push item
     newList
 
-# Object
-# @todo

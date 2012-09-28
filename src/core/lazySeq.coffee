@@ -35,7 +35,7 @@ extend list, isLazySeq,
     sequence.head
 
   rest: (sequence) ->
-    first sequence
+    list.first sequence
     sequence.promise()
 
   conj: (sequence, item) ->
