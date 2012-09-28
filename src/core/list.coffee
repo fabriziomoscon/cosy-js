@@ -42,12 +42,40 @@ filter = (pred, list) ->
   else
     item = (first list)
     if (pred item)
-      (cons item, (lazySeq -> filter pred, (rest list)))
+      (cons item,
+        (lazySeq ->
+          filter pred, (rest list)))
     else
       (filter pred, (rest list))
+
+# Returns a lazy sequence of then first n items in a sequence
+#
+# @param [integer] n
+# @param [list] list
+take = (n, list) ->
+  if list is null or n < 1
+    null
+  else
+    (cons (first list),
+      (lazySeq ->
+        take n-1, (rest list)))
+
+# Returns a lazy sequence of all but the first n items in list
+#
+# @param [integer] n
+# @param [list] list
+drop = (n, list) ->
+  step = (n, list) ->
+    if n < 1
+      list
+    else
+      step n-1, rest list
+  lazySeq -> step n, list
 
 module.exports = {
   map,
   reduce,
-  filter
+  filter,
+  take,
+  drop
 }

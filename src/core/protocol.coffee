@@ -33,7 +33,7 @@ dispatch = (signature) ->
 
   fn.setName = (fnName) ->
     name = fnName
-  fn.impl = (type) -> throw new Error "Function not implemented " + name + " for " + typeof type
+  fn.impl = (type) -> throw new Error "Function not implemented " + name + " for " + type
   fn.validate = (args...) ->
     throw (new Error "Invalid invocation " + name) unless args.length is signature.length
   fn

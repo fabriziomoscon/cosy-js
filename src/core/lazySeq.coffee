@@ -27,7 +27,13 @@ lazySeq = (promise, head) ->
 
 # Extend list protocol
 extend list, isLazySeq,
-  first: (sequence) -> sequence.head
+  first: (sequence) ->
+    unless sequence.head?
+      seq = sequence.promise()
+      sequence.head = list.first seq
+      sequence.promise = -> list.rest seq
+    sequence.head
+
   rest: (sequence) -> sequence.promise()
   conj: (sequence, item) ->
     sequence.head = item

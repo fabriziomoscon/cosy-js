@@ -12,8 +12,9 @@
 
 # Tests
 suite 'list module', ->
-  {map, reduce, filter} = require '../../../src/core/list'
+  {map, reduce, filter, take, drop} = require '../../../src/core/list'
   {first, rest} = require '../../../src/protocol/list'
+
   list = mul2 = add = odd = null
   setup ->
     list = [1, 2, 3, 4 , 5]
@@ -34,6 +35,18 @@ suite 'list module', ->
     assert.equal 1, first result
     assert.equal 3, first rest result
 
+  test 'take', ->
+    result = take 2, list
+    assert.equal 1, first result
+    assert.equal 2, first rest result
+    assert.equal null, first rest rest result
+
+  test 'drop', ->
+    result = drop 3, list
+    assert.equal 4, first result
+    assert.equal 5, first rest result
+    assert.equal null, first rest rest result
+
   suite 'combinations', ->
     test 'map reduce', ->
       assert.equal 30,
@@ -48,3 +61,13 @@ suite 'list module', ->
         reduce add,
           map mul2,
             filter odd, list
+
+    test 'take reduce', ->
+      assert.equal 3,
+        reduce add,
+          take 2, list
+
+    test 'srop reduce', ->
+      assert.equal 12,
+        reduce add,
+          drop 2, list
