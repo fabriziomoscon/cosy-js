@@ -1,7 +1,7 @@
 {defProtocol, dispatch, extend} = require '../core/protocol'
 {ref, watchRef} = require '../core/reference'
 {map, into} = require './list'
-{set} = require './mutable'
+mutable = require './mutable'
 {isFn, assertFn} = require '../core/native/function.coffee'
 {assertStr} = require '../core/native/string.coffee'
 
@@ -26,11 +26,17 @@ isJqueryElement = (value) ->
 module.exports = protocol = defProtocol {
   attr: dispatch (element, key) ->
   attrs: dispatch (element) ->
-  cosy: (element) -> (protocol.attr element, 'data-cosy')
+  cosy: (element) -> (protocol.data element, 'cosy')
   css: dispatch (element, selector) ->
   data: (element, key) -> (protocol.attr element, 'data-' + (assertStr key))
-  value: dispatch (element, value) ->
+  value: dispatch (element) ->
 }
+
+
+# Extend mutable for jQuery
+extend mutable, isJqueryElement,
+  get: (element) -> element.html
+  set: (element, value) -> element.html value
 
 
 # Extend protocol for jQuery
@@ -42,8 +48,8 @@ extend protocol, isJqueryElement,
   # @param [String] key
   # @return [Reference]
   attr: (element, key) ->
-    watchRef (set ref(), (element.attr key)), (reference) ->
-      element.attr key, (get reference)
+    watchRef (mutable.set ref(), (element.attr (assertStr key))), (reference) ->
+      element.attr key, (mutable.get reference)
 
   # Get a map of references to element attributes
   #
@@ -68,8 +74,7 @@ extend protocol, isJqueryElement,
   # Get a reference to an element value
   #
   # @param [Element] element
-  # @param [String] key
   # @return [Reference]
-  value: (element, key) ->
-    watchRef (set ref(), (element.val key)), (reference) ->
-      element.val key, (get reference)
+  value: (element) ->
+    watchRef (mutable.set ref(), element.val), (reference) ->
+      element.val (mutable.get reference)
