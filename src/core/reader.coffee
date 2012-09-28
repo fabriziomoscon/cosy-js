@@ -36,15 +36,12 @@ loadNode = (node) ->
     node: node
   }
 
-# Read a node into env
+# Returns a lazy sequence of all the cosy nodes in a dom node
 #
 # @param [element] node
 # @param [Environment] env
-read = (node, env) ->
-  (set env,
-    (map loadNode,
-      (css "[data-cosy]", node)))
-  env
+read = (node) ->
+  map loadNode, (css "[data-cosy]", node)
 
 module.exports = {
   read

@@ -17,8 +17,8 @@ module.exports = proto = defProtocol {
   conj: dispatch (list, item) ->
   cons: (item, list) -> (proto.conj list, item)
   into: (to, from) ->
-    if from is null
-      into (proto.conj to, (first from)), (rest from)
+    if from isnt null
+      proto.into (proto.conj to, (proto.first from)), (proto.rest from)
     else
       to
 }

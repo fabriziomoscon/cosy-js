@@ -14,7 +14,7 @@
 suite 'hashMap module', ->
   {hashMap} = require '../../../src/core/hashMap'
   {assoc, dissoc, get, find, key, value} = require '../../../src/protocol/map'
-  {first, rest, conj} = require '../../../src/protocol/list'
+  {first, rest, conj, into} = require '../../../src/protocol/list'
 
   suite 'Map protocol', ->
     map1 = null
@@ -58,3 +58,6 @@ suite 'hashMap module', ->
 
     test 'conj map item', ->
       assert.equal 7, (get (conj map, (first hashMap {x: 7})), 'x')
+
+    test 'into', ->
+      assert.equal 7, (get (into map, hashMap {x: 7}), 'x')

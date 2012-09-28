@@ -72,5 +72,3 @@ suite 'list module', ->
         assert.equal 12,
           reduce add,
             drop 2, list
-
-  suite 'Object', ->
