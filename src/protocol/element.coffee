@@ -26,9 +26,9 @@ isJqueryElement = (value) ->
 module.exports = protocol = defProtocol {
   attr: dispatch (element, key) ->
   attrs: dispatch (element) ->
-  cosy: (element) -> (protocol.data element, 'cosy')
+  cosy: (element) -> (protocol.attr element, 'data-cosy')
   css: dispatch (element, selector) ->
-  data: dispatch (element, key) ->
+  data: (element, key) -> (protocol.attr element, 'data-' + (assertStr key))
   value: dispatch (element, value) ->
 }
 
@@ -65,20 +65,11 @@ extend protocol, isJqueryElement,
   css: (element, selector) ->
     element.find (assertStr selector, 'Invalid selector')
 
-  # Get a reference to an element data attribute
-  #
-  # @param [Element] element
-  # @param [String] key
-  # @return [Reference]
-  data: (element, key) ->
-    watchRef (set ref(), (element.data key)), (reference) ->
-      element.data key, (get reference)
-
   # Get a reference to an element value
   #
   # @param [Element] element
   # @param [String] key
   # @return [Reference]
   value: (element, key) ->
-    watchRef (set ref(), (element.data key)), (reference) ->
+    watchRef (set ref(), (element.val key)), (reference) ->
       element.val key, (get reference)
