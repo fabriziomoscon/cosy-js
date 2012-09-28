@@ -9,7 +9,9 @@
 
 class Protocol
   constructor: (spec) ->
-    @[name] = def for own name,def of spec
+    for own name,def of spec
+      @[name] = def
+      @[name].setName name if def.setName
     @.supports = -> false
 
 # Define a protocol
@@ -24,13 +26,16 @@ defProtocol = (spec) ->
 # @param [function] signature
 # @return [function]
 dispatch = (signature) ->
+  name = null
   fn = (args...) ->
     fn.validate args...
     fn.impl args...
 
-  fn.impl = -> throw new Error "Function not implemented"
+  fn.setName = (fnName) ->
+    name = fnName
+  fn.impl = (type) -> throw new Error "Function not implemented " + name + " for " + typeof type
   fn.validate = (args...) ->
-    throw (new Error "Invalid invocation") unless args.length is signature.length
+    throw (new Error "Invalid invocation " + name) unless args.length is signature.length
   fn
 
 # Add a function to a protocol dispatcher

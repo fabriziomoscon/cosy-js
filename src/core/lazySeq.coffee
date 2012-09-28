@@ -1,7 +1,7 @@
 'use strict'
 
 list = require '../protocol/list'
-{extend} = require 'protocol'
+{extend} = require './protocol'
 
 # cosy.js
 #
@@ -11,7 +11,7 @@ list = require '../protocol/list'
 
 # Lazy Sequence class
 class LazySeq
-  constructor: (promisem, head) ->
+  constructor: (promise, head) ->
     @promise = promise
     @head = (head ?= null)
 
@@ -29,7 +29,9 @@ lazySeq = (promise, head) ->
 extend list, isLazySeq,
   first: (sequence) -> sequence.head
   rest: (sequence) -> sequence.promise()
-  conj: (sequence, item) -> lazySeq sequence, item
+  conj: (sequence, item) ->
+    sequence.head = item
+    sequence
 
 # Exports
 module.exports = {

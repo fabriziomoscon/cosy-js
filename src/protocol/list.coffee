@@ -21,7 +21,7 @@ module.exports = proto = defProtocol {
 
 # Array
 extend proto, isArr,
-  first: (list) -> if list.length then list[0] else null
+  first: (list) -> if list.length? and list.length then list[0] else null
   rest: (list) -> if list.length > 1 then list.splice(1) else null
   conj: (list, item) ->
     return [item] if list is null

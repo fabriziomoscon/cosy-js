@@ -1,7 +1,7 @@
 'use strict'
 
 {first, rest, cons} = require '../protocol/list'
-{lazySeq} = require 'lazySeq'
+{lazySeq} = require './lazySeq'
 
 # cosy.js
 #
@@ -14,7 +14,7 @@
 # @param [function] fn
 # @param [list] list
 map = (fn, list) ->
-  if (first list) is null
+  if list is null
     null
   else
     (cons (fn (first list)), (lazySeq -> map fn, (rest list)))
@@ -25,22 +25,22 @@ map = (fn, list) ->
 # @param [list] list
 # @param [mixed] accum
 reduce = (fn, list, accum) ->
-  item = (first list)
-  if item is null
+  if list is null
     accum
   else
-    accum = if accum? then (fn item accum) else item
-    (reduce fn (rest list) accum)
+    item = (first list)
+    accum = if accum? then (fn item, accum) else item
+    (reduce fn, (rest list), accum)
 
-# Returns a lazy sequence containin element in list for which pred returns true 
+# Returns a lazy sequence containin element in list for which pred returns true
 #
 # @param [function] pred
 # @param [list] list
 filter = (pred, list) ->
-  item = (first list)
-  if item is null
+  if list is null
     null
   else
+    item = (first list)
     if (pred item)
       (cons item, (lazySeq -> filter pred, (rest list)))
     else
