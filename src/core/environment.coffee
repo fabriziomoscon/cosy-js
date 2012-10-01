@@ -66,9 +66,9 @@ assertConsole = (value) ->
 # @param [mixed] value
 # @return [DomLib]
 assertDomLib = (value) ->
-  if (isFn value.ajax) and
-     (isFn value.append) and
-     (isFn value.remove)
+  if (isFn value) and
+     (isFn value.ajax) and
+     (isFn value.ready)
     return value
   throw (new Error 'Invalid DOM library')
 

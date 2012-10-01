@@ -46,6 +46,7 @@ parseData = (node) ->
 # @param [element] node
 # @return [map]
 loadNode = (node) ->
+  # @todo remove knowledge of node impl
   return null unless node?
   {
     cosy: parseData node.node
