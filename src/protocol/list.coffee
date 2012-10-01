@@ -12,7 +12,7 @@
 
 module.exports = proto = defProtocol {
   first: dispatch (list) ->
-  second: (list) -> first (rest list)
+  second: (list) -> proto.first (proto.rest list)
   rest: dispatch (list) ->
   conj: dispatch (list, item) ->
   cons: (item, list) -> (proto.conj list, item)

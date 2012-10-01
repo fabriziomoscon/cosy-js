@@ -12,7 +12,7 @@
 
 # Tests
 suite 'list module', ->
-  {map, reduce, filter, take, drop} = require '../../../src/core/list'
+  {map, reduce, filter, take, drop, vec} = require '../../../src/core/list'
   {first, rest} = require '../../../src/protocol/list'
 
   suite 'Array', ->
@@ -47,6 +47,9 @@ suite 'list module', ->
       assert.equal 4, first result
       assert.equal 5, first rest result
       assert.equal null, first rest rest result
+
+    test 'vec', ->
+      assert.deepEqual [10, 8, 6, 4, 2], (vec (map mul2, list))
 
     suite 'combinations', ->
       test 'map reduce', ->

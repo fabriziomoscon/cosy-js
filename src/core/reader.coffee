@@ -41,7 +41,7 @@ loadNode = (node) ->
 # @param [element] node
 # @param [Environment] env
 read = (node) ->
-  map loadNode, (css "[data-cosy]", node)
+  (map loadNode, (css node, "[data-cosy]"))
 
 module.exports = {
   read

@@ -72,10 +72,17 @@ drop = (n, list) ->
       step n-1, rest list
   lazySeq -> step n, list
 
+vec = (seq) ->
+  if seq isnt null
+    (cons (first seq), (vec (rest seq)))
+  else
+    null
+
 module.exports = {
   map,
   reduce,
   filter,
   take,
-  drop
+  drop,
+  vec
 }

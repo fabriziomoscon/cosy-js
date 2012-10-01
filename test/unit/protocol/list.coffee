@@ -12,7 +12,7 @@
 
 # Tests
 suite 'list:', ->
-  {first, rest, conj, cons} = require '../../../src/protocol/list'
+  {first, second, rest, conj, cons} = require '../../../src/protocol/list'
 
   suite 'Array', ->
     myArray = null
@@ -22,6 +22,9 @@ suite 'list:', ->
 
     test 'First gets first element', ->
       assert.strictEqual 1, (first myArray)
+
+    test 'Second gets first element', ->
+      assert.strictEqual 2, (second myArray)
 
     test 'Rest gets rest of list', ->
       assert.deepEqual [2, 3, 4], (rest myArray)
