@@ -73,4 +73,5 @@ suite 'Core Reader:', ->
 </body>
 '''
     ast = reader.read jQuery html
-    #assert.equal 'foo', (first ast.children).cosy.entity
+    assert.equal 'foo', (first ast.children).cosy.entity
+    assert.equal 'update foo', (first (first ast.children).children).cosy.event.click
