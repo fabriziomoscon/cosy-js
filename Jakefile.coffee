@@ -12,6 +12,7 @@ paths =
   src: './src'
   test: './test'
   unitTest: './test/unit'
+  integTest: './test/integration'
 
 # Build JavaScript
 desc 'This builds JavaScript from the CoffeeScript source'
@@ -56,9 +57,27 @@ task 'test', (filePath) ->
     complete()
 , async: true
 
+# Run integration tests
+desc 'This runs all integration tests'
+task 'test-integ', (filePath) ->
+  if filePath?
+    filePath = path.join paths.integTest, filePath
+    console.log "Running integration tests for #{filePath}:".cyan
+  else
+    filePath = paths.integTest
+    console.log 'Running integration tests:'.cyan
+  exec getTestCommand(path: filePath), (error, stdout, stderr) ->
+    if error is null
+      console.log stdout
+    else
+      console.log stderr
+      fail()
+    complete()
+, async: true
+
 # CI
 desc 'This runs all tasks required for CI'
-task 'ci', ['lint', 'test']
+task 'ci', ['lint', 'test', 'test-integ']
 
 # Default task
 task 'default', ['build']

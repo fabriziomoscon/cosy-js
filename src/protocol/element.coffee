@@ -1,6 +1,7 @@
 {defProtocol, dispatch, extend} = require '../core/protocol'
 {ref, watchRef} = require '../core/reference'
 {hashMap} = require '../core/hashMap'
+list = require './list'
 {into} = require './list'
 {map,} = require '../core/list'
 mutable = require './mutable'
@@ -19,6 +20,7 @@ mutable = require './mutable'
 # @param [mixed] value
 # @return [Boolean]
 isJqueryElement = (value) ->
+  (value?) and
   (isFn value.data) and
   (isFn value.find) and
   (isFn value.val)
@@ -34,12 +36,14 @@ module.exports = protocol = defProtocol {
   data: (element, key) -> (protocol.attr element, 'data-' + (assertStr key))
   text: dispatch (element) ->
   value: dispatch (element) ->
+  parents: dispatch (element, selector) ->
+  matches: dispatch (element, selector) ->
 }
 
 
 # Extend mutable for jQuery
 extend mutable, isJqueryElement,
-  get: (element) -> element.html
+  get: (element) -> element.html()
   set: (element, value) -> element.html value
 
 
@@ -87,7 +91,7 @@ extend protocol, isJqueryElement,
   # @param [Element] element
   # @return [Reference]
   text: (element) ->
-    watchRef (mutable.set ref(), element.text), (reference) ->
+    watchRef (mutable.set ref(), element.text()), (reference) ->
       element.text (mutable.get reference)
 
   # Get a reference to an element value
@@ -95,5 +99,24 @@ extend protocol, isJqueryElement,
   # @param [Element] element
   # @return [Reference]
   value: (element) ->
-    watchRef (mutable.set ref(), element.val), (reference) ->
+    watchRef (mutable.set ref(), element.val()), (reference) ->
       element.val (mutable.get reference)
+
+  parents: (element, selector) ->
+    element.parents (assertStr selector, 'Invalid selector')
+
+  matches: (element, selector) ->
+    element.is (assertStr selector, 'Invalid Selector')
+
+# Extend protocol for jQuery
+extend list, isJqueryElement,
+  first: (jqList) ->
+    if jqList.length
+      jqList.eq 0
+    else
+      null
+  rest: (jqList) ->
+    if jqList.length
+      jqList.slice 1
+    else
+      null
