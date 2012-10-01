@@ -60,6 +60,18 @@ loadNode = (node) ->
 read = (node) ->
   loadNode dom.read node, "[data-cosy]"
 
+getNode = (ast) ->
+  ast.node
+
+getCosy = (ast) ->
+  ast.cosy
+
+getChildren = (ast) ->
+  ast.children
+
 module.exports = {
-  read
+  read,
+  node: getNode,
+  cosy: getCosy,
+  children: getChildren
 }
