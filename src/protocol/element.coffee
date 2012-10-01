@@ -21,9 +21,10 @@ mutable = require './mutable'
 # @return [Boolean]
 isJqueryElement = (value) ->
   (value?) and
-  (isFn value.data) and
-  (isFn value.find) and
-  (isFn value.val)
+  (value.jquery?)
+#  (isFn value.data) and
+#  (isFn value.find) and
+#  (isFn value.val)
 
 
 # Exports
@@ -33,7 +34,7 @@ module.exports = protocol = defProtocol {
   children: dispatch (element) ->
   cosy: (element) -> (protocol.data element, 'cosy')
   css: dispatch (element, selector) ->
-  data: (element, key) -> (protocol.attr element, 'data-' + (assertStr key))
+  data: dispatch (element, key) ->
   text: dispatch (element) ->
   value: dispatch (element) ->
   parents: dispatch (element, selector) ->
@@ -64,12 +65,9 @@ extend protocol, isJqueryElement,
   # @param [Element] element
   # @return [Map]
   attrs: (element) ->
-    map into,
-      map (attr) ->
-        ret = {}
-        ret[attr.name] = protocol.attr element, attr.name
-        hashMap ret
-      , element.attributes
+    result = {}
+    result[attr.name] = attr.value for attr in element[0].attributes
+    hashMap result
 
   # Get the children of an element
   #
@@ -85,6 +83,14 @@ extend protocol, isJqueryElement,
   # @return [Element]
   css: (element, selector) ->
     element.find (assertStr selector, 'Invalid selector')
+
+  # Get a reference to the element data attribute
+  #
+  # @param [Element] element
+  # @param [String] key
+  # @return [Reference]
+  data: (element, key) ->
+    element.data (assertStr key)
 
   # Get a reference to an element text
   #

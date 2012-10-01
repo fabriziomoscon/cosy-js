@@ -24,7 +24,7 @@ map = (fn, list) ->
 # @param [function] fn
 # @param [list] list
 # @param [mixed] accum
-reduce = (fn, list, accum) ->
+reduce = (fn, list, accum = null) ->
   if list is null
     accum
   else

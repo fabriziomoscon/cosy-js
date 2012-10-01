@@ -44,7 +44,10 @@ module.exports = {
 extend map, isHashMap,
   assoc: (col, key, value) ->
     newMap = hashMap col
-    newMap[key] = value
+    if isHashMap col[key]
+      newMap[key] = list.into col[key], value
+    else
+      newMap[key] = value
     newMap
   dissoc: (col, key) ->
     newMap = hashMap col

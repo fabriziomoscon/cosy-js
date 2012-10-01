@@ -1,10 +1,12 @@
 'use strict'
 
-{css, data} = require '../protocol/element'
+{css, data, cosy, attrs} = require '../protocol/element'
 {key, value} = require '../protocol/map'
-{into, second} = require '../protocol/list'
+{into, second, rest} = require '../protocol/list'
 {hashMap} = require './hashMap'
-{map} = require './list'
+{map, reduce, filter} = require './list'
+{get} = require '../protocol/mutable'
+dom = require '../dom/reader'
 
 # cosy.js
 #
@@ -12,18 +14,31 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-getData = (attr) ->
-  data = {}
-  data[second /^data-cosy-(.*)/.exec (key attr)] = value attr
-  hashMap data
+getData = (node, attr) ->
+  parts = /^data-(cosy-(.*))/.exec (key attr)
+  name = parts[2]
+  dataName = parts[1]
+  getObject = (name, value) ->
+    result = {}
+    parts = /^([^-]+)(-(.*))?/.exec name
+    if parts[3]?
+      result[parts[1]] = getObject parts[3], value
+    else
+      result[name] = value
+    hashMap result
+  getObject name, data node, dataName
 
 cosyData = (attr) ->
   (/^data-cosy-/.exec (key attr))?
 
 parseData = (node) ->
-  (reduce into,
-    (map getData,
-      (filter cosyData, (attrs node))))
+  result = cosy node
+  if result is '' or result?
+    result = hashMap {}
+  (into result,
+    (reduce into,
+      (map ((attr) -> getData node, attr),
+        (filter cosyData, (attrs node)))))
 
 # Parses all
 # Loads a dom node
@@ -31,9 +46,12 @@ parseData = (node) ->
 # @param [element] node
 # @return [map]
 loadNode = (node) ->
+  return null unless node?
   {
-    data: (into (cosy node), (parseData node))
-    node: node
+    #data: (into (cosy node), (parseData node))
+    cosy: parseData node.node
+    node: node.node
+    children: map loadNode, node.children
   }
 
 # Returns a lazy sequence of all the cosy nodes in a dom node
@@ -41,7 +59,7 @@ loadNode = (node) ->
 # @param [element] node
 # @param [Environment] env
 read = (node) ->
-  (map loadNode, (css node, "[data-cosy]"))
+  loadNode dom.read node, "[data-cosy]"
 
 module.exports = {
   read
