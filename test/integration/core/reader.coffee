@@ -63,3 +63,14 @@ suite 'Core Reader:', ->
     ast = reader.read element
     assert.equal 'remove foo', ast.cosy.event.click
     assert.equal 'update foo', ast.cosy.event.doubleclick
+
+  test 'Nested directives', ->
+    html = '''
+<body>
+  <div data-cosy="" data-cosy-entity="foo">
+    <button data-cosy="" data-cosy-event-click="update foo">Remove</button>
+  </div>
+</body>
+'''
+    ast = reader.read jQuery html
+    #assert.equal 'foo', (first ast.children).cosy.entity

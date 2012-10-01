@@ -41,7 +41,7 @@ filter = (pred, list) ->
     null
   else
     item = (first list)
-    if (pred item)
+    if item? and (pred item)
       (cons item,
         (lazySeq ->
           filter pred, (rest list)))

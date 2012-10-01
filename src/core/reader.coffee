@@ -48,7 +48,6 @@ parseData = (node) ->
 loadNode = (node) ->
   return null unless node?
   {
-    #data: (into (cosy node), (parseData node))
     cosy: parseData node.node
     node: node.node
     children: map loadNode, node.children

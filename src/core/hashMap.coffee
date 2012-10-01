@@ -74,7 +74,11 @@ extend list, isHashMap,
       return hashMapItem key, value
     null
   rest: (col) ->
-    (map.dissoc col, (map.key (list.first col)))
+    colFirst = (list.first col)
+    if colFirst?
+      (map.dissoc col, (map.key colFirst))
+    else
+      null
   conj: (col, item) ->
     if item is null
       col
