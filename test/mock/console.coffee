@@ -2,7 +2,7 @@
 
 {spy} = require 'sinon'
 
-# Cosy.js
+# cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
 # @see http://github.com/BraveNewTalent/cosy-js

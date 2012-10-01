@@ -2,7 +2,7 @@
 
 {defProtocol, dispatch, extend} = require '../core/protocol'
 
-# Cosy.js
+# cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
 # @see http://github.com/BraveNewTalent/cosy-js

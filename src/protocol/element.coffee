@@ -7,7 +7,7 @@ mutable = require './mutable'
 {isFn, assertFn} = require '../core/native/function.coffee'
 {assertStr} = require '../core/native/string.coffee'
 
-# Cosy.js
+# cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
 # @see http://github.com/BraveNewTalent/cosy-js
