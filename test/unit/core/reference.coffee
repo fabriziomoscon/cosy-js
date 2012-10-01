@@ -24,7 +24,7 @@ suite 'reference:', ->
     assert.isTrue (isRef ref())
 
 
-  suite 'get and set:', ->
+  suite 'get and set (with no constructor args):', ->
     val = null
 
     setup ->
@@ -45,6 +45,15 @@ suite 'reference:', ->
       assert.throws ->
         setRef {}, 'foo'
       , /Invalid reference/
+
+  suite 'get and set (with constructor args):', ->
+    val = null
+
+    setup ->
+      val = (ref 'foo')
+
+    test 'getRef returns the value passed into the constructor', ->
+      assert.strictEqual (getRef val), 'foo'
 
 
   suite 'watch:', ->

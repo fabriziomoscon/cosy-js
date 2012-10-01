@@ -14,17 +14,18 @@ mutable = require '../protocol/mutable'
 #
 # @private
 class Reference
-  constructor: ->
-    @value = null
+  constructor: (value = null) ->
+    @value = value
     @metadata =
       watches: []
 
 
 # Create a new reference
 #
+# @param [mixed] value
 # @return [Reference]
-ref = ->
-  new Reference
+ref = (value) ->
+  new Reference value
 
 # Is the value a valid reference
 #
