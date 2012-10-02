@@ -21,4 +21,4 @@ suite 'lazySeq module', ->
     numbers = (start) ->
       (cons start, lazySeq -> (numbers start+1))
 
-    assert.deepEqual [4, 3, 2, 1], (vec (take 4, (numbers 1)))
+    assert.deepEqual [1, 2, 3 ,4], (vec (take 4, (numbers 1)))

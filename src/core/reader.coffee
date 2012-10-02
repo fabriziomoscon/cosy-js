@@ -35,12 +35,34 @@ parseData = (node) ->
   result = cosy node
   if result is '' or result?
     result = hashMap {}
-  (into result,
+  new Cosy (into result,
     (reduce into,
       (map ((attr) -> getData node, attr),
         (filter cosyData, (attrs node)))))
 
-# Parses all
+class Tree
+  constructor: (_tree) ->
+    @.root = _tree.root
+    @.children = _tree.children
+
+class TreeNode
+  constructor: (_node) ->
+    @.cosy = _node.cosy
+    @.element = _node.element
+
+class Cosy
+  constructor: (_cosy) ->
+    @[_key] = _value for own _key, _value of _cosy
+
+isCosy = (cosy) ->
+  cosy instanceof Cosy
+
+isTree = (tree) ->
+  tree instanceof Tree
+
+isTreeNode = (root) ->
+  root instanceof TreeNode
+
 # Loads a dom node
 #
 # @param [element] node
@@ -48,9 +70,11 @@ parseData = (node) ->
 loadNode = (node) ->
   # @todo remove knowledge of node impl
   return null unless node?
-  {
-    cosy: parseData node.node
-    node: node.node
+  new Tree {
+    root: new TreeNode {
+      cosy: parseData node.node
+      element: node.node
+    }
     children: map loadNode, node.children
   }
 
@@ -62,17 +86,24 @@ read = (node) ->
   loadNode dom.read node, "[data-cosy]"
 
 getNode = (ast) ->
-  ast.node
+  ast.root
 
-getCosy = (ast) ->
-  ast.cosy
+getElement = (root) ->
+  root.element
+
+getCosy = (root) ->
+  root.cosy
 
 getChildren = (ast) ->
   ast.children
 
 module.exports = {
   read,
+  isTree,
+  isTreeNode,
+  isCosy,
   node: getNode,
   cosy: getCosy,
-  children: getChildren
+  children: getChildren,
+  element: getElement
 }

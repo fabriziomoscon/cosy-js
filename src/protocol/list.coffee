@@ -71,9 +71,9 @@ extend proto, ((list) -> list is null),
 # Array
 extend proto, isArr,
   first: (list) -> if list.length? and list.length then list[0] else null
-  rest: (list) -> if list.length > 1 then list.splice(1) else null
+  rest: (list) -> if list.length > 1 then list.slice(1) else null
   conj: (list, item) ->
-    newList = list.splice 0
+    newList = list.slice 0
     newList.push item
     newList
 

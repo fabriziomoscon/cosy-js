@@ -49,7 +49,7 @@ suite 'list module', ->
       assert.equal null, first rest rest result
 
     test 'vec', ->
-      assert.deepEqual [10, 8, 6, 4, 2], (vec (map mul2, list))
+      assert.deepEqual [2, 4, 6, 8, 10], (vec (map mul2, list))
 
     suite 'combinations', ->
       test 'map reduce', ->

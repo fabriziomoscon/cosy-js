@@ -1,5 +1,7 @@
 'use strict'
 
+{assertFn} = require './native/function'
+
 # cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
@@ -48,6 +50,8 @@ dispatch = (signature) ->
 addDispatch = (proto, pred, name, fn) ->
   throw (new Error 'Unknown function ' + name) unless proto[name]?
   throw (new Error 'Function not extendable ' + name) unless proto[name].impl?
+  assertFn pred, 'Invalid predicate'
+  assertFn fn, 'Invalid function'
 
   chain = proto[name].impl
   proto[name].impl = (args...) ->
@@ -63,7 +67,7 @@ addDispatch = (proto, pred, name, fn) ->
 # @param [function] pred
 # @param [Object] spec
 extend = (proto, pred, spec) ->
-  (addDispatch proto, pred, name, fn) for own name,fn of spec
+  (addDispatch proto, pred, name, fn) for own name, fn of spec
 
 # Checks if a protocol is supported
 #

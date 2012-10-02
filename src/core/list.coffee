@@ -73,10 +73,24 @@ drop = (n, list) ->
   lazySeq -> step n, list
 
 vec = (seq) ->
-  if seq isnt null
-    (cons (first seq), (vec (rest seq)))
-  else
-    null
+  result = []
+  doSeq ((item) -> result.push item), seq
+  result
+
+doLoop = (fn) ->
+  while fn?
+    result = fn()
+    fn = result?.recur
+  null
+
+recur = (fn) ->
+  return {recur: fn}
+
+doSeq = (fn, seq) ->
+  return null unless seq?
+  doLoop ->
+    fn (first seq)
+    recur -> doSeq fn, (rest seq)
 
 module.exports = {
   map,
@@ -84,5 +98,6 @@ module.exports = {
   filter,
   take,
   drop,
-  vec
+  vec,
+  doSeq
 }

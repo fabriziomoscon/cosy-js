@@ -20,7 +20,7 @@ suite 'Core Reader:', ->
 
     ast = reader.read element
 
-    assert.isObject (reader.cosy ast)
+    assert.isObject (reader.cosy (reader.node ast))
 
   test 'Empty object cosy directive', ->
     html = '<div data-cosy="{}"></div>'
@@ -28,7 +28,7 @@ suite 'Core Reader:', ->
 
     ast = reader.read element
 
-    assert.isObject (reader.cosy ast)
+    assert.isObject (reader.cosy (reader.node ast))
 
   test 'Cosy extended directives', ->
     html = '<div data-cosy-entity="foo"></div>'
@@ -36,30 +36,30 @@ suite 'Core Reader:', ->
 
     ast = reader.read element
 
-    assert.equal 'foo', (reader.cosy ast).entity
+    assert.equal 'foo', (reader.cosy (reader.node ast)).entity
 
   test 'Multiple extended directives', ->
     html = '''<div data-cosy-entity="foo" data-cosy-event='{"click": "remove foo"}'></div>'''
     element = jQuery html
 
     ast = reader.read element
-    assert.equal 'foo', ast.cosy.entity
-    assert.equal 'remove foo', (reader.cosy ast).event.click
+    assert.equal 'foo', (reader.cosy (reader.node ast)).entity
+    assert.equal 'remove foo', (reader.cosy (reader.node ast)).event.click
 
   test 'Second order extended directive', ->
     html = '''<div data-cosy-event-click='remove foo'></div>'''
     element = jQuery html
 
     ast = reader.read element
-    assert.equal 'remove foo', (reader.cosy ast).event.click
+    assert.equal 'remove foo', (reader.cosy (reader.node ast)).event.click
 
   test 'Multiple Second order extended directives', ->
     html = '''<div data-cosy-event-click='remove foo' data-cosy-event-doubleclick='update foo'></div>'''
     element = jQuery html
 
     ast = reader.read element
-    assert.equal 'remove foo', (reader.cosy ast).event.click
-    assert.equal 'update foo', (reader.cosy ast).event.doubleclick
+    assert.equal 'remove foo', (reader.cosy (reader.node ast)).event.click
+    assert.equal 'update foo', (reader.cosy (reader.node ast)).event.doubleclick
 
   test 'Nested directives', ->
     html = '''
@@ -71,7 +71,7 @@ suite 'Core Reader:', ->
 '''
     ast = reader.read jQuery html
     assert.equal 'foo',
-      (reader.cosy (first (reader.children ast))).entity
+      (reader.cosy (reader.node (first (reader.children ast)))).entity
 
     assert.equal 'remove foo',
-      (reader.cosy (first (reader.children (first (reader.children ast))))).event.click
+      (reader.cosy (reader.node (first (reader.children (first (reader.children ast)))))).event.click
