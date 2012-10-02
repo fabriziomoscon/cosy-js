@@ -45,6 +45,6 @@ module.exports =
     proto.update entity, newValue
     frame
   remove: (frame, entity) ->
-    newFrame = dissoc frame, (name entity)
+    newFrame = dissoc frame, (proto.name entity)
     proto.remove entity
     newFrame
