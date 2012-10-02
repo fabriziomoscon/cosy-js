@@ -22,7 +22,7 @@ deps = [
 up = (startNode, reg) ->
   frame = hashMap {}
   frame = evaluator.use frame, dep for dep in deps
-  frame = evaluator.use reg
+  frame = evaluator.use frame, reg
   ast = reader.read startNode
   evaluator.apply ast, frame
 
