@@ -38,9 +38,16 @@ extend proto, isEntity,
   id: (entity) ->
     entity.id
 
+createEntity = (name, id, node) ->
+  new Entity name, id, node
+
+entity = (frame, constructor, name, id) ->
+  assoc frame, name, (constructor name, id, (get frame, '__node'))
+
 module.exports =
-  entity: (frame, name, id) ->
-    assoc frame, name, (new Entity name, id, (get frame, '__node'))
+  entity: (frame, args...) ->
+    args.unshift createEntity if args.length < 4
+    entity frame, args...
   update: (frame, entity, newValue) ->
     proto.update entity, newValue
     frame

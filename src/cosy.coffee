@@ -19,9 +19,10 @@ deps = [
 #
 # @param [domNode] startNode
 # @return [hashMap] stackFrame
-up = (startNode) ->
+up = (startNode, reg) ->
   frame = hashMap {}
   frame = evaluator.use frame, dep for dep in deps
+  frame = evaluator.use reg
   ast = reader.read startNode
   evaluator.apply ast, frame
 
