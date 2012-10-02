@@ -16,32 +16,49 @@ list = require '../protocol/list'
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 parse = (str) ->
-  (assertStr str).split ' '
+  (assertStr str).split /\s/
 
 lookup = (frame, str) ->
   ref = get frame, str
   if ref?
     ref
   else
-    JSON.parse str
+    try
+      JSON.parse str
+    catch e
+      str
 
-evaluate = (str, frame) ->
-  cmd = parse str
+evaluate = (cmd, frame) ->
+  cmd = parse cmd if isStr cmd
   fn = lookup frame, list.first cmd
-  assertFn fn
+  assertFn fn, 'Unknown function ' + list.first cmd
   args = vec (map ((symbol) -> lookup frame, symbol), (list.rest cmd))
   fn frame, args...
 
 proto = defProtocol
   apply: dispatch (type, frame) ->
 
+extend proto, ((type) -> type is null),
+  apply: (nil, frame) -> frame
+
 extend proto, isStr,
   apply: (str, frame) ->
     evaluate str, frame
 
+stringify = (_obj, prefix = '') ->
+  cmds = []
+  if isStr _obj
+    cmds.push prefix + _obj
+  else
+    for own key, val of _obj
+      cmds = cmds.concat (stringify val, prefix + key + ' ')
+  cmds
+
 extend proto, isCosy,
   apply: (_cosy, frame) ->
-    #evaluate _cosy, frame
+    cmds = stringify _cosy
+    for cmd in cmds
+      frame = proto.apply cmd, frame
     frame
 
 extend proto, isTreeNode,
@@ -74,4 +91,5 @@ module.exports = {
   apply: proto.apply
   use
   frame
+  evaluate
 }

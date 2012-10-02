@@ -30,15 +30,17 @@ suite 'Core Evaluator:', ->
       assert.strictEqual obj.a, (get frame, 'a')
       assert.strictEqual obj.b, (get frame, 'b')
 
-    test 'apply string flat call', ->
+    test 'apply string', ->
       obj =
-        fn: (env) ->
-          assoc env, 'foo', 'bar'
+        bar: "bar"
+        def: (env, bar, val) ->
+          assoc env, bar, val
       frame = evaluator.use frame, obj
-      frame = evaluator.apply 'fn', frame
-      assert.strictEqual 'bar', (get frame, 'foo')
+      frame = evaluator.apply 'def bar 1', frame
+      assert.strictEqual 1, (get frame, 'bar')
 
   suite 'Button', ->
+    body = null
     setup ->
       html = '''
   <body>
@@ -47,10 +49,27 @@ suite 'Core Evaluator:', ->
     </div>
   </body>
   '''
-      ast = reader.read jQuery html
+      body = jQuery html
+      ast = reader.read body
       frame = evaluator.frame()
+      frame = evaluator.use frame,
+        entity: (frame, name) ->
+          assoc frame, name,
+            name: name
+            node: get frame, '__node'
+        event: (frame, event, action...) ->
+          node = get frame, '__node'
+          node.on event, ->
+            evaluator.evaluate action, frame
+          frame
+        remove: (frame, entity) ->
+          entity.node.remove()
 
       frame = evaluator.apply ast, frame
+      (body.find 'button').click()
 
-    test 'Next environment is an object', ->
+    test 'Next frame is an object', ->
       assert.isObject frame
+
+    test 'Body is empty', ->
+      assert.strictEqual '<body></body>\n', body[0].outerHTML
