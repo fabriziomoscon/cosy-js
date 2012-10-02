@@ -30,10 +30,10 @@ lookup = (frame, str) ->
 
 evaluate = (cmd, frame) ->
   cmd = parse cmd if isStr cmd
-  console.log cmd
   fn = lookup frame, list.first cmd
   assertFn fn, 'Unknown function ' + list.first cmd
   args = vec (map ((symbol) -> lookup frame, symbol), (list.rest cmd))
+  console.log [(list.first cmd)].concat args
   fn frame, args...
 
 proto = defProtocol

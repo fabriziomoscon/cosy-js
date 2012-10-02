@@ -4,6 +4,7 @@
 {defProtocol, dispatch, extend} = require '../core/protocol'
 {assoc, dissoc, get} = require '../protocol/map'
 element = require '../protocol/element'
+proto = require '../protocol/entity'
 
 # cosy.js
 #
@@ -21,12 +22,6 @@ class Entity
 isEntity = (type) ->
   type instanceof Entity
 
-proto = defProtocol {
-  update: dispatch (entity, newValue) ->
-  remove: dispatch (entity) ->
-  name: dispatch (entity) ->
-  id: dispatch (entity) ->
-}
 
 extend proto, isEntity,
   update: (entity, newValue) ->
@@ -39,12 +34,12 @@ extend proto, isEntity,
   id: (entity) ->
     entity.id
 
-createEntity = (name, id, node) ->
+createEntity = (frame, name, id, node) ->
   new Entity name, id, node
 
 entity = (frame, constructor, name, id) ->
   assertFn constructor, 'Invalid constructor ' + constructor
-  assoc frame, name, (constructor name, id, (get frame, '__node'))
+  assoc frame, name, (constructor frame, name, id, (get frame, '__node'))
 
 module.exports =
   entity: (frame, args...) ->
@@ -54,6 +49,5 @@ module.exports =
     proto.update entity, newValue
     frame
   remove: (frame, entity) ->
-    newFrame = dissoc frame, (proto.name entity)
     proto.remove entity
-    newFrame
+    frame
