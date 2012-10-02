@@ -14,6 +14,6 @@ element = require '../protocol/element'
 module.exports =
   event: (frame, event, action...) ->
     node = get frame, '__node'
-    element.on node, event, ->
+    element.listen node, event, ->
       evaluate action, frame
     frame
