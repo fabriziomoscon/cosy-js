@@ -1,5 +1,6 @@
 'use strict'
 
+{assertFn} = require '../core/native/function'
 {defProtocol, dispatch, extend} = require '../core/protocol'
 {assoc, dissoc, get} = require '../protocol/map'
 element = require '../protocol/element'
@@ -42,11 +43,12 @@ createEntity = (name, id, node) ->
   new Entity name, id, node
 
 entity = (frame, constructor, name, id) ->
+  assertFn constructor, 'Invalid constructor ' + constructor
   assoc frame, name, (constructor name, id, (get frame, '__node'))
 
 module.exports =
   entity: (frame, args...) ->
-    args.unshift createEntity if args.length < 4
+    args.unshift createEntity if args.length < 3
     entity frame, args...
   update: (frame, entity, newValue) ->
     proto.update entity, newValue
