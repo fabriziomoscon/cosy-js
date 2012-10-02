@@ -1,5 +1,7 @@
 'use strict'
 
+{defProtocol, dispatch} = require '../core/protocol'
+
 # cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
