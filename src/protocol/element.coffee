@@ -39,6 +39,8 @@ module.exports = protocol = defProtocol {
   value: dispatch (element) ->
   parents: dispatch (element, selector) ->
   matches: dispatch (element, selector) ->
+  listen: dispatch (element, event, fn) ->
+  remove: dispatch (element) ->
 }
 
 
@@ -113,6 +115,12 @@ extend protocol, isJqueryElement,
 
   matches: (element, selector) ->
     element.is (assertStr selector, 'Invalid Selector')
+
+  listen: (element, event, fn) ->
+    element.on event, fn
+
+  remove: (element) ->
+    element.remove()
 
 # Extend protocol for jQuery
 extend list, isJqueryElement,
