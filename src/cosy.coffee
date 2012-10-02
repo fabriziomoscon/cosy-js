@@ -23,7 +23,7 @@ up = (startNode) ->
   frame = hashMap {}
   frame = evaluator.use frame, dep for dep in deps
   ast = reader.read startNode
-  evaluator.appl ast, initialFrame
+  evaluator.apply ast, frame
 
 module.exports = {
   up
