@@ -21,7 +21,7 @@ getData = (node, attr) ->
   getObject = (name, value) ->
     result = {}
     parts = /^([^-]+)(-(.*))?/.exec name
-    if parts[3]?
+    if parts? and parts[3]?
       result[parts[1]] = getObject parts[3], value
     else
       result[name] = value

@@ -13,6 +13,8 @@ evaluator = require './core/evaluator'
 deps = [
   require './lang/entity'
   require './lang/event'
+  require './lang/handler'
+  require './lang/dom'
 ]
 
 # Start up cosy
