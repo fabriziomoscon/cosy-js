@@ -120,6 +120,7 @@ extend protocol, isJqueryElement,
     element.on event, fn
 
   remove: (element) ->
+    element.trigger "remove"
     element.remove()
 
 # Extend protocol for jQuery
