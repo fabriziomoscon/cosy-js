@@ -42,13 +42,16 @@ module.exports = protocol = defProtocol {
   matches: dispatch (element, selector) ->
   listen: dispatch (element, event, fn) ->
   remove: dispatch (element) ->
+  append: dispatch (element, child) ->
 }
 
 
 # Extend mutable for jQuery
 extend mutable, isJqueryElement,
   get: (element) -> element.html()
-  set: (element, value) -> element.html value
+  set: (element, value) ->
+    element.trigger 'html'
+    element.html value
 
 
 # Extend protocol for jQuery
@@ -109,6 +112,7 @@ extend protocol, isJqueryElement,
   # @return [Reference]
   value: (element) ->
     watchRef (mutable.set ref(), element.val()), (reference) ->
+      element.trigger 'value'
       element.val (mutable.get reference)
 
   parents: (element, selector) ->
@@ -126,6 +130,10 @@ extend protocol, isJqueryElement,
   remove: (element) ->
     element.trigger "remove"
     element.remove()
+
+  append: (element, child) ->
+    element.trigger "append"
+    element.append child
 
 # Extend protocol for jQuery
 extend list, isJqueryElement,
