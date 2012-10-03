@@ -64,7 +64,8 @@ extend proto, isCosy,
 
 extend proto, isTreeNode,
   apply: (node, frame) ->
-    newFrame = (assoc frame, "__node", (element node))
+    newFrame = (assoc frame, "__parent", (get frame, "__node", node))
+    newFrame = (assoc newFrame, "__node", (element node))
     proto.apply (cosy node), newFrame
 
 extend proto, ((type) -> supports list, type),
