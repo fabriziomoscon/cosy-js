@@ -19,21 +19,21 @@ parse = (str) ->
   (assertStr str).split /\s/
 
 lookup = (frame, str) ->
+  return str unless isStr str
   ref = get frame, str
-  if ref?
-    ref
-  else
+  unless ref?
     try
-      JSON.parse str
+      ref = JSON.parse str
     catch e
-      str
+      ref = str
+  ref
 
 evaluate = (cmd, frame) ->
   cmd = parse cmd if isStr cmd
   fn = lookup frame, list.first cmd
   assertFn fn, 'Unknown function ' + list.first cmd
   args = vec (map ((symbol) -> lookup frame, symbol), (list.rest cmd))
-  console.log [(list.first cmd)].concat args
+  console.debug [(list.first cmd)].concat args
   fn frame, args...
 
 proto = defProtocol

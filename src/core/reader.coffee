@@ -33,7 +33,9 @@ cosyData = (attr) ->
 
 parseData = (node) ->
   result = cosy node
-  if result is '' or result?
+  if result is ''
+    result = hashMap {}
+  unless result?
     result = hashMap {}
   new Cosy (into result,
     (reduce into,
@@ -82,8 +84,9 @@ loadNode = (node) ->
 #
 # @param [element] node
 # @param [Environment] env
-read = (node) ->
-  loadNode dom.read node, "[data-cosy]"
+read = (node, selector) ->
+  selector ?= "[data-cosy]"
+  loadNode dom.read node, selector
 
 getNode = (ast) ->
   ast.root

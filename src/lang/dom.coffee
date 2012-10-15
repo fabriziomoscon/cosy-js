@@ -2,7 +2,7 @@
 
 map = require '../protocol/map'
 {first} = require '../protocol/list'
-{parents, siblings, append, remove, children} = require '../protocol/element'
+{parents, siblings, append, remove, children, value} = require '../protocol/element'
 {get, set} = require '../protocol/mutable'
 
 swap = (frame) ->
@@ -14,6 +14,13 @@ swap = (frame) ->
   (append parent, to)
   frame
 
+val = (frame) ->
+  node = (map.get frame, "__node")
+  value node
+
+goto = (frame, location) ->
+
 module.exports = {
   swap
+  val
 }

@@ -1,6 +1,7 @@
 'use strict'
 
-{defProtocol, dispatch} = require '../core/protocol'
+{defProtocol, dispatch, extend} = require '../core/protocol'
+{isStr} = require '../core/native/string'
 
 # cosy.js
 #
@@ -10,7 +11,7 @@
 
 
 # Define protocol
-module.exports = defProtocol
+module.exports = proto = defProtocol
   # Mutably set the value of a reference and return the refernce
   #
   # @param [Reference] variable
@@ -25,3 +26,8 @@ module.exports = defProtocol
   # @param [Reference] variable
   # @return [mixed]
   get: dispatch (variable) ->
+
+
+# Strings
+extend, proto, isStr,
+  get: (str) -> str
