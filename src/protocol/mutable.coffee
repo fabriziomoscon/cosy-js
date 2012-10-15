@@ -29,5 +29,6 @@ module.exports = proto = defProtocol
 
 
 # Strings
-extend, proto, isStr,
+extend proto, isStr,
   get: (str) -> str
+
