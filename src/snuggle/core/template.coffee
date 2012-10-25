@@ -33,7 +33,11 @@ renderTemplate = (tmpl, context) ->
   evaluator.apply ast, @frame
   element
 
+renderRaw = (tmpl, context) ->
+  render tmpl, context
+
 module.exports = {
-  template,
+  template
   render: renderTemplate
+  renderRaw
 }
