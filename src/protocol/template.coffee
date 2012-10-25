@@ -1,6 +1,7 @@
 'use strict'
 
-{defProtocol, dispatch} = require '../core/protocol'
+{defProtocol, dispatch, extend} = require '../core/protocol'
+{isStr} = require '../core/native/string'
 
 # cosy.js
 #
@@ -10,5 +11,11 @@
 
 
 # Define protocol
-module.exports = defProtocol
+module.exports = proto = defProtocol
   render: dispatch (template, context) ->
+
+# Render string
+
+extend proto, isStr,
+  render: (template, context) ->
+    template
