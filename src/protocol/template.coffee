@@ -19,3 +19,13 @@ module.exports = proto = defProtocol
 extend proto, isStr,
   render: (template, context) ->
     template
+
+# Render jQuery
+
+isJqueryElement = (value) ->
+  (value?) and
+  (value.jquery?)
+
+extend proto, isJqueryElement,
+  render: (template, context) ->
+    template
