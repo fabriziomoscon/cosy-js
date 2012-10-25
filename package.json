@@ -17,7 +17,7 @@
     "Rowan Manning"
   ],
   "dependencies": {
-    "hogan": "1.0.5-dev"
+    "hogan.js": "1.0.5-dev"
   },
   "devDependencies": {
     "chai": "1.1.x",

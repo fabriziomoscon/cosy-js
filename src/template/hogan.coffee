@@ -3,7 +3,7 @@
 {assertObj} = require '../core/native/object'
 {assertStr} = require '../core/native/string'
 {extend} = require '../core/protocol'
-{compile} = require 'hogan'
+hogan = require 'hogan.js'
 template = require '../protocol/template'
 
 # cosy.js
@@ -20,7 +20,7 @@ template = require '../protocol/template'
 class HoganTemplate
   constructor: (templateString) ->
     (assertStr templateString, 'Invalid template string')
-    @template = (compile templateString)
+    @template = (hogan.compile templateString)
 
 
 # Create a new Hogan template
