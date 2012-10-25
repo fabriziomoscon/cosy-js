@@ -27,4 +27,5 @@ module.exports =
   state: require('./core/state').state
   template: template.template
   render: template.render
+  renderRaw: template.renderRaw
   global: require './core/global'
