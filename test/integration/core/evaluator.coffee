@@ -72,4 +72,4 @@ suite 'Core Evaluator:', ->
       assert.isObject frame
 
     test 'Body is empty', ->
-      assert.strictEqual '<body></body>\n', body[0].outerHTML
+      assert.match body[0].outerHTML, /^<body>\s*<\/body>$/
