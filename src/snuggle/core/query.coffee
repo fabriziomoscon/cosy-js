@@ -20,7 +20,7 @@ roles = (name, element) ->
   @element.find "[data-role=#{name}]"
 
 role = (name, element) ->
-  (roles.call @, name).eq 0
+  (roles.call @, name, element).eq 0
 
 query = (selector) ->
   $(selector)

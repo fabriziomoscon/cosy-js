@@ -13,9 +13,10 @@ html = require './html'
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-template = (id) ->
+template = (id, element) ->
   id ?= 'template'
-  tmpl = (@element.find "script[data-id=#{id}]").eq 0
+  element ?= @element
+  tmpl = (element.find "script[data-id=#{id}]").eq 0
   if 'text/mustache' is tmpl.attr 'type'
     hogan.tmpl tmpl.html()
   else
