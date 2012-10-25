@@ -32,7 +32,6 @@ eventFn = (fn) ->
     }
 
 submit = (fn, element) ->
-  console.log @
   form = getForm.call @, element
   form.submit (eventFn fn)
 
