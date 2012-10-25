@@ -24,7 +24,7 @@ module.exports =
   copy: ref.copy
   form: require './core/form'
   html: require './core/html'
-  state: require './core/state'
+  state: require('./core/state').state
   template: template.template
   render: template.render
   global: require './core/global'

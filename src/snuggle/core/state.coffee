@@ -44,4 +44,4 @@ state = (name, def, element) ->
   element ?= @element
   new State element, name, def
 
-module.exports = state
+module.exports = {state}
