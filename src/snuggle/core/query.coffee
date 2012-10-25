@@ -17,7 +17,7 @@ container = (name, element) ->
 
 roles = (name, element) ->
   element ?= @element
-  @element.find "[data-role=#{name}]"
+  element.find "[data-role=#{name}]"
 
 role = (name, element) ->
   (roles.call @, name, element).eq 0
