@@ -3,7 +3,7 @@
 # Dependencies
 {assert} = require 'chai'
 {spy} = require 'sinon'
-element = require '../../mock/jQueryElement'
+jQueryElement = require '../../mock/jQueryElement'
 
 
 suite 'element protocol:', ->

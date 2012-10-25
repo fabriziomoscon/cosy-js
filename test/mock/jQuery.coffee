@@ -1,6 +1,7 @@
 'use strict'
 
 {spy} = require 'sinon'
+jQueryElement = require './jQueryElement'
 
 # cosy.js
 #
@@ -8,8 +9,13 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-jQ = spy()
-jQ.ajax = spy()
-jQ.ready = spy()
+# Create a mock jQuery object
+mock = ->
+  jQuery = spy ->
+    jQueryElement.mock()
+  jQuery.ajax = spy()
+  jQuery.ready = spy()
+  jQuery
+
 # Exports
-module.exports = jQ
+module.exports = {mock}

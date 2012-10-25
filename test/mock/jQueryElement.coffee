@@ -3,7 +3,10 @@
 # Dependencies
 {spy} = require 'sinon'
 
-# Exports
-module.exports =
+# Create a mock jQuery element
+mock = ->
   data: spy()
   val: spy()
+
+# Exports
+module.exports = {mock}
