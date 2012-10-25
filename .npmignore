@@ -2,5 +2,4 @@
 Jakefile.coffee
 node_modules
 npm-debug.log
-src
 test
