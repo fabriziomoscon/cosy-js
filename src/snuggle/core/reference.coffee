@@ -1,6 +1,6 @@
 'use strict'
 
-{set, get} = require 'cosy-js/src/protocol/mutable'
+{set, get} = require '../../protocol/mutable'
 
 copy = (src, tgt) ->
   set tgt, (get src)

@@ -1,9 +1,9 @@
 'use strict'
 
-{children} = require 'cosy-js/src/protocol/element'
-{filter, map, reduce} = require 'cosy-js/src/core/list'
-{into} = require 'cosy-js/src/protocol/list'
-{hashMap} = require 'cosy-js/src/core/hashMap'
+{children} = require '../../protocol/element'
+{filter, map, reduce} = require '../../core/list'
+{into} = require '../../protocol/list'
+{hashMap} = require '../../core/hashMap'
 
 formTags = [
   "input"

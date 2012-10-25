@@ -1,8 +1,8 @@
 'use strict'
 
-{isArr} = require 'cosy-js/src/core/native/array'
-{isRef} = require 'cosy-js/src/core/reference'
-{get, set} = require 'cosy-js/src/protocol/mutable'
+{isArr} = require '../../core/native/array'
+{isRef} = require '../../core/reference'
+{get, set} = require '../../protocol/mutable'
 
 isList = isArr
 

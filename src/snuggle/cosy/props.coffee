@@ -1,7 +1,7 @@
 'use strict'
 
-{ref} = require 'cosy-js/src/core/reference'
-{get, assoc} = require 'cosy-js/src/protocol/map'
+{ref} = require '../../core/reference'
+{get, assoc} = require '../../protocol/map'
 
 props = (frame, args...) ->
   refs = (get frame, 'refs') or {}

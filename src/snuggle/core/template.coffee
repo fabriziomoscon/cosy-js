@@ -1,9 +1,9 @@
 'use strict'
 
-{render} = require 'cosy-js/src/protocol/template'
-hogan = require 'cosy-js/src/template/hogan'
-evaluator = require 'cosy-js/src/core/evaluator'
-reader = require 'cosy-js/src/core/reader'
+{render} = require '../../protocol/template'
+hogan = require '../../template/hogan'
+evaluator = require '../../core/evaluator'
+reader = require '../../core/reader'
 html = require './html'
 
 template = (id) ->

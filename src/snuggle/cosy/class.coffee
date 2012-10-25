@@ -1,7 +1,7 @@
 'use strict'
 
-{isFn} = require 'cosy-js/src/core/native/function'
-{evaluate, use} = require 'cosy-js/src/core/evaluator'
+{isFn} = require '../../core/native/function'
+{evaluate, use} = require '../../core/evaluator'
 
 classControl = (constructor) ->
   (args...) ->

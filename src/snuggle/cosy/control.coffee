@@ -1,10 +1,10 @@
 'use strict'
 
-map = require 'cosy-js/src/protocol/map'
-mutable = require 'cosy-js/src/protocol/mutable'
-{isRef, watchRef} = require 'cosy-js/src/core/reference'
-{evaluate, use} = require 'cosy-js/src/core/evaluator'
-{isFn} = require 'cosy-js/src/core/native/function'
+map = require '../../protocol/map'
+mutable = require '../../protocol/mutable'
+{isRef, watchRef} = require '../../core/reference'
+{evaluate, use} = require '../../core/evaluator'
+{isFn} = require '../../core/native/function'
 
 # Parse ang args list replacing any refs with their content
 #

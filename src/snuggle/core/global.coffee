@@ -1,8 +1,8 @@
 'use strict'
 
-{ref: createRef} = require 'cosy-js/src/core/reference'
-map = require 'cosy-js/src/protocol/map'
-mutable = require 'cosy-js/src/protocol/mutable'
+{ref: createRef} = require '../../core/reference'
+map = require '../../protocol/map'
+mutable = require '../../protocol/mutable'
 
 get = (name) ->
   globals = mutable.get (map.get @frame, 'global')

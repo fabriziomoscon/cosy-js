@@ -1,9 +1,9 @@
 'use strict'
 
-{isStr} = require 'cosy-js/src/core/native/string'
-{vec} = require 'cosy-js/src/core/list'
-{first, rest} = require 'cosy-js/src/protocol/list'
-{use} = require 'cosy-js/src/core/evaluator'
+{isStr} = require '../../core/native/string'
+{vec} = require '../../core/list'
+{first, rest} = require '../../protocol/list'
+{use} = require '../../core/evaluator'
 
 findNs = (frame, name, parent) ->
   if frame[name]?

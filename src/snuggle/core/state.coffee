@@ -1,7 +1,7 @@
 'use strict'
 
-{ref, watchRef} = require 'cosy-js/src/core/reference'
-{get, set} = require 'cosy-js/src/protocol/mutable'
+{ref, watchRef} = require '../../core/reference'
+{get, set} = require '../../protocol/mutable'
 
 removeState = (element, name) ->
   element.addClass "is-not-#{name}"
