@@ -13,6 +13,7 @@ jQuery = require 'jquery'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 # Tests
 suite 'Dom parsing:', ->
   reader = require '../../../src/dom/reader'

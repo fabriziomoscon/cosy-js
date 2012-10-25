@@ -14,6 +14,7 @@ dom = require '../../../src/dom/reader'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 # Tests
 suite 'Core Evaluator:', ->
   evaluator = require '../../../src/core/evaluator'

@@ -1,3 +1,5 @@
+'use strict'
+
 {css, parents, matches} = require '../protocol/element'
 {filter, map} = require '../core/list'
 {first} = require '../protocol/list'
@@ -7,6 +9,7 @@
 # @copyright BraveNewTalent Ltd 2012
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
+
 
 isParent = (node, element, selector) ->
   return false unless element?

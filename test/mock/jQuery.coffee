@@ -9,6 +9,7 @@ jQueryElement = require './jQueryElement'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 # Create a mock jQuery object
 mock = ->
   jQuery = spy ->

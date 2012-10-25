@@ -1,11 +1,17 @@
 'use strict'
 
-# Dependencies
 {assert} = require 'chai'
 {spy} = require 'sinon'
 jQueryElement = require '../../mock/jQueryElement'
 
+# cosy.js
+#
+# @copyright BraveNewTalent Ltd 2012
+# @see http://github.com/BraveNewTalent/cosy-js
+# @see http://opensource.org/licenses/mit-license.php MIT License
 
+
+# Tests
 suite 'element protocol:', ->
   {cosy, data, value} = require '../../../src/protocol/element'
 

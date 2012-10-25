@@ -6,6 +6,13 @@ mutable = require '../../protocol/mutable'
 {evaluate, use} = require '../../core/evaluator'
 {isFn} = require '../../core/native/function'
 
+# cosy.js
+#
+# @copyright BraveNewTalent Ltd 2012
+# @see http://github.com/BraveNewTalent/cosy-js
+# @see http://opensource.org/licenses/mit-license.php MIT License
+
+
 # Parse ang args list replacing any refs with their content
 #
 # @param [Array] args

@@ -9,6 +9,7 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 # Returns a lazy sequence applying fn to each element of list
 #
 # @param [function] fn

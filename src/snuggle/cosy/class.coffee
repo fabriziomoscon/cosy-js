@@ -3,6 +3,13 @@
 {isFn} = require '../../core/native/function'
 {evaluate, use} = require '../../core/evaluator'
 
+# cosy.js
+#
+# @copyright BraveNewTalent Ltd 2012
+# @see http://github.com/BraveNewTalent/cosy-js
+# @see http://opensource.org/licenses/mit-license.php MIT License
+
+
 classControl = (constructor) ->
   (args...) ->
     if @isInitialising

@@ -8,6 +8,7 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 module.exports = protocol = defProtocol
   # Return the key of a map item
   # @todo move into own protocol

@@ -9,6 +9,7 @@ list = require '../protocol/list'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 # Lazy Sequence class
 class LazySeq
   constructor: (promise, head) ->

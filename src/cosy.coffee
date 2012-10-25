@@ -10,6 +10,7 @@ evaluator = require './core/evaluator'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 deps = [
   require './lang/entity'
   require './lang/event'

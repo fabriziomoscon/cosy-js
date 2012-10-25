@@ -14,6 +14,7 @@ dom = require '../dom/reader'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
 getData = (node, attr) ->
   parts = /^data-(cosy-(.*))/.exec (key attr)
   name = parts[2]
