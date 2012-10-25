@@ -72,7 +72,8 @@ extend protocol, isJqueryElement,
   # @return [Map]
   attrs: (element) ->
     result = {}
-    result[attr.name] = attr.value for attr in element[0].attributes
+    if element[0].attributes?
+      result[attr.name] = attr.value for attr in element[0].attributes
     hashMap result
 
   # Get the children of an element

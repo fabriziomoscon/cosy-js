@@ -33,7 +33,7 @@ evaluate = (cmd, frame) ->
   fn = lookup frame, list.first cmd
   assertFn fn, 'Unknown function ' + list.first cmd
   args = vec (map ((symbol) -> lookup frame, symbol), (list.rest cmd))
-  console.debug [(list.first cmd)].concat args
+  (console.log [(list.first cmd)].concat args) if (get frame, 'debug')
   fn frame, args...
 
 proto = defProtocol
