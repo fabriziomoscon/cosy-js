@@ -19,7 +19,7 @@ mutable = require '../../protocol/mutable'
 parseArgs = (args) ->
   newArgs = []
   for arg in args
-    newArgs.push if isRef arg then mutable.get arg else arg
+    newArgs.push if (isRef arg) and (arg.passRef isnt true) then mutable.get arg else arg
   newArgs
 
 # Entend a target object by adding all the properties of a src object to it
@@ -66,10 +66,12 @@ class Control
     @element = map.get @frame, '__node'
 
     for arg, index in args
-      parts = /^(@|%)(.*)$/.exec arg
-      args[index] = @props[parts[2]] if parts? and parts[1] is '@' and parts[2]?
-      if parts? and parts[1] is '%' and parts[2]?
-        args[index] = @global.getOrInitRef parts[2]
+      parts = /^([&])?(@|%)(.*)$/.exec arg
+      args[index] = @props[parts[3]] if parts? and parts[2] is '@' and parts[3]?
+      if parts? and parts[2] is '%' and parts[3]?
+        args[index] = @global.getOrInitRef parts[3]
+
+      args[index].passRef = true if parts? and parts[1] is '&'
 
     # Watch any refs in the arg list
     for arg in args
