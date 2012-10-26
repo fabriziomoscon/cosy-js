@@ -1,6 +1,7 @@
 'use strict'
 
 {set, get} = require '../../protocol/mutable'
+{watchRef} = require '../../core/reference'
 
 # cosy.js
 #
@@ -15,9 +16,15 @@ copy = (src, tgt) ->
 notify = (ref) ->
   copy ref, ref
 
+watch = (watchedRef, watchFn) ->
+  watchRef watchedRef, ->
+    watchFn (mutable.get watchedRef)
+
 module.exports = {
   set
   get
   copy
   notify
+  watch
+  watchRef
 }

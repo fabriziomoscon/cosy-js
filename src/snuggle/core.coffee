@@ -29,3 +29,5 @@ module.exports =
   render: template.render
   renderRaw: template.renderRaw
   global: require './core/global'
+  watch: ref.watch
+  watchRef: ref.watchRef
