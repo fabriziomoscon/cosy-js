@@ -13,6 +13,7 @@
 classControl = (constructor) ->
   (args...) ->
     if @isInitialising
+      @isInitialising = false
       new constructor @, args...
     else if isFn @update
       @update args...

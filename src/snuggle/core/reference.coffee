@@ -18,7 +18,7 @@ notify = (ref) ->
 
 watch = (watchedRef, watchFn) ->
   watchRef watchedRef, ->
-    watchFn (mutable.get watchedRef)
+    watchFn (get watchedRef)
 
 module.exports = {
   set
