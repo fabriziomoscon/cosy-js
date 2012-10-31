@@ -87,10 +87,38 @@ suite 'snuggle core query:', ->
       assert.strictEqual result, @queryElement
 
 
-  suite 'on method:', ->
+  suite 'onEvent method:', ->
 
     setup ->
       @handler = spy()
+
+    test 'binds an event to the context element when called with no delegate', ->
+      query.onEvent.call @ctx, 'click', @handler
+      assert.isTrue @ctx.element.on.withArgs('click').calledOnce
+
+    test 'binds a delegated event (with role element selector) to the context element when called with a delegate', ->
+      query.onEvent.call @ctx, 'foo', 'click', @handler
+      assert.isTrue @ctx.element.on.withArgs('click', '[data-role=foo]').calledOnce
+
+    test 'passes a wrapped handler into the jquery event binding', ->
+      query.onEvent.call @ctx, 'click', @handler
+      assert.isFunction @ctx.element.on.firstCall.args[1]
+      assert.notStrictEqual @ctx.element.on.firstCall.args[1], @handler
+
+
+  suite 'on method:', ->
+
+    setup ->
+      @log = global.console.log
+      global.console.log = spy()
+      @handler = spy()
+
+    teardown ->
+      global.console.log = @log
+
+    test 'logs a depreciated notice', ->
+      query.on.call @ctx, 'click', @handler
+      assert.isTrue global.console.log.withArgs('`on` is depreciated, please use `onEvent`').calledOnce
 
     test 'binds an event to the context element when called with no delegate', ->
       query.on.call @ctx, 'click', @handler
