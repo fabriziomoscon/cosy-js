@@ -46,10 +46,15 @@ onEvent = (args...) ->
   else
     onRoleEvent @element, args...
 
+onEventDepreciated = (args...) ->
+  console.log '`on` is depreciated, please use `onEvent`'
+  onEvent.apply @, args
+
 module.exports = {
   container
   role
   roles
   query
-  "on": onEvent
+  onEvent
+  "on": onEventDepreciated
 }

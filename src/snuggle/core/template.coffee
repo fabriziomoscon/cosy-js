@@ -24,7 +24,7 @@ template = (id, element) ->
 
 renderTemplate = (tmpl, context) ->
   html = render tmpl, context
-  tags = /^<.+>$/i.test html.replace(/[\r\n]/gm," ").trim()
+  tags = /^<.+>$/i.test $.trim(html.replace(/[\r\n]/gm, " "))
   if tags
     element = $ html
   else
