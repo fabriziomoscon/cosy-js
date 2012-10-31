@@ -1,6 +1,7 @@
 'use strict'
 
 {assert} = require 'chai'
+{spy} = require 'sinon'
 jQuery = require 'jquery'
 {first} = require '../../../src/protocol/list'
 {get, assoc} = require '../../../src/protocol/map'
@@ -74,3 +75,28 @@ suite 'Core Evaluator:', ->
 
     test 'Body is empty', ->
       assert.match body[0].outerHTML, /^<body>\s*<\/body>\s*$/
+
+  suite 'Dot syntax', ->
+    body = null
+    method = null
+    setup ->
+      html = '''
+  <body>
+    <div data-cosy="" data-cosy-test="a.b">
+    </div>
+  </body>
+  '''
+      method = spy()
+      body = jQuery html
+      ast = reader.read body
+      frame = evaluator.frame()
+      frame = evaluator.use frame,
+        test: (frame, args...) ->
+          method args...
+        a:
+          b: true
+
+      frame = evaluator.apply ast, frame
+
+    test 'Test methods called with test value', ->
+      assert (method.withArgs true).calledOnce

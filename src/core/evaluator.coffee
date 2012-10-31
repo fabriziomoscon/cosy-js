@@ -19,9 +19,18 @@ list = require '../protocol/list'
 parse = (str) ->
   (assertStr str).split /\s/
 
+lookupRef = (frame, parts) ->
+  name = list.first parts
+  rest = list.rest parts
+  ref = get frame, name
+  if ref and rest
+    lookupRef (use frame, ref), rest
+  else
+    ref
+
 lookup = (frame, str) ->
   return str unless isStr str
-  ref = get frame, str
+  ref = lookupRef frame, str.split /[.]/
   unless ref?
     try
       ref = JSON.parse str
