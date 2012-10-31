@@ -109,16 +109,16 @@ suite 'snuggle core query:', ->
   suite 'on method:', ->
 
     setup ->
-      @log = global.console.log
-      global.console.log = spy()
+      console.log = spy(console, 'log')
       @handler = spy()
 
     teardown ->
-      global.console.log = @log
+      console.log.restore()
 
-    test 'logs a depreciated notice', ->
+    test 'logs a depreciated notice (but only once)', ->
       query.on.call @ctx, 'click', @handler
-      assert.isTrue global.console.log.withArgs('`on` is depreciated, please use `onEvent`').calledOnce
+      query.on.call @ctx, 'click', @handler
+      assert.isTrue console.log.withArgs('`on` is depreciated, please use `onEvent`').calledOnce
 
     test 'binds an event to the context element when called with no delegate', ->
       query.on.call @ctx, 'click', @handler
