@@ -17,6 +17,7 @@ module.exports =
   roles: query.roles
   query: query.query
   list: require './core/list'
+  onEvent: query.onEvent
   "on": query.on
   set: ref.set
   get: ref.get

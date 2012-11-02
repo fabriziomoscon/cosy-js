@@ -68,10 +68,10 @@ function argsExample (arg1, arg2, arg3) {
 ```
 
 
-Control Helpers
+Control Methods
 ---------------
 
-There are many core convenience methods available to controls. These are documented separately, but we'll run through some of the basic DOM helpers here.
+There are many core convenience methods available to controls, exposed as methods on the control context. See the [control object documentation](../control-object.md) for more detail, but we'll run through some of the basic DOM helpers here.
 
 
 ### Role(s)
@@ -106,12 +106,12 @@ Snuggle also provides a convenience wrapper for events, which can be bound to th
 function helloWorld () {
     
     // Click the control element
-    this.on('click', function (event) {
+    this.onEvent('click', function (event) {
         alert(event.element.text()); // hello world
     });
 
     // Click the 'world' role element
-    this.on('world', 'click', function (event) {
+    this.onEvent('world', 'click', function (event) {
         alert(event.element.text()); // world
     });
 }
