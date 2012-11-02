@@ -13,3 +13,4 @@ module.exports =
   ns: require './cosy/ns'
   props: require './cosy/props'
   attach: require './cosy/attach'
+  call: require './cosy/call'

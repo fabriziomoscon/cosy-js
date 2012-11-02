@@ -46,8 +46,11 @@ onEvent = (args...) ->
   else
     onRoleEvent @element, args...
 
+depreciatedMsgSent = false
 onEventDepreciated = (args...) ->
-  console.log '`on` is depreciated, please use `onEvent`'
+  if depreciatedMsgSent is false
+    console.log '`on` is depreciated, please use `onEvent`'
+    depreciatedMsgSent = true
   onEvent.apply @, args
 
 module.exports = {
