@@ -12,8 +12,6 @@ The control object also has an `element` property, which is a jQuery object repr
 
 The container method is used to select a parent element with a `data-container` attribute. The `name` argument specifies the name of the container we wish to select, and the `element` argument allows us to specify an element to query the parents of (defaulting to the control element).
 
-### Example
-
 ```html
 <div data-container="todo">
     Buy some milk and eggs
