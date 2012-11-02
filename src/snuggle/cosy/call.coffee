@@ -8,7 +8,7 @@
 
 
 call = (frame, fn, args...) ->
-  fn args...
+  fn frame.__node, args...
   frame
 
 module.exports = call
