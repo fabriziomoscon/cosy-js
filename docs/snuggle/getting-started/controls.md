@@ -1,7 +1,6 @@
 
-
-Controls
-========
+Getting Started With Snuggle: Controls
+======================================
 
 A control in snuggle is a simple function, with HTML attributes used to bind controls to DOM elements. In their simplest form, a control looks like this:
 
