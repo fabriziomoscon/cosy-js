@@ -7,8 +7,8 @@ list = require './list'
 {into} = require './list'
 {map,} = require '../core/list'
 mutable = require './mutable'
-{isFn, assertFn} = require '../core/native/function.coffee'
-{assertStr} = require '../core/native/string.coffee'
+{isFn, assertFn} = require '../core/native/function'
+{assertStr} = require '../core/native/string'
 
 # cosy.js
 #
