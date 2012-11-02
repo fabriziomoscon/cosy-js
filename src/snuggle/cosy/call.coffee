@@ -7,7 +7,7 @@
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-call = (frame, fn, args..) ->
+call = (frame, fn, args...) ->
   fn args...
   frame
 
