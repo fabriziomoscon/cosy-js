@@ -158,9 +158,9 @@ The object returned by the state method has the following methods itself:
 
 ```js
 function todo () {
-    var done = this.state('done', false);
+    var done = this.state('done', false); // apply state classes to the control element
     this.role('complete').on('change', function () {
-        done.toggle();
+        done.toggle(); // toggles between `is-done` and `is-not-done` classes
     });
 }
 ```
