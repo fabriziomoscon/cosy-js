@@ -36,7 +36,7 @@ function complete () {
 `Control.copy`
 --------------
 
-Todo.
+Alias of `cosy.core.reference.copy`.
 
 
 `Control.form`
@@ -48,7 +48,7 @@ Todo.
 `Control.get`
 -------------
 
-Todo.
+Alias of `cosy.core.reference.get`.
 
 
 `Control.global`
@@ -114,7 +114,7 @@ Todo.
 `Control.set`
 -------------
 
-Todo.
+Alias of `cosy.core.reference.set`.
 
 
 `Control.state`
@@ -132,10 +132,10 @@ Todo.
 `Control.watch`
 ---------------
 
-Todo.
+Alias of `cosy.core.reference.watch`.
 
 
 `Control.watchRef`
 ------------------
 
-Todo.
+Alias of `cosy.core.reference.watchRef`.
