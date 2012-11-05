@@ -21,14 +21,7 @@ The container method is used to select a parent element with a `data-container` 
 
 ```js
 function complete () {
-    var control = this;
-    control.element.on('change', function () {
-        if (control.element.is(':checked')) {
-            this.container('todo').addClass('done');
-        } else {
-            this.container('todo').removeClass('done');
-        }
-    })
+    var todo = this.container('todo'); // the containing div
 }
 ```
 
@@ -102,13 +95,40 @@ Todo.
 `Control.role`
 --------------
 
-Todo.
+The role method is used to select a (single) child element with a `data-role` attribute. The `name` argument specifies the name of the role we wish to select, and the `element` argument allows us to specify an element to query the children of (defaulting to the control element).
+
+```html
+<div data-cosy-control="todo">
+    Buy some milk and eggs
+    <input type="checkbox" data-role="complete"/>
+</div>
+```
+
+```js
+function todo () {
+    var checkbox = this.role('checkbox'); // the checkbox element
+}
+```
 
 
 `Control.roles`
 ---------------
 
-Todo.
+The roles method is exactly the same as `role` except that it selects multiple elements.
+
+```html
+<ul data-cosy-control="todos">
+    <li data-role="todo"> ... </li>
+    <li data-role="todo"> ... </li>
+    <li data-role="todo"> ... </li>
+</ul>
+```
+
+```js
+function todos () {
+    var todo = this.roles('todo'); // the three list items
+}
+```
 
 
 `Control.set`
