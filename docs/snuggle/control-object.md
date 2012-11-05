@@ -80,10 +80,28 @@ Todo.
 Todo.
 
 
-`Control.onEvent`
------------------
+`Control.onEvent( [role ,] event, handler )`
+--------------------------------------------
 
-Todo.
+The onEvent method is used to bind a DOM event, providing a shortcut to binding events on role elements. The event (or delegate) is always bound to the control element. The optional `role` argument specifies the name of the role to target; if this is present then a delegated event is used. The `event` and `handler` arguments allow you to specify the type of event to bind to as well as the handler function.
+
+```html
+<div data-cosy-control="todo">
+    Buy some milk and eggs
+    <input type="checkbox" data-role="complete"/>
+</div>
+```
+
+```js
+function todo () {
+    this.onEvent('click', function (event) {
+        // control has been clicked (regular event)
+    });
+    this.onEvent('complete', 'change', function (event) {
+        // checkbox has changed (delegate)
+    });
+}
+```
 
 
 `Control.query( name [, element] )`
