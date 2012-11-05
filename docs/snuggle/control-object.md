@@ -50,10 +50,22 @@ Alias of `cosy.core.reference.get`.
 Todo.
 
 
-`Control.html`
---------------
+`Control.html.<tag>( [attrs [, content]] )`
+-------------------------------------------
 
-Todo.
+The HTML object contains methods for every HTML element, which are used to construct new elements. The `attrs` argument is expected to be an object with properties mapping to attribute names/values. The `content` argument is the content of the new element. A jQuery object is returned by these methods.
+
+```html
+<div data-cosy-control="form"></div>
+```
+
+```js
+function form () {
+    var input = this.html.input({type: 'text', name: 'todo'});
+    var button = this.html.button(null, 'Add');
+    this.element.append(input).append(button);
+}
+```
 
 
 `Control.list`
