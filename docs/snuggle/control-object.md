@@ -8,7 +8,7 @@ The control object also has an `element` property, which is a jQuery object repr
 
 
 `Control.container( name [, element] )`
--------------------
+---------------------------------------
 
 The container method is used to select a parent element with a `data-container` attribute. The `name` argument specifies the name of the container we wish to select, and the `element` argument allows us to specify an element to query the parents of (defaulting to the control element).
 
@@ -74,8 +74,25 @@ Todo.
 Todo.
 
 
-`Control.query`
----------------
+`Control.query( name [, element] )`
+-----------------------------------
+
+The query method is used to query all DOM elements. In most cases, you can consider this an alias of the `jQuery` function. Use this as a last resort when the container and role methods won't cut it.
+
+```html
+<ul id="todo-list"></ul>
+
+<input type="text" name="todo"/>
+<button data-cosy-control="add">Add todo</button>
+```
+
+```js
+function add () {
+    var value = this.query('[name=todo]').val();
+    var list = this.query('#todo-list');
+    list.append('<li>' + value + '</li>');
+}
+```
 
 Todo.
 
@@ -93,7 +110,7 @@ Todo.
 
 
 `Control.role( name [, element] )`
---------------
+----------------------------------
 
 The role method is used to select a (single) child element with a `data-role` attribute. The `name` argument specifies the name of the role we wish to select, and the `element` argument allows us to specify an element to query the children of (defaulting to the control element).
 
