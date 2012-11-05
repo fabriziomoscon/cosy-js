@@ -1,6 +1,6 @@
 'use strict'
 
-{ref} = require '../../core/reference'
+{ref, isRef} = require '../../core/reference'
 {get, assoc} = require '../../protocol/map'
 
 # cosy.js
@@ -13,7 +13,7 @@
 props = (frame, args...) ->
   refs = (get frame, 'refs') or {}
   for arg in args
-    refs[arg] = ref()
+    refs[arg] = ref() unless isRef refs[arg]
   assoc frame, 'refs', refs
 
 module.exports = props
