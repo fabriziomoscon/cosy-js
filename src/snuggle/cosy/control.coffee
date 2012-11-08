@@ -87,4 +87,6 @@ control = (frame, fn, args...) ->
   new Control frame, fn, args
   frame
 
+control.raw = /^&?[%@].+$/
+
 module.exports = control

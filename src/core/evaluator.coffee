@@ -46,7 +46,13 @@ evaluate = (cmd, frame) ->
   cmd = parse cmd if isStr cmd
   fn = lookup frame, list.first cmd
   assertFn fn, 'Unknown function ' + list.first cmd
-  args = vec (map ((symbol) -> lookup frame, symbol), (list.rest cmd))
+  mapSymbol = (symbol) ->
+    if fn.raw? and fn.raw.exec symbol
+      symbol
+    else
+      lookup frame, symbol
+
+  args = vec (map mapSymbol, (list.rest cmd))
   (console.log [(list.first cmd)].concat args) if (get frame, 'debug')
   fn frame, args...
 

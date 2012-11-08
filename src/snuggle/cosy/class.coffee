@@ -22,4 +22,6 @@ cosyClass = (frame, constructor, args...) ->
   control = classControl constructor
   evaluate (['control', control].concat args), frame
 
+cosyClass.raw = /^&?[%@].+$/
+
 module.exports = cosyClass

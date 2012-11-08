@@ -16,4 +16,6 @@ props = (frame, args...) ->
     refs[arg] = ref() unless isRef refs[arg]
   assoc frame, 'refs', refs
 
+props.raw = /^[^"'].*$/
+
 module.exports = props
