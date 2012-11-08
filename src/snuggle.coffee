@@ -36,6 +36,7 @@ up.to = (startNode, frame) ->
   attributes = []
   attributes.push "[data-cosy-#{name}]" for own name, obj of cosy
   selector = attributes.join ','
+  frame.__selector = selector
   startNode.each (index, element) ->
     ast = reader.read $(element), selector
     evaluator.apply ast, frame

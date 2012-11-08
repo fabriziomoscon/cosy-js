@@ -2,8 +2,9 @@
 
 {render} = require '../../protocol/template'
 hogan = require '../../template/hogan'
+evaluator = require '../../core/evaluator'
+reader = require '../../core/reader'
 html = require './html'
-snuggle = require '../../snuggle'
 
 # cosy.js
 #
@@ -29,7 +30,8 @@ renderTemplate = (tmpl, context) ->
   else
     element = @html.span {}, html
 
-  snuggle.up.to element, frame
+  ast = reader.read element, @frame.__selector
+  evaluator.apply ast, @frame
   element
 
 renderRaw = (tmpl, context) ->
