@@ -1,6 +1,7 @@
 'use strict'
 
 {isArr} = require '../../core/native/array'
+{isCollection} = require '../../core/collection'
 {isRef} = require '../../core/reference'
 {get, set} = require '../../protocol/mutable'
 
@@ -11,7 +12,8 @@
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-isList = isArr
+isList = (type) ->
+  (isArr type) or (isCollection type)
 
 count = (list) ->
   return count get list if isRef list

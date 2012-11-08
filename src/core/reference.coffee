@@ -91,4 +91,5 @@ module.exports = {
   getRef
   setRef
   watchRef
+  notifyRef
 }

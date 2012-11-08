@@ -17,6 +17,8 @@ core = require './snuggle/core'
 
 cosy = require './snuggle/cosy'
 
+control = require './snuggle/control'
+
 up = (startNode, controls, lib, debug = false) ->
   frame = evaluator.frame()
   for own name, value of lib
@@ -25,6 +27,7 @@ up = (startNode, controls, lib, debug = false) ->
     core[name] = value
 
   frame = assoc frame, 'namespace', core
+  frame = assoc frame, 'cosy', control
   frame = evaluator.use frame, cosy
   frame = evaluator.use frame, controls
   frame = assoc frame, 'global', ref {}

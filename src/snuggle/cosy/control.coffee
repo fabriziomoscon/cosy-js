@@ -16,10 +16,10 @@ mutable = require '../../protocol/mutable'
 # Parse ang args list replacing any refs with their content
 #
 # @param [Array] args
-parseArgs = (args) ->
+parseArgs = (args, instance) ->
   newArgs = []
   for arg in args
-    newArgs.push if (isRef arg) and (arg.passRef isnt true) then mutable.get arg else arg
+    newArgs.push if (isRef arg) and (arg.metadata.controls[instance].passRef isnt true) then mutable.get arg else arg
   newArgs
 
 # Entend a target object by adding all the properties of a src object to it
@@ -35,6 +35,7 @@ extend = (tgtObj, srcObj, ctx) ->
         tgtObj[name] = {}
         extend tgtObj[name], value, ctx
 
+instance = 0
 # Define what controls use as this
 class Control
   # Construct a control adding watches and calling the control fn
@@ -49,8 +50,11 @@ class Control
       else
         throw new Error fn + ' control not found'
 
+    instance += 1
+    @instance = instance
+
     apply = =>
-      newArgs = parseArgs args
+      newArgs = parseArgs args, @instance
       fn.apply @, newArgs
 
     # Import name space
@@ -71,7 +75,10 @@ class Control
       if parts? and parts[2] is '%' and parts[3]?
         args[index] = @global.getOrInitRef parts[3]
 
-      args[index].passRef = true if parts? and parts[1] is '&'
+      if isRef args[index]
+        args[index].metadata.controls ?= {}
+        args[index].metadata.controls[@instance] ?= {}
+        args[index].metadata.controls[@instance].passRef = true if parts? and parts[1] is '&'
 
     # Watch any refs in the arg list
     for arg in args
