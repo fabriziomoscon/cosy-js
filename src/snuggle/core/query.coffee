@@ -49,7 +49,7 @@ onEvent = (args...) ->
 depreciatedMsgSent = false
 onEventDepreciated = (args...) ->
   if depreciatedMsgSent is false
-    console.log '`on` is depreciated, please use `onEvent`'
+    console.log '`on` is deprecated, please use `onEvent`'
     depreciatedMsgSent = true
   onEvent.apply @, args
 

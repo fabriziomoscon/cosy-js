@@ -11,7 +11,7 @@
 deprecatedMsgSent = false
 nsDeprecated = (args...) ->
   if deprecatedMsgSent is false
-    console.log '`ns` is depreciated, please use `import`'
+    console.log '`ns` is deprecated, please use `import`'
     deprecatedMsgSent = true
   use args...
 
