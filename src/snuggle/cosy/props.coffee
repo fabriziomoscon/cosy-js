@@ -9,11 +9,11 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-
 props = (frame, args...) ->
   refs = (get frame, 'refs') or {}
   for arg in args
-    refs[arg] = ref() unless isRef refs[arg]
+    unless isRef refs[arg]
+      refs[arg] = ref()
   assoc frame, 'refs', refs
 
 props.raw = /^[^"'].*$/
