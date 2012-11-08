@@ -18,7 +18,7 @@ core = require './snuggle/core'
 cosy = require './snuggle/cosy'
 
 up = (startNode, controls, lib, debug = false) ->
-  frame = hashMap {}
+  frame = evaluator.frame()
   for own name, value of lib
     if core[name]?
       throw new Error "Cannot overwrite #{name} in core"

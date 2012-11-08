@@ -30,12 +30,16 @@ lookupRef = (frame, parts) ->
 
 lookup = (frame, str) ->
   return str unless isStr str
+  str = str.replace /^'(.*)'$/, '"$1"'
   ref = lookupRef frame, str.split /[.]/
   unless ref?
-    try
+    if /^(true|false|[\d"[{])/i.exec str
       ref = JSON.parse str
-    catch e
-      ref = str
+    else
+      location = ''
+      if frame.__node?
+        location = ' at ' + frame.__node[0].toString()
+      throw new Error "Symbol #{str} not found" + location
   ref
 
 evaluate = (cmd, frame) ->

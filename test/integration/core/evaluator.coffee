@@ -46,8 +46,8 @@ suite 'Core Evaluator:', ->
     setup ->
       html = '''
   <body>
-    <div data-cosy="" data-cosy-entity="foo">
-      <button data-cosy="" data-cosy-event-click="remove foo">Remove</button>
+    <div data-cosy="" data-cosy-entity="'foo'">
+      <button data-cosy="" data-cosy-event="'click' remove foo">Remove</button>
     </div>
   </body>
   '''
