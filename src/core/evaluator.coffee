@@ -101,7 +101,7 @@ extend proto, ((type) -> supports list, type),
 extend proto, isTree,
   apply: (tree, frame) ->
     newFrame = proto.apply (root tree), frame
-    if newFrame.__delay?
+    if newFrame?.__delay?
       newFrame.__continue = ->
         delete newFrame.__delay
         delete newFrame.__continue
