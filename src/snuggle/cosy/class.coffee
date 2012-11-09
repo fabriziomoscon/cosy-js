@@ -20,7 +20,7 @@ classControl = (constructor) ->
 
 cosyClass = (frame, constructor, args...) ->
   control = classControl constructor
-  evaluate (['control', control].concat args), frame
+  frame.control frame, control, args...
 
 cosyClass.raw = /^&?[%@].+$/
 
