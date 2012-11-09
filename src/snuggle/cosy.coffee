@@ -15,11 +15,16 @@ nsDeprecated = (args...) ->
     deprecatedMsgSent = true
   use args...
 
+importObj = (frame, obj, args...) ->
+  return frame unless obj?
+  frame = use frame, obj
+  importObj frame, args...
+
 module.exports =
   control: require './cosy/control'
   class: require './cosy/class'
   props: require './cosy/props'
   attach: require './cosy/attach'
   call: require './cosy/call'
-  import: use
+  import: importObj
   ns: nsDeprecated
