@@ -73,7 +73,7 @@ class Collection extends Array
     if i?
       ref = @[i]
       @[i..i] = []
-      notify @removed, item
+      notify @removed, ref
       true
 
   removeFn: (fn) ->

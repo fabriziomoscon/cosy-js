@@ -7,8 +7,10 @@
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-attach = (frame) ->
+attach = (frame, delay) ->
   frame.__node[0].frame = frame
+  if delay is 'delay'
+    frame.__delay = true
   frame
 
 module.exports = attach

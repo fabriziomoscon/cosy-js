@@ -5,7 +5,7 @@ list = require '../protocol/list'
 {assoc, get} = require '../protocol/map'
 {hashMap} = require './hashMap'
 {isStr, assertStr} = require './native/string'
-{doSeq, map, vec} = require './list'
+{doSeq, map, vec, filter} = require './list'
 {assertFn} = require './native/function'
 {isTreeNode, isTree, isCosy, node: root, children, cosy, element} = require './reader'
 
@@ -52,7 +52,10 @@ evaluate = (cmd, frame) ->
     else
       lookup frame, symbol
 
-  args = vec (map mapSymbol, (list.rest cmd))
+  filterSymbol = (symbol) ->
+    symbol? and symbol isnt ''
+
+  args = vec (map mapSymbol, (filter filterSymbol, (list.rest cmd)))
   (console.log [(list.first cmd)].concat args) if (get frame, 'debug')
   fn frame, args...
 
@@ -98,7 +101,13 @@ extend proto, ((type) -> supports list, type),
 extend proto, isTree,
   apply: (tree, frame) ->
     newFrame = proto.apply (root tree), frame
-    proto.apply (children tree), newFrame
+    if newFrame.__delay?
+      newFrame.__continue = ->
+        delete newFrame.__delay
+        delete newFrame.__continue
+        proto.apply (children tree), newFrame
+    else
+      proto.apply (children tree), newFrame
     frame
 
 use = (frame, obj) ->
