@@ -4,12 +4,13 @@
 mutable = require '../../protocol/mutable'
 {isRef} = require '../../core/reference'
 
-instance = 0
 # cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
+
+instance = 0
 
 class List
   constructor: (@control, ref) ->
@@ -31,25 +32,33 @@ class List
     @renderAll()
     global.list = ref
 
+  filter: (item) =>
+    true
+
   render: (index) =>
     item = @collection[index]
+    return unless @filter mutable.get item
     @control.frame.item = item
     item.metadata.listElements ?= {}
     node = @control.render @itemTemplate, mutable.get item
     item.metadata.listElements[@instance] = node
+    node
 
   append: (index) =>
-    @control.element.append @render index
+    node = @render index
+    if node?
+      @control.element.append node
 
   prepend: (index) =>
-    @control.element.prepend @render index
+    node = @render index
+    if node?
+      @control.element.prepend node
 
   remove: (ref) =>
+    return unless ref.metadata?.listElements?[@instance]?
     element = ref.metadata.listElements[@instance]
     delete ref.metadata.listElements[@instance]
     element.remove()
-
-  update: (index) =>
 
   renderAll: =>
     @control.element.html ''

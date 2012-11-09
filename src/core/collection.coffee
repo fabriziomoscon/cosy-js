@@ -1,6 +1,7 @@
 'use strict'
 
 {isArr} = require './native/array'
+{isFn} = require './native/function'
 mutable = require '../protocol/mutable'
 {vec, map} = require './list'
 reference = require '../../core/reference'
@@ -20,7 +21,7 @@ notify = (fnList, index) ->
 class Collection extends Array
   append: []
   prepend: []
-  remove: []
+  removed: []
   update: []
   constructor: (@ref) ->
     super()
@@ -35,9 +36,10 @@ class Collection extends Array
 
   pop: ->
     result = super()
-    notify @remove, result
-    reference.notifyRef @ref
-    mutable.get result
+    if result?
+      notify @removed, result
+      reference.notifyRef @ref
+      mutable.get result
 
   unshift: (item) ->
     result = super mapItem item
@@ -47,13 +49,61 @@ class Collection extends Array
 
   shift: ->
     result = super()
-    notify @remove, result
-    reference.notifyRef @ref
-    mutable.get result
+    if result?
+      notify @removed, result
+      reference.notifyRef @ref
+      mutable.get result
+
+  splice: (args...) ->
+    result = super args...
+    if result?
+      for item in result
+        notify @removed, item
+      reference.notifyRef @ref
+      mutable.get item for item in result
+
+  indexOf: (item) ->
+    return @indexOf mutable.get item if reference.isRef item
+    for x, i in @
+      if item is mutable.get x
+        return i
+
+  removeItem: (item) ->
+    i = @indexOf item
+    if i?
+      ref = @[i]
+      @[i..i] = []
+      notify @removed, item
+      true
+
+  removeFn: (fn) ->
+    removed = false
+    items = []
+    for x in @
+      if fn mutable.get x
+        items.push x
+
+    for x in items
+      @removeItem x
+      removed = true
+
+    removed
+
+  remove: (arg) ->
+    if isFn arg
+      removed = @removeFn arg
+    else
+      removed = @removeItem arg
+
+    reference.notifyRef @ref if removed
+    removed
+
+  removeAll: ->
+    @remove -> true
 
   onAppend: (fn) -> @append.push fn
   onPrepend: (fn) -> @prepend.push fn
-  onRemove: (fn) -> @remove.push fn
+  onRemove: (fn) -> @removed.push fn
   onUpdate: (fn) -> @update.push fn
 
 collection = (ref) ->
@@ -66,3 +116,4 @@ module.exports = {
   collection
   isCollection
 }
+
