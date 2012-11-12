@@ -4,7 +4,7 @@
 {isFn} = require './native/function'
 mutable = require '../protocol/mutable'
 {vec, map} = require './list'
-reference = require '../../core/reference'
+reference = require './reference'
 
 # cosy.js
 #
