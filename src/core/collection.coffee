@@ -26,7 +26,7 @@ class Collection extends Array
   constructor: (@ref) ->
     super()
     newValues = (vec map mapItem, mutable.get @ref)
-    Array.push @, newValues...
+    Array.prototype.push.apply @, newValues
 
   push: (item) ->
     result = super mapItem item
