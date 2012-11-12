@@ -2,7 +2,7 @@
 
 {collection, isCollection} = require '../../core/collection'
 mutable = require '../../protocol/mutable'
-{isRef} = require '../../core/reference'
+{isRef, ref: createRef} = require '../../core/reference'
 
 # cosy.js
 #
@@ -21,6 +21,15 @@ class List
     unless isCollection @collection
       @collection = collection ref
       mutable.set ref, @collection
+
+    items = @control.element.children '[data-item]'
+    for item, index in items
+      element = items.eq index
+      itemData = (element.data 'item') or {}
+      data = createRef itemData
+      data.metadata.listElements ?= {}
+      data.metadata.listElements[@instance] = element
+      @collection.push data
 
     @itemTemplate = @control.template 'item'
 
@@ -63,7 +72,10 @@ class List
   renderAll: =>
     @control.element.html ''
     for item, index in @collection
-      @append index
+      if item.metadata?.listElements?[@instance]?
+        @control.element.append item.metadata.listElements[@instance]
+      else
+        @append index
 
 module.exports = {
   List
