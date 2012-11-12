@@ -14,7 +14,8 @@ props = (frame, args...) ->
   for arg in args
     unless isRef refs[arg]
       refs[arg] = ref()
-  assoc frame, 'refs', refs
+  frame['refs'] = refs
+  frame
 
 props.raw = /^[^"'].*$/
 
