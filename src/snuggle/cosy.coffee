@@ -26,5 +26,6 @@ module.exports =
   props: require './cosy/props'
   attach: require './cosy/attach'
   call: require './cosy/call'
+  partial: require('./cosy/partial').partial
   import: importObj
   ns: nsDeprecated
