@@ -64,6 +64,9 @@ class Control
     @cosy = {
       control: (args...) ->
         evaluate (['control'].concat args), frame
+      cmd: (element, cmd) ->
+        newFrame = map.assoc frame, "__node", element
+        evaluate cmd, newFrame
     }
 
     @props = map.get @frame, 'refs'
