@@ -74,6 +74,10 @@ class Control
 
     for arg, index in args
       parts = /^([&])?(@|%)(.*)$/.exec arg
+      if isRef args[index]
+        args[index].metadata.controls ?= {}
+        args[index].metadata.controls[@instance] ?= {}
+        args[index].metadata.controls[@instance].passRef = true
       args[index] = @props[parts[3]] if parts? and parts[2] is '@' and parts[3]?
       if parts? and parts[2] is '%' and parts[3]?
         args[index] = @global.getOrInitRef parts[3]
