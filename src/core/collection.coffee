@@ -16,7 +16,7 @@ mapItem = (item) ->
   if reference.isRef item then item else reference.ref item
 
 notify = (fnList, index) ->
-  fn index for fn in fnList
+  fn? index for fn in fnList
 
 class Collection extends Array
   append: []
@@ -99,7 +99,10 @@ class Collection extends Array
     removed
 
   removeAll: ->
-    @remove -> true
+    if @length > 0
+      @remove -> true
+    else
+      notify @update
 
   onAppend: (fn) -> @append.push fn
   onPrepend: (fn) -> @prepend.push fn
