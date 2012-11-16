@@ -32,4 +32,5 @@ up = (startNode, reg) ->
 module.exports = {
   up
   isAwesome: true
+  snuggle: require './snuggle'
 }
