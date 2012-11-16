@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Counter &ndash; Cosy.js examples</title>
+
+</head>
+<body>
+
+    <div data-cosy-import="example" data-cosy-props="count">
+
+        <p data-cosy-control="counter @count">
+            You&#39;ve clicked <span data-role="count">0</span> times
+        </p>
+
+        <div data-cosy-control="incrementer &@count">
+            <button data-role="button">Click me</button>
+            <button data-role="reset">Reset</button>
+        </div>
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="build/app.js"></script>
+
+</body>
+</html>

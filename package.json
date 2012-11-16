@@ -20,6 +20,7 @@
     "hogan.js": "1.0.5-dev"
   },
   "devDependencies": {
+    "browserify": "1.16.x",
     "chai": "1.1.x",
     "coffee-script": "1.3.x",
     "coffeelint": "0.5.x",
