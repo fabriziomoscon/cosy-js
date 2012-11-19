@@ -87,8 +87,7 @@ extend proto, isCosy,
 
 extend proto, isTreeNode,
   apply: (node, frame) ->
-    newFrame = (assoc frame, "__parent", (get frame, "__node"))
-    newFrame = (assoc newFrame, "__node", (element node))
+    newFrame = (assoc frame, "__node", (element node))
     proto.apply (cosy node), newFrame
 
 extend proto, ((type) -> supports list, type),
@@ -103,6 +102,7 @@ extend proto, isTree,
     continueFn = ->
     frame = assoc frame, '__continue', (-> do continueFn)
     newFrame = proto.apply (root tree), frame
+    newFrame["__parent"] = newFrame
     if newFrame?.__delay?
       continueFn = (nextFrame) ->
         delete newFrame.__delay
