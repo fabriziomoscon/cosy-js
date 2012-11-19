@@ -8,8 +8,8 @@
 
 
 partial = (frame, name) ->
-  frame.partials ?= {}
-  frame.partials[name] = frame.__node.html()
+  frame.__parent.partials ?= {}
+  frame.__parent.partials[name] = frame.__node.html()
   frame
 
 partial.raw = /^[^"'].*$/

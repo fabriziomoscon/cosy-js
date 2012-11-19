@@ -18,7 +18,14 @@ template = (id, element) ->
   element ?= @element
   tmpl = (element.find "script[data-id=#{id}]").eq 0
   if 'text/mustache' is tmpl.attr 'type'
-    hogan.tmpl tmpl.html()
+    partialName = tmpl.data 'partial'
+    if partialName
+      partial = @frame.partials?[partialName]
+      unless partial?
+        throw new Error "Partial not found #{partialName}"
+      hogan.tmpl partial
+    else
+      hogan.tmpl tmpl.html()
   else
     throw new Error "Unkown type for template #{id}"
 
