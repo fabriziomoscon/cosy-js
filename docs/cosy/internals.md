@@ -41,7 +41,7 @@ When the cosy `evaluator` tries to evaluate each node in the tree it takes the p
 
 A cosy `command` takes the following form: `foo arg1 arg2 arg3`, this is equivalent to adding a `data-cosy-foo="arg1 arg2 arg3"` attribute to an element in the DOM.  The cosy `evaluator` takes each of the words in the command and looks them up using the current `frame` (if the args are valid JavaScript literals then they are used directly).
 
-If the first word in the command matches a function the `evaluator` calls that function passing in the current `frame` and the looked up args e.g. if our frame looked something like this:
+With any luck the first word in the command matches a function in the current `frame` if so the `evaluator` calls that function passing in the current `frame` and the looked up args e.g. if our frame looked something like this:
 
 ```js
 {
@@ -52,17 +52,19 @@ If the first word in the command matches a function the `evaluator` calls that f
             console.log("Hello " + worldOther);
         }
     },
-    worldFrench: 'monde'
+    worlds: {
+        french: 'monde'
+    }
 }
 ```
 
 We would expect to see the following output:
 
 ```js
-evaluator.apply("foo true 'world' worldFrench", frame);
+evaluator.apply("hello true 'world' worlds.french", frame);
 // Hello world
 
-evaluator.apply("foo false 'world' worldFrench", frame);
+evaluator.apply("hello false 'world' worlds.french", frame);
 // Hello monde
 ```
 
@@ -78,3 +80,5 @@ imports = require('/path/to/your/code');
 cosy.up($('html'), imports);
 
 ```
+
+The default behaviour of cosy `up` is to take each of the keys in imports and build a [data-cosy-{key}] selector for each.  To get a more detailed usage it's probably now a good time to look at `snuggle.up`.
