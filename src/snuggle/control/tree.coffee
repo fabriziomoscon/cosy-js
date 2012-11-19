@@ -14,8 +14,8 @@ class Tree
     list = new List @control, ref, template
     childElement = @control.role 'children'
     if childElement.length > 0
-      ref.metadata.children = createRef()
-      @control.cosy.cmd childElement, ['class', Tree, ref.metadata.children, list.itemTemplate ]
+      ref.value.children = createRef()
+      @control.cosy.cmd childElement, ['class', Tree, ref.value.children, list.itemTemplate ]
 
 module.exports = {
   Tree

@@ -1,7 +1,7 @@
 'use strict'
 
 {set, get} = require '../../protocol/mutable'
-{watchRef} = require '../../core/reference'
+{watchRef: coreWatchRef, unwatchRef} = require '../../core/reference'
 
 # cosy.js
 #
@@ -17,8 +17,15 @@ notify = (ref) ->
   copy ref, ref
 
 watch = (watchedRef, watchFn) ->
+  @destructors.push ->
+    unwatchRef watchedRef, watchFn
   watchRef watchedRef, ->
     watchFn (get watchedRef)
+
+watchRef = (watchedRef, watchFn) ->
+  @destructors.push ->
+    unwatchRef watchedRef, watchFn
+  coreWatchRef watchedRef, watchFn
 
 module.exports = {
   set
