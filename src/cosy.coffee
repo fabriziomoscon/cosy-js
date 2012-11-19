@@ -10,23 +10,16 @@ evaluator = require './core/evaluator'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-
-deps = [
-  require './lang/entity'
-  require './lang/event'
-  require './lang/handler'
-  require './lang/dom'
-]
-
 # Start up cosy
 #
 # @param [domNode] startNode
 # @return [hashMap] stackFrame
-up = (startNode, reg) ->
-  frame = hashMap {}
-  frame = evaluator.use frame, dep for dep in deps
-  frame = evaluator.use frame, reg
-  ast = reader.read startNode
+up = (startNode, imports) ->
+  frame = evaluator.use evaluator.frame(), imports
+  attributes = []
+  attributes.push "[data-cosy-#{name}]" for own name, obj of imports
+  selector = attributes.join ','
+  ast = reader.read startNode, selector
   evaluator.apply ast, frame
 
 module.exports = {
