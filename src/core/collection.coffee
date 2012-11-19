@@ -19,22 +19,22 @@ notify = (fnList, index) ->
   fn? index for fn in fnList
 
 class Collection extends Array
-  append: []
-  prepend: []
-  removed: []
-  update: []
   constructor: (@ref) ->
     super()
     newValues = (vec map mapItem, mutable.get @ref)
     Array.prototype.push.apply @, newValues
+    @append = []
+    @prepend = []
+    @removed = []
+    @update = []
 
-  push: (item) ->
+  push: (item) =>
     result = super mapItem item
     notify @append, @length - 1
     reference.notifyRef @ref
     result
 
-  pop: ->
+  pop: =>
     result = super()
     if result?
       notify @removed, result
@@ -47,14 +47,14 @@ class Collection extends Array
     reference.notifyRef @ref
     result
 
-  shift: ->
+  shift: =>
     result = super()
     if result?
       notify @removed, result
       reference.notifyRef @ref
       mutable.get result
 
-  splice: (args...) ->
+  splice: (args...) =>
     result = super args...
     if result?
       for item in result
@@ -62,13 +62,13 @@ class Collection extends Array
       reference.notifyRef @ref
       mutable.get item for item in result
 
-  indexOf: (item) ->
+  indexOf: (item) =>
     return @indexOf mutable.get item if reference.isRef item
     for x, i in @
       if item is mutable.get x
         return i
 
-  removeItem: (item) ->
+  removeItem: (item) =>
     i = @indexOf item
     if i?
       ref = @[i]
@@ -76,7 +76,7 @@ class Collection extends Array
       notify @removed, ref
       true
 
-  removeFn: (fn) ->
+  removeFn: (fn) =>
     removed = false
     items = []
     for x in @
@@ -89,7 +89,7 @@ class Collection extends Array
 
     removed
 
-  remove: (arg) ->
+  remove: (arg) =>
     if isFn arg
       removed = @removeFn arg
     else
@@ -98,16 +98,16 @@ class Collection extends Array
     reference.notifyRef @ref if removed
     removed
 
-  removeAll: ->
+  removeAll: =>
     if @length > 0
       @remove -> true
     else
       notify @update
 
-  onAppend: (fn) -> @append.push fn
-  onPrepend: (fn) -> @prepend.push fn
-  onRemove: (fn) -> @removed.push fn
-  onUpdate: (fn) -> @update.push fn
+  onAppend: (fn) => @append.push fn
+  onPrepend: (fn) => @prepend.push fn
+  onRemove: (fn) => @removed.push fn
+  onUpdate: (fn) => @update.push fn
 
 collection = (ref) ->
   new Collection ref
