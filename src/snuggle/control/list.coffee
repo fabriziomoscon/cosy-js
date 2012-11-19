@@ -13,7 +13,7 @@ mutable = require '../../protocol/mutable'
 instance = 0
 
 class List
-  constructor: (@control, ref) ->
+  constructor: (@control, ref, @itemTemplate) ->
     throw new Error "First argument must be a reference" unless isRef ref
     instance += 1
     @instance = instance
@@ -31,7 +31,7 @@ class List
       data.metadata.listElements[@instance] = element
       @collection.push data
 
-    @itemTemplate = @control.template 'item'
+    @itemTemplate ?= @control.template 'item'
 
     @collection.onAppend @append
     @collection.onPrepend @prepend
@@ -39,7 +39,6 @@ class List
     @collection.onUpdate @update
 
     @renderAll()
-    global.list = ref
 
   filter: (item) =>
     true
