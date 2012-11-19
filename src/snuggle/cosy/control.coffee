@@ -35,6 +35,13 @@ extend = (tgtObj, srcObj, ctx) ->
         tgtObj[name] = {}
         extend tgtObj[name], value, ctx
 
+registerChild = (frame, child) ->
+  return unless frame?
+  if frame.__control?
+    frame.__control.children.push child
+  else if frame isnt frame.__parent
+    registerChild frame.__parent, child
+
 instance = 0
 # Define what controls use as this
 class Control
@@ -52,6 +59,10 @@ class Control
 
     instance += 1
     @instance = instance
+    @destructors = []
+    @children = []
+    registerChild @frame, @
+    @frame.__control = @
 
     apply = =>
       newArgs = parseArgs args, @instance
@@ -89,12 +100,23 @@ class Control
 
     # Watch any refs in the arg list
     for arg in args
-      (watchRef arg, apply) if isRef arg
+      (@watchRef arg, apply) if isRef arg
 
     # Apply the control function
     @isInitialising = true
     apply()
     @isInitialising = false
+
+  empty: =>
+    while child = @children.pop()
+      child.destroy()
+    @element.html ''
+
+  destroy: =>
+    @empty()
+    for fn in @destructors
+      do fn
+    @element.remove()
 
 # Function to bind contol to this
 control = (frame, fn, args...) ->

@@ -68,6 +68,11 @@ watchRef = (reference, callback) ->
   (assertRef reference).metadata.watches.push callback
   reference
 
+unwatchRef = (reference, callback) ->
+  assertRef reference
+  (reference.metadata.watches[i..i] if x is callback) for x, i in reference.metadata.watches
+  return true
+
 # Notify watchers
 #
 # @private
@@ -92,4 +97,5 @@ module.exports = {
   setRef
   watchRef
   notifyRef
+  unwatchRef
 }
