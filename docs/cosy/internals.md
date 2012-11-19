@@ -58,7 +58,7 @@ With any luck the first word in the command matches a function in the current `f
 }
 ```
 
-We would expect to see the following output:
+We would expect to see the following output (note the fact we can use the evaluator on a string as well as a tree node):
 
 ```js
 evaluator.apply("hello true 'world' worlds.french", frame);
