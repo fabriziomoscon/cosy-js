@@ -17,9 +17,7 @@ notify = (ref) ->
   copy ref, ref
 
 watch = (watchedRef, watchFn) ->
-  @destructors.push ->
-    unwatchRef watchedRef, watchFn
-  watchRef watchedRef, ->
+  watchRef.call @, watchedRef, ->
     watchFn (get watchedRef)
 
 watchRef = (watchedRef, watchFn) ->
