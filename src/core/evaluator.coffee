@@ -82,7 +82,9 @@ extend proto, isCosy,
   apply: (_cosy, frame) ->
     cmds = stringify _cosy
     for cmd in cmds
-      frame = proto.apply cmd, frame
+      newFrame = proto.apply cmd, frame
+      if newFrame?
+        frame = newFrame
     frame
 
 extend proto, isTreeNode,
