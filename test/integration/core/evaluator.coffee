@@ -66,6 +66,7 @@ suite 'Core Evaluator:', ->
           frame
         remove: (frame, entity) ->
           entity.node.remove()
+          frame
 
       frame = evaluator.apply ast, frame
       (body.find 'button').click()
@@ -93,6 +94,7 @@ suite 'Core Evaluator:', ->
       frame = evaluator.use frame,
         test: (frame, args...) ->
           method args...
+          frame
         a:
           b: true
 
