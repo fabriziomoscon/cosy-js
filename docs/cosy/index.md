@@ -148,8 +148,10 @@ imports = {
         frame[name] = frame.__node;
     },
     remover: function (frame, element) {
-        // Remove the element we've been passed
-        element.remove();
+        // Remove the element we've been passed on click
+        frame.__node.on('click', function () {
+            element.remove();
+        });
     }
 }
 
