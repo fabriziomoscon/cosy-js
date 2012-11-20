@@ -100,8 +100,8 @@ mind that the code is equally as silly as the example).
 
 ```html
 <html>
-  <body data-cosy-import="example.silly">
-    <div data-cosy-control="remover">
+  <body data-cosy-import="example">
+    <div data-cosy-control="silly.remover 'bar-container'">
       Foo
       <div data-role="bar-container">
         Bar
@@ -123,9 +123,9 @@ sillyHelper: function (control, role, element) {
     });
 };
 
-sillyRemover = function () {
+sillyRemover = function (containerName) {
     this.helper.remover(this, 'foo', this.element);
-    this.helper.remover(this, 'bar', this.role('bar-container'));
+    this.helper.remover(this, 'bar', this.role(containerName));
 };
 
 controls = {
