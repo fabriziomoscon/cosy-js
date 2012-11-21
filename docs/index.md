@@ -3,35 +3,34 @@ cosy-js
 
 One Liner
 
-Summary
+## Summary ##
 
-Purpose
+## Purpose ##
 
-Key Concepts (w/ examples)
+### Key Concepts (w/ examples) ###
 
-Controls (w/ expander example)
+### Declarative Control Binding (w/ expander example) ###
 
-Properties (w/ counter example)
+### Properties (w/ counter example) ###
 
-Partials & Templates (w/ List example)
+### Partials & Templates (w/ Mustache standard example) ###
 
-Collections (w/ Improved list example)
+### Lists (w/ List example) ###
 
-Getting Started
+## Getting Started ###
 
-Installation
+### Installation ###
 
-Bootstrapping
+### Bootstrapping ###
 
-Structuring your code
+### Structuring your code ###
 
 
-Further Reading
+## Further Reading ###
 
-Cosy core
+### Cosy core ###
 
-Cosy Snuggle
+### Cosy Snuggle ###
 
-Building Controls
-
+### Building Controls ###
 
