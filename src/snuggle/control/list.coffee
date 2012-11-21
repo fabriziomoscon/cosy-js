@@ -2,7 +2,7 @@
 
 {collection, isCollection} = require '../../core/collection'
 mutable = require '../../protocol/mutable'
-{isRef, ref: createRef} = require '../../core/reference'
+{isRef, ref: createRef, notifyRef} = require '../../core/reference'
 
 # cosy.js
 #
@@ -17,6 +17,7 @@ class List
     throw new Error "First argument must be a reference" unless isRef ref
     instance += 1
     @instance = instance
+    @ref = ref
     @collection = mutable.get ref
     unless isCollection @collection
       @collection = collection ref
@@ -49,7 +50,20 @@ class List
     @control.frame.item = item
     item.metadata.listElements ?= {}
     node = @control.render @itemTemplate, mutable.get item
+    oldNode = item.metadata.listElements[@instance]
     item.metadata.listElements[@instance] = node
+    if oldNode?
+      node.insertAfter oldNode
+      for control in @control.children
+        if oldNode is control.element
+          control.destroy()
+          oldNode = null
+      if oldNode
+        oldNode.remove()
+    else
+      @control.watchRef item, =>
+        @render index
+        notifyRef @ref
     node
 
   append: (index) =>
@@ -66,7 +80,11 @@ class List
     return unless ref.metadata?.listElements?[@instance]?
     element = ref.metadata.listElements[@instance]
     delete ref.metadata.listElements[@instance]
-    element.remove()
+    for control in @control.children
+      if element is control.element
+        control.destroy()
+        element = null
+    element.remove() if element?
 
   renderAll: =>
     @control.element.html ''

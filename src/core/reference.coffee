@@ -2,6 +2,7 @@
 
 {extend} = require './protocol'
 mutable = require '../protocol/mutable'
+{isFn} = require './native/function'
 
 # cosy.js
 #
@@ -70,7 +71,9 @@ watchRef = (reference, callback) ->
 
 unwatchRef = (reference, callback) ->
   assertRef reference
-  (reference.metadata.watches[i..i] if x is callback) for x, i in reference.metadata.watches
+  for fn, index in reference.metadata.watches
+    if fn is callback
+      delete reference.metadata.watches[index]
   return true
 
 # Notify watchers
@@ -79,7 +82,7 @@ unwatchRef = (reference, callback) ->
 # @param [Reference] reference
 # @return [Reference]
 notifyRef = (reference) ->
-  callback reference for callback in reference.metadata.watches
+  (callback reference if isFn callback) for callback in reference.metadata.watches
   reference
 
 

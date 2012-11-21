@@ -97,6 +97,10 @@ class Control
         args[index].metadata.controls ?= {}
         args[index].metadata.controls[@instance] ?= {}
         args[index].metadata.controls[@instance].passRef = true if parts? and parts[1] is '&'
+        @destructors.push do (controls = args[index].metadata.controls, index = @instance) ->
+          ->
+            delete controls[index] if controls[index]?
+
 
     # Watch any refs in the arg list
     for arg in args
