@@ -116,7 +116,7 @@ function helloWorld () {
 }
 ```
 
-Getting Started With Snuggle: Class Controls
-============================================
+Class Controls
+--------------
 
-Todo.
+

@@ -42,6 +42,8 @@ following commands:
 
 `jake test`: Run all unit tests.
 
+## Documentation ##
+Read the documentation [here](./docs/index.md)
 
 ## License ##
 
