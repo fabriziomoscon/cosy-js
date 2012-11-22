@@ -43,7 +43,7 @@ following commands:
 `jake test`: Run all unit tests.
 
 ## Documentation ##
-Read the documentation [here](./blob/master/docs/index.md)
+Read the documentation [here](./cosy-js/blob/master/docs/index.md)
 
 ## License ##
 
