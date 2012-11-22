@@ -21,6 +21,9 @@ foolish to try and solve that problem again so is there another problem that
 isn't being solved? We think there is and we've built the snuggle control
 library on top of cosy to solve just that problem.
 
+Check out the [cosy introduction](./cosy/index.md) for a more detailed
+explanation of how cosy works.
+
 # Snuggle #
 
 > Snuggle lets you build resuable UI controls designed to interract with your
@@ -55,6 +58,27 @@ this other thing when it's clicked on"?  These collections of behaviour are
 easily created, with some thought, in any library but snuggle helps take out
 much of the repitition and boilerplate by giving you the concept of controls.
 
+## Getting Started ###
+
+See the snuggle [getting started guide](./snuggle/index.md) for more information
+
+### Installation ###
+
+    npm install cosy-js
+
+### Bootstrapping ###
+
+```js
+snuggle = require('cosy-js').snuggle;
+
+controls = require('/path/to/your/controls');
+libs = require('/path/to/your/libraries');
+
+debug = false;
+
+snuggle.up($('html'), controls, libs, debug);
+```
+
 ## Key Concepts (w/ examples) ##
 
 ### Controls & Declarative Binding (w/ expander example) ###
@@ -64,12 +88,6 @@ much of the repitition and boilerplate by giving you the concept of controls.
 ### Partials & Templates (w/ Mustache standard example) ###
 
 ### Lists (w/ List example) ###
-
-## Getting Started ###
-
-### Installation ###
-
-### Bootstrapping ###
 
 ### Structuring your code ###
 

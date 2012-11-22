@@ -65,7 +65,7 @@ Just has cosy has `cosy.up` snuggle has a equivalant command called
 `snuggle.up`.
 
 ```js
-snuggle = require('cosy.js').snuggle;
+snuggle = require('cosy-js').snuggle;
 
 controls = require('/path/to/your/controls');
 libs = require('/path/to/your/libraries');
@@ -115,7 +115,7 @@ mind that the code is equally as silly as the example).
 
 
 ```js
-snuggle = require('cosy.js').snuggle;
+snuggle = require('cosy-js').snuggle;
 
 sillyHelper: function (control, role, element) {
     control.onEvent(role, 'click', function() {
