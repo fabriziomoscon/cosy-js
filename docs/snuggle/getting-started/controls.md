@@ -1,6 +1,6 @@
 
-Getting Started With Snuggle: Controls
-======================================
+Getting Started With Snuggle: Building Controls
+===============================================
 
 A control in snuggle is a simple function, with HTML attributes used to bind controls to DOM elements. In their simplest form, a control looks like this:
 
@@ -104,7 +104,6 @@ Snuggle also provides a convenience wrapper for events, which can be bound to th
 
 ```js
 function helloWorld () {
-    
     // Click the control element
     this.onEvent('click', function (event) {
         alert(event.element.text()); // hello world
@@ -116,3 +115,8 @@ function helloWorld () {
     });
 }
 ```
+
+Getting Started With Snuggle: Class Controls
+============================================
+
+Todo.

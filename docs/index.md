@@ -3,7 +3,7 @@ Cosy & Snuggle
 
 # Cosy #
 
-> Cosy lets you build resuable components designed to interract with the DOM.
+**Cosy lets you build resuable components designed to interract with the DOM.**
 
 ## Why cosy? ##
 
@@ -26,8 +26,8 @@ explanation of how cosy works.
 
 # Snuggle #
 
-> Snuggle lets you build resuable UI controls designed to interract with your
-data.
+**Snuggle lets you build resuable UI controls designed to interract with your
+data.**
 
 ## Why snuggle? ##
 
@@ -60,7 +60,7 @@ much of the repitition and boilerplate by giving you the concept of controls.
 
 ## Getting Started ###
 
-See the snuggle [getting started guide](./snuggle/index.md) for more information
+See the snuggle [getting started guide](./snuggle/getting-started/index.md) for more information
 
 ### Installation ###
 
@@ -79,24 +79,10 @@ debug = false;
 snuggle.up($('html'), controls, libs, debug);
 ```
 
-## Key Concepts (w/ examples) ##
-
-### Controls & Declarative Binding (w/ expander example) ###
-
-### Properties (w/ counter example) ###
-
-### Partials & Templates (w/ Mustache standard example) ###
-
-### Lists (w/ List example) ###
-
-### Structuring your code ###
-
-
 ## Further Reading ###
 
-### Cosy core ###
+ - [Cosy Documentation](./cosy/index.md)
 
-### Cosy Snuggle ###
+ - [Snuggle Documentation](./snuggle/index.md)
 
-### Building Controls ###
 
