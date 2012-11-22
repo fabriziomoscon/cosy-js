@@ -148,3 +148,9 @@ snuggle.up($('html'), controls, libs, debug);
 ```
 
 For some less silly examples please refer to the examples in the code.
+
+## Further Reading ###
+
+ - [Getting Started](./getting-started/index.md)
+
+ - [Reference Guide](./reference/index.md)
