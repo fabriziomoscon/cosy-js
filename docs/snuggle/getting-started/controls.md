@@ -40,7 +40,7 @@ Arguments
 You are able to pass arguments into control functions by adding space-separated arguments to the `data-cosy-control` attribute. These arguments are run through a JSON parser:
 
 ```html
-<div data-cosy-control='helloThing "world"'>
+<div data-cosy-control="helloThing 'world'">
     hello <span class="thing">...</span>
 </div>
 ```
@@ -54,7 +54,7 @@ function helloThing (thing) {
 Multiple arguments are allowed, and snuggle doesn't mess with your types:
 
 ```html
-<div data-cosy-control='argsExample "world" true 123'>
+<div data-cosy-control="argsExample 'world' true 123">
     <!-- control content here -->
 </div>
 ```
@@ -71,7 +71,7 @@ function argsExample (arg1, arg2, arg3) {
 Control Methods
 ---------------
 
-There are many core convenience methods available to controls, exposed as methods on the control context. See the [control object documentation](../control-object.md) for more detail, but we'll run through some of the basic DOM helpers here.
+There are many core convenience methods available to controls, exposed as methods on the control context. See the [control object reference](../reference/control-object.md) for more detail, but we'll run through some of the basic DOM helpers here.
 
 
 ### Role(s)
@@ -81,7 +81,7 @@ Snuggle uses `role` elements (defined using the `data-role` attribute) as pointe
 We can simplify the `helloThing` example from earlier by using roles:
 
 ```html
-<div data-cosy-control='helloThing "world"'>
+<div data-cosy-control="helloThing 'world'">
     hello <span data-role="thing">...</span>
 </div>
 ```
@@ -97,7 +97,7 @@ function helloThing (thing) {
 Snuggle also provides a convenience wrapper for events, which can be bound to the control's DOM element. In order to encourage use of role elements, delegated events automatically fill out the `data-role` part for you:
 
 ```html
-<div data-cosy-control='helloWorld'>
+<div data-cosy-control="helloWorld">
     hello <span data-role="world">world</span>
 </div>
 ```
