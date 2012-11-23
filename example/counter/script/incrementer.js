@@ -1,42 +1,33 @@
 (function() {
 
-    // Dependencies
-    var mutable = require('../../lib/protocol/mutable.js');
-    var get = mutable.get;
-    var set = mutable.set;
-
     /**
      * Incrementer control
      *
      * Increments a number in a given reference
      *
-     * @param [Reference] reference
+     * @param [Reference] count
      */
-    var incrementer = function (reference) {
+    var incrementer = function (count) {
 
         if (this.isInitialising) {
 
-            // Store the initial value
-            this.initial = get(reference) || null;
+            var _this = this;
 
-            // Bind click event to submit button
+            // Increment the count on [data-role="button"] click
             this.onEvent('button', 'click', function () {
-                // Set the reference to val+1
-                var value = get(reference);
-                set(reference, ++value);
+                var value = _this.get(count);
+                _this.set(count, ++value);
             });
 
-            // Bind click event to reset button
+            // Reset the count on [data-role="reset"] click
             this.onEvent('reset', 'click', function () {
-                // Set the reference to the initial value
-                set(reference, 0);
+                _this.set(count, 0);
             });
 
         }
 
     };
 
-    // Export
     module.exports = {
         incrementer: incrementer
     };

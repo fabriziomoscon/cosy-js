@@ -14,7 +14,6 @@
 
     };
 
-    // Export
     module.exports = {
         counter: counter
     };
