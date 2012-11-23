@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>List &ndash; Cosy.js examples</title>
+
+</head>
+<body>
+
+    <div data-cosy-props="list">
+
+        <form data-cosy-control="example.list.input @list">
+            <input type="text" data-role="input"/>
+            <button data-role="append">Append</button>
+            <button data-role="prepend">Prepend</button>
+        </form>
+
+        <ul data-cosy-class="cosy.List &@list">
+            <li data-item><span>Original item</span></li>
+
+            <script type="text/mustache" data-id="item">
+                <li><span>{{ content }}</span></li>
+            </script>
+        </ul>
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="build/app.js"></script>
+
+</body>
+</html>
