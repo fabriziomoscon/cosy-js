@@ -400,7 +400,7 @@ require.define("/example/expander/script/expander.js",function(require,module,ex
      */
     var expander = function () {
 
-        var state = this.state('expanded', false);
+        var state = this.state('open', false);
 
         _this = this;
 
