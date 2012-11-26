@@ -94,7 +94,7 @@ desc 'This runs all tasks required for CI'
 task 'ci', ['lint', 'test', 'test-integ']
 
 # Default task
-task 'default', ['build']
+task 'default', ['build', 'bundle']
 
 # Generate a lint command
 getLintCommand = (options = {}) ->
