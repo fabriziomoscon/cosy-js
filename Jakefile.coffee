@@ -8,11 +8,25 @@ path = require 'path'
 paths =
   config: './test/config'
   lib: './lib'
+  minified: './cosy.min.js'
   nodebin: './node_modules/.bin'
   src: './src'
   test: './test'
   unitTest: './test/unit'
   integTest: './test/integration'
+
+# Minify JavaScript
+desc 'This minifies the JavaScript for the browser'
+task 'minify', ['build', 'lint', 'test'], ->
+  console.log 'Minifying JavaScript:'.cyan
+  exec "#{paths.nodebin}/browserify #{paths.lib}/window.js | #{paths.nodebin}/uglifyjs --lift-vars -o #{paths.minified}", (error, stdout, stderr) ->
+    if error is null
+      console.log 'Minified!'.green
+    else
+      console.log stderr
+      fail()
+    complete()
+, async: true
 
 # Build JavaScript
 desc 'This builds JavaScript from the CoffeeScript source'
