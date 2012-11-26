@@ -18,7 +18,39 @@ will work just fine in-browser too.
 
 ## Usage ##
 
-Todo...
+Cosy is typically used through our high level abstraction library, Snuggle.
+Bootstrapping Snuggle is easy.
+
+```js
+(function($, snuggle) {
+
+    var controls = {};
+    var library = {};
+    var debug = false;
+
+    snuggle.up($('body'), controls, library, debug);
+
+})(jQuery, cosy.snuggle);​
+```
+
+If you want to work with Cosy itself, you can bootstrap it just as easily as with Snuggle.
+
+```js
+(function($, cosy) {
+
+    var imports = {};
+
+    cosy.up($('body'), imports);
+
+})(jQuery, cosy);​
+```
+If you're using a package manager such as `Browserify` or `CommonJs` (bundled with Node.js), you can simply require our main file.
+
+```js
+var cosy = require('path/to/cosy/lib/cosy.js');
+var snuggle = cosy.snuggle;
+```
+
 
 
 ## Development ##
