@@ -8,20 +8,20 @@ path = require 'path'
 paths =
   config: './test/config'
   lib: './lib'
-  minified: './cosy.min.js'
+  bundled: './cosy.js'
   nodebin: './node_modules/.bin'
   src: './src'
   test: './test'
   unitTest: './test/unit'
   integTest: './test/integration'
 
-# Minify JavaScript
-desc 'This minifies the JavaScript for the browser'
-task 'minify', ['build', 'lint', 'test'], ->
+# Bundle JavaScript
+desc 'This bundles the JavaScript for the browser'
+task 'bundle', ['build', 'lint', 'test'], ->
   console.log 'Minifying JavaScript:'.cyan
-  exec "#{paths.nodebin}/browserify #{paths.lib}/window.js | #{paths.nodebin}/uglifyjs --lift-vars -o #{paths.minified}", (error, stdout, stderr) ->
+  exec "#{paths.nodebin}/browserify #{paths.lib}/window.js -o #{paths.bundled}", (error, stdout, stderr) ->
     if error is null
-      console.log 'Minified!'.green
+      console.log 'Bundled!'.green
     else
       console.log stderr
       fail()
