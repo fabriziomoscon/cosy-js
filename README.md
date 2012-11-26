@@ -54,7 +54,7 @@ var snuggle = cosy.snuggle;
 ```
 
 ## Examples ##
-We have built a few example projects [here](./cosy-js/blob/master/example)
+We have built a few example projects [here](./cosy-js/blob/master/example) with full tutorials to help get you started.
 
 
 ## Development ##
