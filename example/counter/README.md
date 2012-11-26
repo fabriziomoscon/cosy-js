@@ -150,8 +150,9 @@ var counter = function (count) {
 
 To conclude, we've just built a simple counter which displays the count with buttons to increment and reset the count
 
-**jsFiddle** coming soon...
+**View the example on [jsFiddle][fiddle]**
 
 
 <!-- Meta -->
 [examples]: https://github.com/BraveNewTalent/cosy-js/tree/master/example
+[fiddle]: http://jsfiddle.net/adlawson/2DffD
