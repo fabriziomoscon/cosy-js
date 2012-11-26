@@ -12,8 +12,10 @@ A cosy little library.
 Just install with `npm install cosy-js` or add it to your
 `package.json`.
 
-If you use a bundler like [Browserify][browserify], then Cosy
-will work just fine in-browser too.
+You can use cosy in your browser too by including the library in your footer.
+```html
+<script src="https://raw.github.com/BraveNewTalent/cosy-js/master/cosy.js"></script>
+```
 
 
 ## Usage ##
@@ -51,6 +53,8 @@ var cosy = require('path/to/cosy/lib/cosy.js');
 var snuggle = cosy.snuggle;
 ```
 
+## Examples ##
+We have built a few example projects [here](./cosy-js/blob/master/example)
 
 
 ## Development ##
