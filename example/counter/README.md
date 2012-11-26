@@ -5,7 +5,7 @@
 # Counter #
 
 This is a simple step-by-step guide to creating a basic counter control.
-The completed feature will display the count with a button to increment and a button to reset.
+The completed feature will display the count with a button to increment and a button to reset. [View demo][fiddle]
 
 
 

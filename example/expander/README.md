@@ -5,7 +5,7 @@
 # Expander #
 
 This is a simple step-by-step guide to creating a basic expander control.
-The completed feature will display a list of cosy-js authors in an open/close box.
+The completed feature will display a list of cosy-js authors in an open/close box. [View demo][fiddle]
 
 
 

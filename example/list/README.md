@@ -5,7 +5,7 @@
 # List #
 
 This is a simple step-by-step guide to creating a basic list control.
-The completed feature will display an input field which appends or prepends text onto a list.
+The completed feature will display an input field which appends or prepends text onto a list. [View demo][fiddle]
 
 
 
