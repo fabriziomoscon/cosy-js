@@ -10,7 +10,11 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-
+# Checks if an node is a parent of an element given mose selector
+#
+# @param [mixed] node
+# @param [mixed] element
+# @return boolean
 isParent = (node, element, selector) ->
   return false unless element?
   cand = first parents element, selector
@@ -20,7 +24,7 @@ isParent = (node, element, selector) ->
   else
     true
 
-# Starting at a node return a tree of all the element matching a selector
+# Starting at a node return a tree of all the elements matching a selector
 #
 # @param [element] node
 # @param [string] css selector
