@@ -14,7 +14,11 @@ dom = require '../dom/reader'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-
+# Return a hashmap of the data-cosy part of an attribute
+#
+# @param [mixed] node
+# @param [HashMapItem] attr
+# @return [HashMap]
 getData = (node, attr) ->
   parts = /^data-(cosy-(.*))/.exec (key attr)
   name = parts[2]
@@ -27,11 +31,19 @@ getData = (node, attr) ->
     else
       result[name] = value
     hashMap result
-  getObject name, data node, dataName
+  getObject name, (data node, dataName)
 
-cosyData = (attr) ->
+# An attribute for the data-cosy prefix
+#
+# @param [HashMapItem] attr
+# @return [boolean]
+isCosyData = (attr) ->
   (/^data-cosy-/.exec (key attr))?
 
+# Given a node parse the data attributes for cosy commands
+#
+# @param [mixed] node
+# @return [Cosy]
 parseData = (node) ->
   result = cosy node
   if result is ''
@@ -41,30 +53,48 @@ parseData = (node) ->
   new Cosy (into result,
     (reduce into,
       (map ((attr) -> getData node, attr),
-        (filter cosyData, (attrs node)))))
+        (filter isCosyData, (attrs node)))))
 
+# Tree class
+# @private
 class Tree
   constructor: (_tree) ->
     @.root = _tree.root
     @.children = _tree.children
 
+# TreeNode class
+# @private
 class TreeNode
   constructor: (_node) ->
     @.cosy = _node.cosy
     @.element = _node.element
 
+# Cosy class
+# @private
 class Cosy
   constructor: (_cosy) ->
     @[_key] = _value for own _key, _value of _cosy
 
-isCosy = (cosy) ->
-  cosy instanceof Cosy
+# Check for a Cosy class
+#
+# @param [mixed] type
+# @return [boolean]
+isCosy = (type) ->
+  type instanceof Cosy
 
-isTree = (tree) ->
-  tree instanceof Tree
+# Check for a Tree class
+#
+# @param [mixed] type
+# @return [boolean]
+isTree = (type) ->
+  type instanceof Tree
 
-isTreeNode = (root) ->
-  root instanceof TreeNode
+# Check for a TreeNode class
+#
+# @param [mixed] type
+# @return [boolean]
+isTreeNode = (type) ->
+  type instanceof TreeNode
 
 # Loads a dom node
 #
@@ -89,15 +119,31 @@ read = (node, selector) ->
   selector ?= "[data-cosy]"
   loadNode dom.read node, selector
 
+# Given a tree return the root node
+#
+# @param [Tree] ast
+# @return [TreeNode]
 getNode = (ast) ->
   ast.root
 
+# Given a tree node return the element
+#
+# @param [TreeNode] root
+# @return [mixed]
 getElement = (root) ->
   root.element
 
+# Given a tree node return the cosy part
+#
+# @param [TreeNode] root
+# @return [Cosy]
 getCosy = (root) ->
   root.cosy
 
+# Given a tree return the children
+#
+# @param [Tree] ast
+# @return [list]
 getChildren = (ast) ->
   ast.children
 
