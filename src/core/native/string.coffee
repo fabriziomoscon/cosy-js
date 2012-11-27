@@ -1,5 +1,7 @@
 'use strict'
 
+{assert} = require './assert'
+
 # Cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
@@ -20,8 +22,7 @@ isStr = (value) ->
 # @param [String] message
 # @return [String]
 assertStr = (value, message = 'Invalid string') ->
-  throw (new Error message) unless (isStr value)
-  value
+  assert value, message, isStr
 
 
 # Exports

@@ -1,5 +1,7 @@
 'use strict'
 
+{assert} = require './assert'
+
 # Cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
@@ -20,9 +22,7 @@ isArr = Array.isArray or (value) ->
 # @param [String] message
 # @return [Array]
 assertArr = (value, message = 'Invalid array') ->
-  throw (new Error message) unless (isArr value)
-  value
-
+  assert value, message, isArr
 
 # Exports
 module.exports = {

@@ -1,5 +1,7 @@
 'use strict'
 
+{assert} = require './assert'
+
 # Cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
@@ -20,9 +22,7 @@ isNum = (value) ->
 # @param [String] message
 # @return [Number]
 assertNum = (value, message = 'Invalid number') ->
-  throw (new Error message) unless (isNum value)
-  value
-
+  assert value, message, isNum
 
 # Exports
 module.exports = {

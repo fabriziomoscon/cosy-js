@@ -1,5 +1,6 @@
 'use strict'
 
+{assert} = require './assert'
 {isArr} = require './array'
 
 # Cosy.js
@@ -24,9 +25,7 @@ isObj = (value) ->
 # @param [String] message
 # @return [Object]
 assertObj = (value, message = 'Invalid object') ->
-  throw (new Error message) unless (isObj value)
-  value
-
+  assert value, message, isObj
 
 # Exports
 module.exports = {

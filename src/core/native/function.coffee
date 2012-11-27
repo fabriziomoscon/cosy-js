@@ -1,5 +1,7 @@
 'use strict'
 
+{assert} = require './assert'
+
 # Cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
@@ -20,8 +22,7 @@ isFn = (value) ->
 # @param [String] message
 # @return [Function]
 assertFn = (value, message = 'Invalid function') ->
-  throw (new Error message) unless (isFn value)
-  value
+  assert value, message, isFn
 
 
 # Exports
