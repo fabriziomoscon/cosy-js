@@ -69,6 +69,11 @@ watchRef = (reference, callback) ->
   (assertRef reference).metadata.watches.push callback
   reference
 
+# Remove a watch from a reference
+#
+# @param [Reference] reference
+# @param [Function] callbac
+# @return [boolean]
 unwatchRef = (reference, callback) ->
   assertRef reference
   for fn, index in reference.metadata.watches

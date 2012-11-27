@@ -73,20 +73,37 @@ drop = (n, list) ->
       step n-1, rest list
   lazySeq -> step n, list
 
+# Turn a sequence into a plain array
+#
+# @param [list] seq
+# @return [Array]
 vec = (seq) ->
   result = []
   doSeq ((item) -> result.push item), seq
   result
 
+# Perform a loop without retcursion (trampoline)
+#
+# @param [Function] fn
+# @return [null]
 doLoop = (fn) ->
   while fn?
     result = fn()
     fn = result?.recur
   null
 
+# Cause a loop to recur on a function
+#
+# @param [Function] fn
+# @return [Object]
 recur = (fn) ->
   return {recur: fn}
 
+# Call fn on all elements of a sequence
+#
+# @param [Function] fn
+# @param [list] seq
+# @return null
 doSeq = (fn, seq) ->
   return null unless seq?
   doLoop ->

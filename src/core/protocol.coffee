@@ -8,7 +8,8 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-
+# Protocol Class
+# @private
 class Protocol
   constructor: (spec) ->
     for own name,def of spec
