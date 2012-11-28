@@ -10,7 +10,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Cosy-js by BraveNewTalent</title>
+    <title>cosy-js by BraveNewTalent</title>
   </head>
 
   <body>
@@ -18,8 +18,8 @@
       <div class="inner">
 
         <header>
-          <h1>Cosy-js</h1>
-          <h2>A cosy little library</h2>
+          <h1>cosy-js</h1>
+          <h2>A cosy little UI library</h2>
         </header>
 
         <section id="downloads" class="clearfix">
@@ -33,8 +33,6 @@
         <section id="main_content">
           <h1>Cosy</h1>
 
-<p>A cosy little library.</p>
-
 <p><a href="https://secure.travis-ci.org/BraveNewTalent/cosy-js"><img src="https://secure.travis-ci.org/BraveNewTalent/cosy-js.png?branch=master" alt="Build Status"></a></p>
 
 <h2>Installation</h2>
@@ -42,12 +40,47 @@
 <p>Just install with <code>npm install cosy-js</code> or add it to your
 <code>package.json</code>.</p>
 
-<p>If you use a bundler like <a href="https://github.com/substack/node-browserify">Browserify</a>, then Cosy
-will work just fine in-browser too.</p>
+<p>You can use cosy in your browser too by including the library in your footer.</p>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://raw.github.com/BraveNewTalent/cosy-js/master/cosy.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
 
 <h2>Usage</h2>
 
-<p>Todo...</p>
+<p>Cosy is typically used through our high level abstraction library, Snuggle.
+Bootstrapping Snuggle is easy.</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">snuggle</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">controls</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kd">var</span> <span class="nx">library</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kd">var</span> <span class="nx">debug</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="nx">snuggle</span><span class="p">.</span><span class="nx">up</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">),</span> <span class="nx">controls</span><span class="p">,</span> <span class="nx">library</span><span class="p">,</span> <span class="nx">debug</span><span class="p">);</span>
+
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">,</span> <span class="nx">cosy</span><span class="p">.</span><span class="nx">snuggle</span><span class="p">);</span><span class="err">​</span>
+</pre></div>
+
+<p>If you want to work with Cosy itself, you can bootstrap it just as easily as with Snuggle.</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="nx">cosy</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">imports</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="nx">cosy</span><span class="p">.</span><span class="nx">up</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">),</span> <span class="nx">imports</span><span class="p">);</span>
+
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">,</span> <span class="nx">cosy</span><span class="p">);</span><span class="err">​</span>
+</pre></div>
+
+<p>If you're using a package manager such as <code>Browserify</code> or <code>CommonJs</code> (bundled with Node.js), you can simply require our main file.</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">cosy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path/to/cosy/lib/cosy.js'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">snuggle</span> <span class="o">=</span> <span class="nx">cosy</span><span class="p">.</span><span class="nx">snuggle</span><span class="p">;</span>
+</pre></div>
+
+<h2>Examples</h2>
+
+<p>We have built a few example projects <a href="https://github.com/BraveNewTalent/cosy-js/tree/master/example">here</a> with full tutorials to help get you started.</p>
 
 <h2>Development</h2>
 
@@ -72,13 +105,17 @@ following commands:</p>
 
 <p><code>jake test</code>: Run all unit tests.</p>
 
+<h2>Documentation</h2>
+
+<p>Read the documentation <a href="https://github.com/BraveNewTalent/cosy-js/blob/master/docs/index.md">here</a></p>
+
 <h2>License</h2>
 
 <p>Licensed under the <a href="http://opensource.org/licenses/mit-license.php">MIT</a> license.</p>
         </section>
 
         <footer>
-          Cosy-js is maintained by <a href="https://github.com/BraveNewTalent">BraveNewTalent</a><br>
+          cosy-js is maintained by <a href="https://github.com/BraveNewTalent">BraveNewTalent</a><br>
           This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
         </footer>
 
