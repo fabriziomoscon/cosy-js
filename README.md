@@ -54,7 +54,7 @@ var snuggle = cosy.snuggle;
 ```
 
 ## Examples ##
-We have built a few example projects [here](./cosy-js/blob/master/example) with full tutorials to help get you started.
+We have built a few example projects [here](https://github.com/BraveNewTalent/cosy-js/tree/master/example) with full tutorials to help get you started.
 
 
 ## Development ##
@@ -79,7 +79,7 @@ following commands:
 `jake test`: Run all unit tests.
 
 ## Documentation ##
-Read the documentation [here](./cosy-js/blob/master/docs/index.md)
+Read the documentation [here](https://github.com/BraveNewTalent/cosy-js/blob/master/docs/index.md)
 
 ## License ##
 
