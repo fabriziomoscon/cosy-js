@@ -13,6 +13,7 @@
 #
 # @param [HashMap] frame
 # @param [Array] args
+# @return [HashMap]
 props = (frame, args...) ->
   refs = (get frame, 'refs') or {}
   for arg in args
