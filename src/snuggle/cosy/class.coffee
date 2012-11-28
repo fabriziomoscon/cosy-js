@@ -9,7 +9,10 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
-
+# Build a class control
+#
+# @param [Function] constructor
+# @return [Function]
 classControl = (constructor) ->
   (args...) ->
     if @isInitialising
@@ -18,10 +21,17 @@ classControl = (constructor) ->
     else if isFn @update
       @update args...
 
+# Instantial a cosy class
+#
+# @param [HashMap] frame
+# @param [Function] constructor
+# @param [Array] args
+# @return [HashMap]
 cosyClass = (frame, constructor, args...) ->
   control = classControl constructor
   frame.control frame, control, args...
 
+# Treat all refs and globals as strings
 cosyClass.raw = /^&?[%@].+$/
 
-module.exports = cosyClass
+module.exports = class: cosyClass

@@ -9,6 +9,10 @@
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+# Add a list of properties to the current frame
+#
+# @param [HashMap] frame
+# @param [Array] args
 props = (frame, args...) ->
   refs = (get frame, 'refs') or {}
   for arg in args
@@ -17,6 +21,7 @@ props = (frame, args...) ->
   frame['refs'] = refs
   frame
 
+# Treat all unquoted symbols as strings
 props.raw = /^[^"'].*$/
 
-module.exports = props
+module.exports = {props}

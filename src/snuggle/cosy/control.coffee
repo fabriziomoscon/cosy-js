@@ -16,6 +16,7 @@ mutable = require '../../protocol/mutable'
 # Parse ang args list replacing any refs with their content
 #
 # @param [Array] args
+# @param [number] instance
 parseArgs = (args, instance) ->
   newArgs = []
   for arg in args
@@ -26,6 +27,7 @@ parseArgs = (args, instance) ->
 #
 # @param [Object] tgtObj
 # @param [Object] srcObj
+# @param [HashMap] ctx
 extend = (tgtObj, srcObj, ctx) ->
   for own name, value of srcObj
     do (name, value) ->
@@ -35,6 +37,10 @@ extend = (tgtObj, srcObj, ctx) ->
         tgtObj[name] = {}
         extend tgtObj[name], value, ctx
 
+# Register a child control
+#
+# @param [HashMap] frame
+# @param [Control] child
 registerChild = (frame, child) ->
   return unless frame?
   if frame.__control?
@@ -43,7 +49,9 @@ registerChild = (frame, child) ->
     registerChild frame.__parent, child
 
 instance = 0
-# Define what controls use as this
+
+# Control Class
+# @private
 class Control
   # Construct a control adding watches and calling the control fn
   #
@@ -122,11 +130,17 @@ class Control
       do fn
     @element.remove()
 
-# Function to bind contol to this
+# Instantial a cosy control
+#
+# @param [HashMap] frame
+# @param [Function] fn
+# @param [Array] args
+# @return [HashMap]
 control = (frame, fn, args...) ->
   new Control frame, fn, args
   frame
 
+# Treat all refs and globals as strings
 control.raw = /^&?[%@].+$/
 
-module.exports = control
+module.exports = {control}
