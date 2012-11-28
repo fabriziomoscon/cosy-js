@@ -26,9 +26,9 @@ suite 'snuggle core html:', ->
     delete global.$
 
   test 'Exports functions for common HTML elements', ->
-    assert.isFunction html.div
-    assert.isFunction html.h1
-    assert.isFunction html.p
+    assert.isFunction html.div, 'div'
+    assert.isFunction html.h1, 'h1'
+    assert.isFunction html.p, 'p'
 
 
   suite '<element> method:', ->
