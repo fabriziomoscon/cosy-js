@@ -1,8 +1,8 @@
 'use strict'
 
-reader = require './core/reader'
-evaluator = require './core/evaluator'
 {hashMap} = require './core/hashMap'
+evaluator = require './core/evaluator'
+reader = require './core/reader'
 
 # cosy.js
 #
@@ -10,11 +10,16 @@ evaluator = require './core/evaluator'
 # @see http://github.com/BraveNewTalent/cosy-js
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
+
+# Namespace
+cosy = {}
+
+
 # Start up cosy
 #
 # @param [domNode] startNode
 # @return [hashMap] stackFrame
-up = (startNode, imports) ->
+cosy.up = (startNode, imports) ->
   frame = evaluator.use evaluator.frame(), imports
   attributes = []
   attributes.push "[data-cosy-#{name}]" for own name, obj of imports
@@ -22,8 +27,19 @@ up = (startNode, imports) ->
   ast = reader.read startNode, selector
   evaluator.apply ast, frame
 
-module.exports = {
-  up
-  isAwesome: true
-  snuggle: require './snuggle'
-}
+
+# Important assertion
+#
+# @var [Boolean]
+cosy.isAwesome = true
+
+
+# Expose Snuggle
+#
+# @var [Object]
+cosy.snuggle = require './snuggle'
+
+
+# Exports
+window.cosy = cosy if typeof window isnt 'undefined'
+module.exports = cosy
