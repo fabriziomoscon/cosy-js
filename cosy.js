@@ -3805,7 +3805,8 @@ require.define("/lib/snuggle/control/list.js",function(require,module,exports,__
   List = (function() {
 
     function List(control, ref, itemTemplate) {
-      var data, element, index, item, itemData, items, _base, _i, _len, _ref2, _ref3;
+      var coll, data, element, index, item, itemData, items, loadCollection, _base, _i, _len, _ref2, _ref3,
+        _this = this;
       this.control = control;
       this.itemTemplate = itemTemplate;
       this.renderAll = __bind(this.renderAll, this);
@@ -3826,11 +3827,14 @@ require.define("/lib/snuggle/control/list.js",function(require,module,exports,__
       instance += 1;
       this.instance = instance;
       this.ref = ref;
-      this.collection = mutable.get(ref);
-      if (!isCollection(this.collection)) {
-        this.collection = collection(ref);
-        mutable.set(ref, this.collection);
-      }
+      coll = mutable.get(ref);
+      loadCollection = function(coll) {
+        if (!isCollection(coll)) {
+          _this.collection = collection(ref);
+          return mutable.set(ref, _this.collection);
+        }
+      };
+      loadCollection(collection);
       items = this.control.element.children('[data-item]');
       for (index = _i = 0, _len = items.length; _i < _len; index = ++_i) {
         item = items[index];
@@ -3851,6 +3855,14 @@ require.define("/lib/snuggle/control/list.js",function(require,module,exports,__
       this.collection.onRemove(this.remove);
       this.collection.onUpdate(this.update);
       this.renderAll();
+      this.control.watchRef(ref, function() {
+        coll = mutable.get(ref);
+        if (coll !== _this.collection) {
+          loadCollection(coll);
+          _this.control.empty();
+          return _this.renderAll();
+        }
+      });
     }
 
     List.prototype.filter = function(item) {

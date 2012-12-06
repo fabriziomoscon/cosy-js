@@ -18,10 +18,14 @@ class List
     instance += 1
     @instance = instance
     @ref = ref
-    @collection = mutable.get ref
-    unless isCollection @collection
-      @collection = collection ref
-      mutable.set ref, @collection
+    coll = mutable.get ref
+
+    loadCollection = (coll) =>
+      unless isCollection coll
+        @collection = collection ref
+        mutable.set ref, @collection
+
+    loadCollection collection
 
     items = @control.element.children '[data-item]'
     for item, index in items
@@ -40,6 +44,13 @@ class List
     @collection.onUpdate @update
 
     @renderAll()
+
+    @control.watchRef ref, =>
+      coll = mutable.get ref
+      if coll isnt @collection
+        loadCollection coll
+        @control.empty()
+        @renderAll()
 
   filter: (item) =>
     true
