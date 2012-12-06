@@ -2986,6 +2986,14 @@ require.define("/lib/core/collection.js",function(require,module,exports,__dirna
     function Collection(ref) {
       var newValues;
       this.ref = ref;
+      this.offUpdate = __bind(this.offUpdate, this);
+
+      this.offRemove = __bind(this.offRemove, this);
+
+      this.offPrepend = __bind(this.offPrepend, this);
+
+      this.offAppend = __bind(this.offAppend, this);
+
       this.onUpdate = __bind(this.onUpdate, this);
 
       this.onRemove = __bind(this.onRemove, this);
@@ -3155,6 +3163,66 @@ require.define("/lib/core/collection.js",function(require,module,exports,__dirna
 
     Collection.prototype.onUpdate = function(fn) {
       return this.update.push(fn);
+    };
+
+    Collection.prototype.offAppend = function(fn) {
+      var i, x, _i, _len, _ref1, _results;
+      _ref1 = this.append;
+      _results = [];
+      for (i = _i = 0, _len = _ref1.length; _i < _len; i = ++_i) {
+        x = _ref1[i];
+        if (fn === x) {
+          _results.push(delete this.append[i]);
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+
+    Collection.prototype.offPrepend = function(fn) {
+      var i, x, _i, _len, _ref1, _results;
+      _ref1 = this.prepend;
+      _results = [];
+      for (i = _i = 0, _len = _ref1.length; _i < _len; i = ++_i) {
+        x = _ref1[i];
+        if (fn === x) {
+          _results.push(delete this.prepend[i]);
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+
+    Collection.prototype.offRemove = function(fn) {
+      var i, x, _i, _len, _ref1, _results;
+      _ref1 = this.removed;
+      _results = [];
+      for (i = _i = 0, _len = _ref1.length; _i < _len; i = ++_i) {
+        x = _ref1[i];
+        if (fn === x) {
+          _results.push(delete this.removed[i]);
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+
+    Collection.prototype.offUpdate = function(fn) {
+      var i, x, _i, _len, _ref1, _results;
+      _ref1 = this.update;
+      _results = [];
+      for (i = _i = 0, _len = _ref1.length; _i < _len; i = ++_i) {
+        x = _ref1[i];
+        if (fn === x) {
+          _results.push(delete this.update[i]);
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
     };
 
     return Collection;
@@ -3805,7 +3873,7 @@ require.define("/lib/snuggle/control/list.js",function(require,module,exports,__
   List = (function() {
 
     function List(control, ref, itemTemplate) {
-      var coll, data, element, index, item, itemData, items, loadCollection, _base, _i, _len, _ref2, _ref3,
+      var bindEvents, coll, data, element, index, item, itemData, items, loadCollection, unbindEvents, _base, _i, _len, _ref2, _ref3,
         _this = this;
       this.control = control;
       this.itemTemplate = itemTemplate;
@@ -3850,15 +3918,26 @@ require.define("/lib/snuggle/control/list.js",function(require,module,exports,__
       if ((_ref3 = this.itemTemplate) == null) {
         this.itemTemplate = this.control.template('item');
       }
-      this.collection.onAppend(this.append);
-      this.collection.onPrepend(this.prepend);
-      this.collection.onRemove(this.remove);
-      this.collection.onUpdate(this.update);
+      bindEvents = function() {
+        _this.collection.onAppend(_this.append);
+        _this.collection.onPrepend(_this.prepend);
+        _this.collection.onRemove(_this.remove);
+        return _this.collection.onUpdate(_this.update);
+      };
+      unbindEvents = function() {
+        _this.collection.offAppend(_this.append);
+        _this.collection.offPrepend(_this.prepend);
+        _this.collection.offRemove(_this.remove);
+        return _this.collection.offUpdate(_this.update);
+      };
+      bindEvents();
       this.renderAll();
       this.control.watchRef(ref, function() {
         coll = mutable.get(ref);
         if (coll !== _this.collection) {
+          unbindEvents();
           loadCollection(coll);
+          bindEvents();
           _this.control.empty();
           return _this.renderAll();
         }

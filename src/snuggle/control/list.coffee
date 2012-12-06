@@ -38,17 +38,27 @@ class List
 
     @itemTemplate ?= @control.template 'item'
 
-    @collection.onAppend @append
-    @collection.onPrepend @prepend
-    @collection.onRemove @remove
-    @collection.onUpdate @update
+    bindEvents = =>
+      @collection.onAppend @append
+      @collection.onPrepend @prepend
+      @collection.onRemove @remove
+      @collection.onUpdate @update
 
+    unbindEvents = =>
+      @collection.offAppend @append
+      @collection.offPrepend @prepend
+      @collection.offRemove @remove
+      @collection.offUpdate @update
+
+    bindEvents()
     @renderAll()
 
     @control.watchRef ref, =>
       coll = mutable.get ref
       if coll isnt @collection
+        unbindEvents()
         loadCollection coll
+        bindEvents()
         @control.empty()
         @renderAll()
 

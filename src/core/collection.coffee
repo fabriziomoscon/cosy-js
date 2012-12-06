@@ -166,6 +166,34 @@ class Collection extends Array
   # @param [Function] fn
   onUpdate: (fn) => @update.push fn
 
+  # Register an append callback
+  #
+  # @param [Function] fn
+  offAppend: (fn) =>
+    for x, i in @append
+      delete @append[i] if fn is x
+
+  # Register a prepend callback
+  #
+  # @param [Function] fn
+  offPrepend: (fn) =>
+    for x, i in @prepend
+      delete @prepend[i] if fn is x
+
+  # Register a remove callback
+  #
+  # @param [Function] fn
+  offRemove: (fn) =>
+    for x, i in @removed
+      delete @removed[i] if fn is x
+
+  # Register an update callback
+  #
+  # @param [Function] fn
+  offUpdate: (fn) =>
+    for x, i in @update
+      delete @update[i] if fn is x
+
 # Create a collection
 #
 # @param [Reference] ref
