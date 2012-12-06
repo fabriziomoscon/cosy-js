@@ -1,5 +1,14 @@
 'use strict'
 
+{ref} = require './core/reference'
+{hashMap} = require './core/hashMap'
+{assoc} = require './protocol/map'
+evaluator = require './core/evaluator'
+reader = require './core/reader'
+core = require './snuggle/core'
+cosy = require './snuggle/cosy'
+control = require './snuggle/control'
+
 # cosy.js
 #
 # @copyright BraveNewTalent Ltd 2012
@@ -7,19 +16,17 @@
 # @see http://opensource.org/licenses/mit-license.php MIT License
 
 
-evaluator = require './core/evaluator'
-reader = require './core/reader'
-{ref} = require './core/reference'
-{hashMap} = require './core/hashMap'
-{assoc} = require './protocol/map'
+# Namespace
+snuggle = {}
 
-core = require './snuggle/core'
 
-cosy = require './snuggle/cosy'
-
-control = require './snuggle/control'
-
-up = (startNode, controls, lib, debug = false) ->
+# Snuggle up
+#
+# @param [domNode] startNode
+# @param [Object] controls
+# @param [Object] lib
+# @param [Boolean] debug
+snuggle.up = (startNode, controls, lib, debug = false) ->
   frame = evaluator.frame()
   for own name, value of lib
     if core[name]?
@@ -33,9 +40,14 @@ up = (startNode, controls, lib, debug = false) ->
   frame = assoc frame, 'global', ref {}
   frame = assoc frame, 'debug', debug
 
-  up.to startNode, frame
+  snuggle.up.to startNode, frame
 
-up.to = (startNode, frame) ->
+
+# Snuggle up with a given frame
+#
+# @param [domNode] startNode
+# @param [hashMap] frame
+snuggle.up.to = (startNode, frame) ->
   attributes = []
   attributes.push "[data-cosy-#{name}]" for own name, obj of cosy
   selector = attributes.join ','
@@ -44,6 +56,7 @@ up.to = (startNode, frame) ->
     ast = reader.read $(element), selector
     evaluator.apply ast, frame
 
-module.exports = {
-  up
-}
+
+# Exports
+window.snuggle = snuggle if typeof window isnt 'undefined'
+module.exports = snuggle

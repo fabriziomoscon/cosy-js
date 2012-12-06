@@ -19,7 +19,7 @@ paths =
 desc 'This bundles the JavaScript for the browser'
 task 'bundle', ['build', 'lint', 'test'], ->
   console.log 'Minifying JavaScript:'.cyan
-  exec "#{paths.nodebin}/browserify #{paths.lib}/window.js -o #{paths.bundled}", (error, stdout, stderr) ->
+  exec "#{paths.nodebin}/browserify #{paths.lib}/cosy.js -o #{paths.bundled}", (error, stdout, stderr) ->
     if error is null
       console.log 'Bundled!'.green
     else
